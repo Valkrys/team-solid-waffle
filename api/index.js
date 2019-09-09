@@ -7,9 +7,19 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 8002;
 
+// Database Connection
+const db = require('./db.js');
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+app.get('/careers', function(req, res) {
+  db.getCareers(function(rows) {
+    res.send(rows);
+  })
+});
+
