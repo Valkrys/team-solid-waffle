@@ -1,18 +1,10 @@
 const mysql = require('mysql');
-const fs = require('fs');
-
-dbprops = fs.readFileSync('dbprops.properties', 'utf-8', function(err, data) {
-    console.log(data);
-    return data;
-});
-
-dbprops = JSON.parse(dbprops);
 
 const db = mysql.createConnection({
-    host: dbprops.host,
-    user: dbprops.user,
-    password: dbprops.pass,
-    database: dbprops.database
+    host: process.env.DB_HOSTNAME,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 db.connect(function(err) {
