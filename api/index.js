@@ -23,6 +23,12 @@ app.get('/user_role', function(req, res) {
   })
 });
 
+app.get('/roles', function(req, res) {
+  db.getJobRoles(function(rows) {
+    res.send(rows);
+  })
+});
+
 app.get('/detail/:jobFamily/:capabilityName/:bandName', function (req, res) {
   var jobFamily = req.params.jobFamily;
   var capabilityName = req.params.capabilityName;
