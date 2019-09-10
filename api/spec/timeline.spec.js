@@ -11,7 +11,7 @@ describe("Server", () => {
   describe("GET /capabilities_roles", () => {
     var data = {};
     beforeAll((done) => {
-        request.get("http://localhost:8002/user_role", (error, response, body) => {
+        request.get("http://localhost:8002/capabilities_roles?capabilities=Software Engineering", (error, response, body) => {
             data.status = response.statusCode;
             data.body = body;
             done();
@@ -25,9 +25,6 @@ describe("Server", () => {
         for(var i=0; i< expectedKeys.length;i++) {
            expect(keysFromObject).toContain(expectedKeys[i])
         }
-
-         
     });
-
   });
 });

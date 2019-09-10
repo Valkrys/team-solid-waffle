@@ -24,7 +24,8 @@ app.get('/user_role', function(req, res) {
 });
 
 app.get('/capabilities_roles', function(req, res) {
-  db.getRolesForCapabilities(function(row) {
+  console.log(req.body);
+  db.getRolesForCapabilities(req.query.capabilities, function(rows) {
     res.send(rows);
   })
 });
