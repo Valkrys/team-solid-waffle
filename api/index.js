@@ -23,3 +23,16 @@ app.get('/user_role', function(req, res) {
   })
 });
 
+app.get('/detail/:jobFamily/:capabilityName/:bandName', function (req, res) {
+  var jobFamily = req.params.jobFamily;
+  var capabilityName = req.params.capabilityName;
+  var bandName = req.params.bandName;
+  console.log(format(capabilityName));
+  db.getRoleSpecification(jobFamily, format(capabilityName), bandName, function (rows) {
+    res.send(rows[0]);
+  })
+});
+
+function format(string){
+  return string.replace(/-/g, " ");
+}

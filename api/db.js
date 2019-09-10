@@ -23,3 +23,13 @@ exports.getNameAndRole = function(callback) {
         }
     )
 }
+
+exports.getRoleSpecification = function (family, capability, band, callback) {
+    db.query("SELECT role.description, role.responsibilities, role.training FROM role JOIN capability ON (role.capabilityName=capability.capabilityName) WHERE capability.jobFamilyName=? AND role.capabilityName=? AND role.bandName=?", [family, capability, band],
+        function (err, rows) {
+            if (err) throw err;
+            callback(rows);
+        }
+    )
+}
+
