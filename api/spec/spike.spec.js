@@ -8,7 +8,7 @@ describe("Server", () => {
   });
 
 
-  describe("GET /user_role", () => {
+  describe("GET /courses", () => {
     var data = {};
     beforeAll((done) => {
         request.get("http://localhost:8002/user_role", (error, response, body) => {
@@ -26,6 +26,7 @@ describe("Server", () => {
            expect(keysFromObject).toContain(expectedKeys[i])
         }
 
+         
     });
 
   });
