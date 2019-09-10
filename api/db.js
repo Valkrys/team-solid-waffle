@@ -23,3 +23,13 @@ exports.getNameAndRole = function(callback) {
         }
     )
 }
+
+//Query to return band name and role name for each capability
+exports.getRolesForCapabilities = function(callback) {
+    db.query("SELECT bandName, roleName FROM role WHERE capabilityName = ?",
+        function(err,  rows) {
+            if (err) throw err;
+            callback(rows);
+        }
+    )
+}
