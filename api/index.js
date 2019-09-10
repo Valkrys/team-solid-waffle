@@ -19,6 +19,12 @@ app.listen(port, () => {
 
 app.get('/user_role', function(req, res) {
   db.getNameAndRole(function(rows) {
+    res.send(rows[0]);
+  })
+});
+
+app.get('/roles', function(req, res) {
+  db.getJobRoles(function(rows) {
     res.send(rows);
   })
 });
