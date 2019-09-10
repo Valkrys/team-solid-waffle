@@ -4,6 +4,7 @@ import { FilterHeaderComponent } from './filter-header/filter-header.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { CardsComponent } from './cards/cards.component';
 import { RolesPageContainerComponent } from './roles-page-container/roles-page-container.component';
+import { SharedFeaturesModule } from '../shared-features/shared-features.module';
 
 
 
@@ -12,10 +13,12 @@ import { RolesPageContainerComponent } from './roles-page-container/roles-page-c
     FilterHeaderComponent,
     SearchBarComponent,
     CardsComponent,
-    RolesPageContainerComponent
+    RolesPageContainerComponent,
+    
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedFeaturesModule
   ],
   exports: [
     SearchBarComponent,

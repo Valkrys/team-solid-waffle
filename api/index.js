@@ -1,7 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const jwt = require("jsonwebtoken")
 var log4js = require('log4js');
+var md5 = require('md5');
+var cookieParser = require('cookie-parser')
+
 
 log4js.configure({
   appenders: { express_endpoint: { type: 'dateFile', filename: 'logs/express_endpoint.log'} },
@@ -21,6 +24,34 @@ const db = require('./db.js');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(cookieParser())
+
+function verifyToken(req, res, next)
+{
+  if(!req.cookies.SESSIONID)
+  {
+    return res.send('Unathorized request');
+  }
+
+  let token = req.cookies.SESSIONID;
+
+  if(token == 'null')
+  {
+    return res.send('Unathorized request');
+  }
+
+  let payload = jwt.verify(token,'secretKey');
+
+  if(!payload)
+  {
+    return res.send('Unathorized request');
+  }
+
+  // return res.send('it works');
+  req.userId = payload.subject;
+  next();
+}
+app.use(verifyToken);
 
 
 app.listen(port, () => {
@@ -97,6 +128,8 @@ app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req
 });
 
 app.get('/capabilities_roles/:capability', function(req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   logger.trace('GET carousel request');
 
   var capabilityName = req.params.capability;
@@ -129,6 +162,38 @@ app.get('/carousel/:bandName/', function (req, res) {
   })
 });
 
+app.get('/capability/:userID', function (req, res) {
+  var userID = req.params.userID;
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+  db.getCapability(userID, function (rows) {
+    res.send(rows[0]);
+  })
+});
+
+app.post('/login', function (req, res) {
+  var username = req.body.username;
+  var plainPasswrod = req.body.password;
+  db.getUserByUsername(username, function (rows) {
+
+    if(md5(plainPasswrod) == rows[0].password)
+    {
+      let payload = { subject: username}
+      let token = jwt.sign(payload, 'secretkey', {expiresIn: 120});
+      res.cookie("SESSIONID", token, {httpOnly:true, secure:true});
+      res.send({token});
+    }
+    else {
+      res.send({
+        message: 'Wrong password'
+      });
+    }
+
+    
+  })
+});
+
 app.get('/keyDetails/:userID', function (req, res) {
   logger.trace('GET keyDetails request');
 
@@ -148,3 +213,5 @@ app.get('/keyDetails/:userID', function (req, res) {
 function format(string) {
   return string.replace(/-/g, " ");
 }
+
+

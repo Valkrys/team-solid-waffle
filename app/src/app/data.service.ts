@@ -5,6 +5,7 @@ import { Role } from './role';
 import { KeyDetails } from './keyDetails';
 import { TimelineRole } from './timelineRole';
 import { CarouselRole } from './carouselRole';
+import * as moment from 'moment';
 
 
 @Injectable({
@@ -18,6 +19,8 @@ export class DataService {
   public splittedTraining: string[];
   public keyDetails: KeyDetails;
   public timelineRole: TimelineRole;
+  public token: string;
+  public correctLogin: boolean;
 
   public carouselRole: CarouselRole[] = [];
   constructor(private http: HttpClient) {
@@ -73,6 +76,45 @@ export class DataService {
     this.http.get<CarouselRole[]>('/api/carousel/Trainee').subscribe(carouselRoleDetails => {
       this.carouselRole = carouselRoleDetails;
     });
+  }
+
+  public login(user: User): void {
+    this.http.post<any>('api/login', {username: user.username, password: user.password}).subscribe(res => {  
+      if(res == null){
+        console.error(res);
+      }
+      else
+      {
+        if(res.token)
+        {
+          const expiresAt = moment().add(res.expiresIn,'second');
+          localStorage.setItem('token', res.token);
+          localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+          this.correctLogin = true;
+        }
+        else
+        {
+          this.correctLogin = false;
+        }
+        
+      }
+
+    });
+  }
+
+  public loggedIn()
+  {
+    return !!localStorage.getItem('token');
+  }
+
+  public getToken()
+  {
+    return localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiresAt");
   }
 
 }

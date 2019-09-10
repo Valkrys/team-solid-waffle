@@ -1,0 +1,33 @@
+<div class="login-page">
+    <div class="form">
+          <form name= "form" class="login-form" #loginForm="ngForm" (ngSubmit)="form.valid && checkLogin(loginForm)" [formGroup]="form">
+            <label class="floatLeft">Username</label>
+            <input type="text" placeholder="username"
+            name="username" [(ngModel)] = "user.username" class="form-control" 
+            [ngClass]="{'is-invalid':form.get('username').touched && form.get('username').invalid}"
+            formControlName="username" required 
+            />
+
+            <div class="invalid-feedback" *ngIf="form.get('username').touched && form.get('username').invalid">
+                <p class="form-text errorMsg alignLeft" *ngIf="form.get('username').errors.required">Please enter the username</p>
+            </div>
+
+            <label class="floatLeft">Password</label>
+            <input type="password" placeholder="password"
+            name="password" [(ngModel)] = "user.password" class="form-control"
+            [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}"
+            formControlName="password" required 
+            />
+
+            <div class="invalid-feedback" *ngIf="form.get('password').touched && form.get('password').invalid">
+                <p class="form-text errorMsg alignLeft" *ngIf="form.get('password').errors.required">Please enter the password</p>
+            </div>
+
+            <div class="invalid-feedback" *ngIf="form.submitted">
+                <h1>ok</h1>
+                <p class="form-text errorMsg alignLeft" *ngIf="!data.correctLogin">Please make sure that you have entered a correct username or password</p>
+            </div>
+            <button [ngClass]="{'validForm': form.valid}" [disabled]="!form.valid">login</button>
+        </form>
+    </div> 
+</div>
