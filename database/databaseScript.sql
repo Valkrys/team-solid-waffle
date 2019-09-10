@@ -332,9 +332,3 @@ INSERT INTO job(jobName, capabilityName, description, bandName, responsibilities
 INSERT INTO capabilityLead(capabilityLeadName, picture, message, capabilityName)
 VALUES ('Jason Lee', null, 'Please let me know if you have any questions about Sales', 'Sales'),
        ('Reece Bennett', null, 'I am be available in the Birmingham office between 9am and 5pm', 'Software Engineering');
-
-
-INSERT INTO user(firstName, lastName, username, password, jobID, isAdmin)
-VALUES ('Antonia', 'Badarau', 'antoniab@kainos.com', MD5('12345!abc'), '3', '0'),
-       ('Jennifer', 'Myers', 'jenniferm@kainos.com', MD5('abcdefg$12'), '2', '0'),
-       ('Admin', 'Admin', 'admin@kainos.com', MD5('admin123'), '1', '1');
