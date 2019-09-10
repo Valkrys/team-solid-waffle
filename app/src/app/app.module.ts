@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule} from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DetailsPageModule } from './details-page/details-page.module';
+import { RolesPageModule } from './roles-page/roles-page.module';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -14,11 +14,12 @@ import { NavbarComponent } from './navbar/navbar.component';
     NavbarComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     DetailsPageModule,
+    HttpClientModule,
     NgbModule,
-    HttpClientModule
+    RolesPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
