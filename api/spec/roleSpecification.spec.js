@@ -8,10 +8,10 @@ describe("Server", () => {
     });
 
 
-    describe("GET /detail/:jobFamily/:capabilityName/:bandName", () => {
+    describe("GET /:jobFamily/:capabilityName/:bandName", () => {
         var data = {};
         beforeAll((done) => {
-            request.get("http://localhost:8002/detail/Technical/Software-Engineering/Trainee", (error, response, body) => {
+            request.get("http://localhost:8002/Technical/Software-Engineering/Trainee", (error, response, body) => {
                 data.status = response.statusCode;
                 data.body = body;
                 done();
