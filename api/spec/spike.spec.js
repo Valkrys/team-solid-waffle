@@ -11,7 +11,7 @@ describe("Server", () => {
   describe("GET /courses", () => {
     var data = {};
     beforeAll((done) => {
-        request.get("http://localhost:8002/user_role", (error, response, body) => {
+        request.get("http://localhost:8002/user_details", (error, response, body) => {
             data.status = response.statusCode;
             data.body = body;
             done();
@@ -27,7 +27,6 @@ describe("Server", () => {
            expect(keysFromObject).toContain(expectedKeys[i])
         }
 
-         
     });
 
   });
