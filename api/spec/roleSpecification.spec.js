@@ -10,7 +10,6 @@ describe("Server", () => {
         server = require("../");
     });
 
-
     describe("GET /:jobFamily/:capabilityName/:bandName", () => {
         var data = {};
         beforeAll((done) => {

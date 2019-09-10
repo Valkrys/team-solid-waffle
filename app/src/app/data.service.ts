@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
-import { Role } from './role';
-import { KeyDetails } from './keyDetails';
-import { TimelineRole } from './timelineRole';
+import { Injectable } from '@angular/core';
+import { Band } from './band';
+import { Capability } from './capability';
 import { CarouselRole } from './carouselRole';
+import { Family } from './family';
+import { KeyDetails } from './keyDetails';
+import { Role } from './role';
+import { Roles } from './roles';
+import { TimelineRole } from './timelineRole';
+import { User } from './user';
+
 
 
 @Injectable({
@@ -18,15 +23,23 @@ export class DataService {
   public splittedTraining: string[];
   public keyDetails: KeyDetails;
   public timelineRole: TimelineRole;
-
+  public capability: Capability;
+  public band: Band;
+  public family: Family;
+  public roles: Roles;
   public carouselRole: CarouselRole[] = [];
+
   constructor(private http: HttpClient) {
-    this.getUser();
-    this.getRoleSpecification();
-    this.getKeyDetails();
-    this.getTimelineRoles();
+    this.getBand();
+    this.getCapability();
     this.getCarouselRoleDetails();
-   }
+    this.getFamily();
+    this.getKeyDetails();
+    this.getRoles();
+    this.getRoleSpecification();
+    this.getTimelineRoles();
+    this.getUser();
+  }
 
    public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
@@ -67,14 +80,35 @@ export class DataService {
     });
   }
 
-
-
   public getCarouselRoleDetails(): void {
     this.http.get<CarouselRole[]>('/api/carousel/Trainee').subscribe(carouselRoleDetails => {
       this.carouselRole = carouselRoleDetails;
     });
   }
 
-}
+  public getRoles(): void {
+    this.http.get<Roles>('/api/roles').subscribe(roles => {
+      this.roles = roles;
+    });
+  }
 
+  public getFamily(): void {
+    this.http.get<Family>('/api/family').subscribe(family => {
+      this.family = family;
+    });
+  }
+
+  public getCapability(): void {
+    this.http.get<Capability>('/api/capability').subscribe(capability => {
+      this.capability = capability;
+      console.log(capability);
+    });
+  }
+
+  public getBand(): void {
+    this.http.get<Band>('/api/band').subscribe(band => {
+      this.band = band;
+    });
+  }
+}
 
