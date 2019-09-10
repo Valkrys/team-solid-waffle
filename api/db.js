@@ -16,7 +16,7 @@ db.connect(function(err) {
 });
 
 exports.getNameAndRole = function(callback) {
-    db.query("SELECT user.firstName, role.roleName FROM user INNER JOIN role ON user.roleID = role.roleID WHERE role.roleID = 1",
+    db.query("SELECT user.firstName, role.roleName FROM user INNER JOIN role ON user.roleID = role.roleID WHERE user.userID = 1",
         function(err, rows) {
             if (err) throw err;
             callback(rows);
