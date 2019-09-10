@@ -4,7 +4,7 @@ const assert = require("assert");
 describe("Server", () => {
     var server;
     beforeAll(() => {
-        server = require("../");
+        server = require("..");
     });
 
 
