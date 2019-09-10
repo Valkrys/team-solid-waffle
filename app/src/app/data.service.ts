@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Band } from './band';
 import { Capability } from './capability';
+import { CapabilityLead } from './capabilityLead';
 import { Family } from './family';
 import { Role } from './role';
-import { User } from './user';
-import { CapabilityLead } from './capabilityLead';
 import { Training } from './training';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class DataService {
 
   constructor(private http: HttpClient) {
     this.getUser();
-   }
+  }
 
   public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
@@ -62,5 +62,15 @@ export class DataService {
   public addNewRole(role : Role): Observable<Role> {
     return this.http.post<Role>('/api/role', role);
   }
+  
+  public addBand(newBand: Band): Observable<Band> {
+    console.log('add band call', newBand);
+    return this.http.post<Band>('api/band', newBand);
+  }
+
+  public addTraining(newTraining: Training): Observable<Training> {
+    return this.http.post<Training>('api/training', newTraining);
+  }
+
 }
 

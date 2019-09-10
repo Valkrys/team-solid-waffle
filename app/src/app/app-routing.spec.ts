@@ -1,7 +1,7 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from "@angular/router/testing";
-import { routes } from "./app-routing.module";
+import { RouterTestingModule } from '@angular/router/testing';
+import { routes } from './app-routing.module';
 import { Location } from '@angular/common';
 import { CompareRolesComponent } from './details-page/compare-roles/compare-roles.component';
 import { CurrentRoleComponent } from './details-page/current-role/current-role.component';
@@ -49,7 +49,7 @@ describe('Router', () => {
   });
 
   it('fakeAsync works', fakeAsync(() => {
-    let promise = new Promise(resolve => {
+    const promise = new Promise(resolve => {
       setTimeout(resolve, 10);
     });
     let done = false;

@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="form-group">
+        <form (ngSubmit)="addBand(addForm)" #addForm="ngForm">
+            <fieldset>
+                <h1>Add Band</h1>
+                <div class="form">
+                    <label class="required" for="bnd_Name">Name</label>
+                    <span aria-hidden="true" class="required">*</span>
+                    <input class="pretty" [(ngModel)]="newBand.bandName" name="bnd_Name" placeholder="Enter name" maxlength="50" required>
+                    <div class="error" *ngIf="addForm.hasError('required', 'bnd_Name')">Name is required</div>
+                    <div class="error" *ngIf="addForm.hasError('unique', 'bnd_Name')">Name already exists</div>
+                </div>
+
+                <div class="form">
+                    <label class="required" for="bnd_Rank">Rank</label>
+                    <span aria-hidden="true" class="required">*</span>
+                    <input class="pretty" name="bnd_Rank" type='number' [(ngModel)]="newBand.bandRank" placeholder="Enter rank" maxlength="1500" required>
+                    <div class="error" *ngIf="(newBand.bandRank < minRank || newBand.bandRank>maxRank) && newBand.bandRank">Rank must be between {{minRank}} and {{maxRank+1}}</div>
+                    <div class="error" *ngIf="addForm.hasError('required', 'bnd_Rank')">Rank is required</div>
+                    <div class="error" *ngIf="addForm.hasError('unique', 'bnd_Rank')">Rank already exists</div>
+                </div>
+
+                <div class="form">
+                  <label>Training</label>
+                  <select class="browser-default custom-select" name="bnd_Training" [(ngModel)]="newBand.trainingID" (change)="assignTrainingID(newBand.trainingID)" style="width: 40%; text-align: left; background-color: white; color: #495057;">
+                    <optgroup label="New training">
+                      <option>Add new training</option>
+                    </optgroup>
+                    <optgroup label="Existing trainings">
+                      <option *ngFor="let training of trainings" [value]="training.trainingID" >{{training.description}}</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <div class="form">
+                  <div id="extra" *ngIf="isAddTrainingSelected">
+                    <label class="required" for="bnd_Training_Desc">Training description</label>
+                    <span aria-hidden="true" class="required">*</span>
+                    <input class="pretty" [(ngModel)]="newTraining.description" name="trn_Name" placeholder="Enter description" maxlength="50" required>
+                    <div class="error" *ngIf="addForm.hasError('required', 'bnd_Name')">Description is required</div>
+                    <div class="error" *ngIf="addForm.hasError('unique', 'bnd_Name')">Description already exists</div>
+                  </div>
+                </div>
+
+                <div class="form">
+                  <label for="bnd_Responsibilities">Responsibilities</label>
+                  <textarea class="form-control" name="bnd_Responsibilities" [(ngModel)]="newBand.responsibilities" id="bnd_Responsibilities" style="width: 40%;"
+                            placeholder="Enter responsibilities" maxlength="1500"></textarea>
+                </div>
+
+                <h2>Competencies</h2>
+                <div class="form">
+                    <label for="bnd_Commercial">Commercial</label>
+                    <textarea class="form-control" [(ngModel)]="newBand.commercial" name="bnd_Commercial"
+                        style="width: 40%;" placeholder="Enter Commercial competency" maxlength="1500"></textarea>
+                </div>
+
+                <div class="form">
+                    <label for="bnd_Communication">Communication</label>
+                    <textarea class="form-control" [(ngModel)]="newBand.communication" name="bnd_Communication"
+                        style="width: 40%;" placeholder="Enter Communication competency" maxlength="1500"></textarea>
+                </div>
+
+                <div class="form">
+                    <label for="bnd_Innovation">Innovation</label>
+                    <textarea class="form-control" [(ngModel)]="newBand.innovation" name="bnd_Innovation"
+                        style="width: 40%;" placeholder="Enter Innovation competency" maxlength="1500"></textarea>
+                </div>
+
+                <div class="form">
+                    <label for="bnd_CustomerFocus">Customer Focus</label>
+                    <textarea class="form-control" [(ngModel)]="newBand.customerFocus" name="bnd_CustomerFocus"
+                        style="width: 40%;" placeholder="Enter Customer Focus competency" maxlength="1500"></textarea>
+                </div>
+
+                <div class="form">
+                    <label for="bnd_Development">Development</label>
+                    <textarea class="form-control" [(ngModel)]="newBand.development" name="bnd_Development"
+                        style="width: 40%;" placeholder="Enter Development competency" maxlength="1500"></textarea>
+                </div>
+
+                <div class="form">
+                    <label for="bnd_Planning">Planning</label>
+                    <textarea class="form-control" [(ngModel)]="newBand.planning" name="bnd_Planning"
+                        style="width: 40%;" placeholder="Enter Planning competency" maxlength="1500"></textarea>
+                </div>
+
+                <div class="form">
+                    <label for="bnd_Knowledge">Knowledge</label>
+                    <textarea class="form-control" [(ngModel)]="newBand.knowledge" name="bnd_Knowledge"
+                        style="width: 40%;" placeholder="Enter Knowledge competency" maxlength="1500"></textarea>
+                </div>
+
+                <input id="submit" type="submit" class="btn btn-primary" [disabled]="!addForm.valid">
+
+            </fieldset>
+        </form>
+      <h4 style="color: green">{{success}}</h4>
+      <h4 style="color: red">{{failure}}</h4>
+    </div>
+</div>
