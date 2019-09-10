@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DataService } from './data.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  userDetails = []; 
+
+  data: DataService;
+  
+
+
+  constructor (dataService: DataService){
+    this.data = dataService;
+  }
 }
+
