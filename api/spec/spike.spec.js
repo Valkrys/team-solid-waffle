@@ -11,7 +11,7 @@ describe("Server", () => {
   describe("GET /courses", () => {
     var data = {};
     beforeAll((done) => {
-        request.get("http://localhost:8002/userjob", (error, response, body) => {
+        request.get("http://localhost:8002/user_role", (error, response, body) => {
             data.status = response.statusCode;
             data.body = body;
             done();
@@ -21,7 +21,7 @@ describe("Server", () => {
         var jsonArray = JSON.parse(data.body);
         var jsonObject = jsonArray[0];
 
-        var expectedKeys = ["firstName", "jobName"];
+        var expectedKeys = ["firstName", "roleName"];
         var keysFromObject = Object.keys(jsonObject);
         for(var i=0; i< expectedKeys.length;i++) {
            expect(keysFromObject).toContain(expectedKeys[i])

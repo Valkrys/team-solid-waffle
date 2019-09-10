@@ -15,8 +15,8 @@ db.connect(function(err) {
     console.log('Connected to mysql');
 });
 
-exports.getNameAndJob = function(callback) {
-    db.query("SELECT User.firstName, Job.jobName FROM User INNER JOIN Job ON User.jobID = Job.jobID",
+exports.getNameAndRole = function(callback) {
+    db.query("SELECT user.firstName, job.jobName AS roleName FROM user INNER JOIN job ON user.jobID = job.jobID",
         function(err, rows) {
             if (err) throw err;
             callback(rows);
