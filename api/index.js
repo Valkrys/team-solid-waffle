@@ -46,7 +46,7 @@ app.get('/capability/:userID', function (req, res) {
   })
 });
 
-app.get('/getUser/:username', function (req, res) {
+app.get('/login/:username', function (req, res) {
   var username = req.params.username;
   db.getUserByUsername(username, function (rows) {
     res.send(rows[0]);
