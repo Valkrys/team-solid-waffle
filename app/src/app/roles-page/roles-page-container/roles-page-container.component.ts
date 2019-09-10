@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Band } from 'src/app/band';
+import { Capability } from 'src/app/capability';
+import { DataService } from 'src/app/data.service';
+import { Family } from 'src/app/family';
 
 @Component({
   selector: 'app-roles-page-container',
@@ -7,7 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RolesPageContainerComponent implements OnInit {
 
-  constructor() { }
+  data: DataService;
+  selectedFamily: string = "";
+  selectedCapability: string = "";
+  selectedBand: string = "";
+  searchText: string = "";
+
+  constructor(data: DataService) {
+    this.data = data;
+  }
+
+  onFamilyChange() {
+    // When the family changes, reset the capability dropdown
+    this.selectedCapability = "";
+  }
 
   ngOnInit() {
   }

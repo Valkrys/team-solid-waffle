@@ -39,6 +39,39 @@ exports.getJobRoles = function (callback) {
   );
 }
 
+exports.getFamily = function (callback) {
+  db.query("SELECT name AS jobFamilyName, jobFamilyID FROM jobFamily",
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
+}
+
+exports.getBand = function (callback) {
+  db.query("SELECT name AS bandName FROM band",
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
+}
+
+exports.getCapability = function (callback) {
+  db.query("SELECT name AS capabilityName, capabilityID, jobFamilyID FROM capability",
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
+}
+
+exports.getJobRoles = function (callback) {
+  db.query("SELECT role.name AS roleName, capability.name AS capabilityName, role.capabilityID, band.name AS bandName, jobFamily.name AS jobFamilyName, jobFamily.jobFamilyID as jobFamilyID FROM role " +
+    "JOIN capability ON role.capabilityID = capability.capabilityID JOIN band ON role.bandID = band.bandID JOIN jobFamily ON capability.jobFamilyID = jobFamily.jobFamilyID",
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
+}
+
 exports.getRoleSpecification = function (family, capability, band, callback) {
   db.query("SELECT role.description AS roleDescription, role.responsibilities AS roleResponsibilities, training.description AS trainingDescription FROM role JOIN capability ON role.capabilityID=capability.capabilityID JOIN jobFamily ON " +
     "capability.jobFamilyID=jobFamily.jobFamilyID JOIN band ON role.bandID=band.bandID join training on role.trainingID=training.trainingID WHERE jobFamily.name=? AND capability.name=? AND band.name=?", [family, capability, band],
@@ -47,13 +80,13 @@ exports.getRoleSpecification = function (family, capability, band, callback) {
     }
   );
 }
-
 exports.getCarouselRoleAndCapability = function (band, callback) {
   db.query("SELECT role.name AS roleName, capability.name AS capabilityName, jobFamily.name AS jobFamilyName FROM role " +
     "JOIN capability ON role.capabilityID = capability.capabilityID JOIN jobFamily ON capability.jobFamilyID=jobFamily.jobFamilyID JOIN band " +
     "ON role.bandID=band.bandID WHERE band.name = ?", band,
     function (err, rows, fields) {
       callback(err, rows);
+
     }
   );
 }

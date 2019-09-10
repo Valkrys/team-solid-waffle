@@ -10,7 +10,6 @@ describe("Server", () => {
         server = require("../");
     });
 
-
     describe("GET /roles", () => {
         var data = {};
         beforeAll((done) => {
@@ -41,7 +40,5 @@ describe("Server", () => {
             var jsonArray = JSON.parse(data.body);
             expect(jsonArray.length).toBe(numberOfRows);
         });
-
     });
-
 });
