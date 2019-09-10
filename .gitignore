@@ -273,4 +273,8 @@ $RECYCLE.BIN/
 # Logs
 /logs/*
 
+database/usersScript.sql
+
+database/usersScript.sql
+
 # End of https://www.gitignore.io/api/node,macos,windows,angular,intellij,visualstudiocode
