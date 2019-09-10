@@ -1,0 +1,14 @@
+<div class="swiper-container"> 
+    <div class="swiper-wrapper timeline">
+        <div *ngFor="let item of data" class="swiper-slide">
+
+            <div class="status" [ngClass]="{'currentRule': item.passed}">
+                <span>{{item.title}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+</div>
+
+
