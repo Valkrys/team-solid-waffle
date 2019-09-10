@@ -43,7 +43,6 @@ describe('DetailsContainerComponent', () => {
         RouterModule.forRoot([]),
         DetailsPageModule
       ],
-      // providers: [DataService]
     })
       .compileComponents();
   }));

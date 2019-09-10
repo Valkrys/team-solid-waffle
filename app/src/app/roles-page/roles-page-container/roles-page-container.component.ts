@@ -11,11 +11,11 @@ import { Role } from 'src/app/role';
   styleUrls: ['./roles-page-container.component.css']
 })
 export class RolesPageContainerComponent implements OnInit {
-
   roles: Role[];
   capabilities: Capability[];
   families: Family[];
   bands: Band[];
+
   selectedFamily: string = "";
   selectedCapability: string = "";
   selectedBand: string = "";

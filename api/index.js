@@ -6,9 +6,9 @@ const bodyParser = require("body-parser");
 const log4js = require('log4js');
 
 log4js.configure({
-  appenders: { 
+  appenders: {
     console: { type: 'stdout' },
-    file: { type: 'dateFile', filename: 'logs/express_endpoint.log'}
+    file: { type: 'dateFile', filename: 'logs/express_endpoint.log' }
   },
   categories: { default: { appenders: (process.env.NODE_ENV !== "test" ? ['file', 'console'] : ['file']), level: 'all' } }
 });
@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 function handleError(err, req, res) {
   logger.trace('Entered handleError');
   logger.warn('DB result contains an err');
-  if(!err) {
+  if (!err) {
     logger.error("SQL query has returned 0 rows or was NULL");
 
     res.status(404).send({
@@ -37,9 +37,9 @@ function handleError(err, req, res) {
     return;
   }
 
-  if (err.errno === 3819){
+  if (err.errno === 3819) {
     err.code = "ER_CHECK_CONSTRAINT_VIOLATED";
-  } 
+  }
 
   logger.error(`${err.errno} (${err.code}) : ${err.sqlMessage}`);
 
@@ -120,11 +120,11 @@ app.get('/families', (req, res) => {
   });
 });
 
-app.get('/user_role', function(req, res) {
+app.get('/user_role', function (req, res) {
   logger.trace('GET user_role request');
 
-  db.getNameAndRole(function(err, rows) {
-    if(!Array.isArray(rows) || !rows.length || err) { 
+  db.getNameAndRole(function (err, rows) {
+    if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
     }
     logger.info("Sending user_role results back");
