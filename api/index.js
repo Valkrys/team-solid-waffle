@@ -23,8 +23,8 @@ app.get('/user_role', function(req, res) {
   })
 });
 
-app.get('/job_role_details', function(req, res) {
-  db.getJobRoleDetails(function(rows) {
+app.get('/roles', function(req, res) {
+  db.getJobRoles(function(rows) {
     res.send(rows);
   })
 });

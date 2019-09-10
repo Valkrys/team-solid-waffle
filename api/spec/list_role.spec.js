@@ -8,10 +8,10 @@ describe("Server", () => {
   });
 
 
-describe("GET /job_role_details", () => {
+describe("GET /roles", () => {
     var data = {};
     beforeAll((done) => {
-        request.get("http://localhost:8002/job_role_details", (error, response, body) => {
+        request.get("http://localhost:8002/roles", (error, response, body) => {
             data.status = response.statusCode;
             data.body = body;
             done();
