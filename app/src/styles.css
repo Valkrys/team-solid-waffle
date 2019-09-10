@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+.details_title
+{
+    color: #4789cf;
+}
+
+.details_info
+{
+    color: #003471;
+}

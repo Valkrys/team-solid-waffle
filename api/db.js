@@ -7,7 +7,7 @@ const db = mysql.createConnection({
     database: process.env.DB_DATABASE
 });
 
-db.connect(function(err) {
+db.connect(function (err) {
     if (err) {
         throw err;
     }
@@ -15,9 +15,9 @@ db.connect(function(err) {
     console.log('Connected to mysql');
 });
 
-exports.getNameAndRole = function(callback) {
-    db.query("SELECT user.firstName, role.roleName FROM user INNER JOIN role ON user.roleID = role.roleID WHERE role.roleID = 1",
-        function(err, rows) {
+exports.getNameAndRole = function (callback) {
+    db.query("SELECT user.firstName, role.roleName FROM user INNER JOIN role ON user.roleID = role.roleID WHERE user.userID = 1",
+        function (err, rows) {
             if (err) throw err;
             callback(rows);
         }
@@ -28,6 +28,21 @@ exports.getNameAndRole = function(callback) {
 exports.getRolesForCapabilities = function(capability, callback) {
     db.query("SELECT role.bandName, role.roleName, band.bandRank FROM role join band on role.bandName = band.bandName WHERE role.capabilityName = ? ORDER BY band.bandRank", [capability],
         function(err,  rows) {
+
+exports.getJobRoles = function (callback) {
+    db.query("SELECT role.roleName, role.capabilityName, role.bandName, capability.jobfamilyName FROM role " + 
+        "JOIN (capability) ON (role.capabilityName = capability.capabilityName);",
+        function (err, rows) {
+            if (err) throw err;
+            callback(rows);
+        }
+    )
+}
+}
+
+exports.getRoleSpecification = function (family, capability, band, callback) {
+    db.query("SELECT role.description, role.responsibilities, role.training FROM role JOIN capability ON (role.capabilityName=capability.capabilityName) WHERE capability.jobFamilyName=? AND role.capabilityName=? AND role.bandName=?", [family, capability, band],
+        function (err, rows) {
             if (err) throw err;
             callback(rows);
         }

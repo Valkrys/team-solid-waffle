@@ -19,6 +19,12 @@ app.listen(port, () => {
 
 app.get('/user_role', function(req, res) {
   db.getNameAndRole(function(rows) {
+    res.send(rows[0]);
+  })
+});
+
+app.get('/roles', function(req, res) {
+  db.getJobRoles(function(rows) {
     res.send(rows);
   })
 });
@@ -30,3 +36,16 @@ app.get('/capabilities_roles', function(req, res) {
   })
 });
 
+app.get('/:jobFamily/:capabilityName/:bandName', function (req, res) {
+  var jobFamily = req.params.jobFamily;
+  var capabilityName = req.params.capabilityName;
+  var bandName = req.params.bandName;
+  console.log(format(capabilityName));
+  db.getRoleSpecification(jobFamily, format(capabilityName), bandName, function (rows) {
+    res.send(rows[0]);
+  })
+});
+
+function format(string){
+  return string.replace(/-/g, " ");
+}
