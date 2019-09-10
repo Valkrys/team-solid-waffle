@@ -26,7 +26,7 @@ exports.getNameAndRole = function(callback) {
 
 //Query to return band name and role name for each capability
 exports.getRolesForCapabilities = function(callback) {
-    db.query("SELECT bandName, roleName FROM role WHERE capabilityName = ?",
+    db.query("SELECT role.bandName, role.roleName, band.bandRank FROM role join band on role.bandName WHERE capabilityName = ? order by band.bandRank",
         function(err,  rows) {
             if (err) throw err;
             callback(rows);

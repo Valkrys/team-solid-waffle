@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS capability(
 CREATE TABLE IF NOT EXISTS band(
 #     bandID TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     bandName VARCHAR(50) UNIQUE NOT NULL PRIMARY KEY,
+    bandRank TINYINT UNSIGNED NOT NULL,
     responsibilities VARCHAR(1500),
     CONSTRAINT `band_name_len` CHECK ( LENGTH(bandName) <= 50),
     CONSTRAINT `band_responsibilities_len` CHECK ( LENGTH(responsibilities) <= 1500)
@@ -123,25 +124,25 @@ INSERT INTO capability(capabilityName, jobFamilyName) VALUES ('Business Developm
                                                 ('Strategy', 'Central Services Teams'),
                                                 ('Systems', 'Central Services Teams');
 
-INSERT INTO band(bandName, responsibilities)
-    VALUES ('Apprentice', 'Competency framework does not directly apply at this Job Level for now. Please see Associate to assist with your career planning.'),
+INSERT INTO band(bandName, responsibilities, bandRank)
+    VALUES ('Apprentice', 'Competency framework does not directly apply at this Job Level for now. Please see Associate to assist with your career planning.', 0) ,
 
        ('Trainee', 'You consistently cooperate with the business processes completing accurately and honestly e.g. timesheets/EOY review/travel requests.
         You willingly cooperate by volunteering to take on additional tasks that will benefit the business e.g. Recruitment events such as University careers fairs, EAYL open evening, Work experience mentoring.
-        You understand how the business generates income.'),
+        You understand how the business generates income.', 1),
 
        ('Associate', 'You understand the contribution your role makes to the success of the business, consistently delivering to task deadlines. You understand and the need for the business to generate additional income and respect that costs need to be managed.
         You know what you have to do to manage costs within the business.
         You complete expenses honestly, on time and accurately.
         You consistently achieve your personal productive utilisation target.
-        You understand how your team supports increased income for Kainos.'),
+        You understand how your team supports increased income for Kainos.', 2),
 
        ('Senior Associate', 'You understand how the company makes profit and how your role affects profitability of the company.
         You create honest time estimates and are determined to deliver upon these.
         You question actions where appropriate and identify cost-effective approaches.
         You respectfully challenge commercial decisions to contribute an increase in profitability.
         You manage and meet the expectations of customers without compromising budgets.
-        You understand the organisational structure of Kainos, your reporting lines and can actively identify where key responsibilities lie.'),
+        You understand the organisational structure of Kainos, your reporting lines and can actively identify where key responsibilities lie.', 3),
 
        ('Consultant', 'You look beyond immediate problems/issues to see the impact on the bigger picture.
         You use financial information to find pragmatic new ways of saving cost/effort without reducing throughput.
@@ -150,7 +151,7 @@ INSERT INTO band(bandName, responsibilities)
         You understand the commercial implications of changes in scope and negotiate with customers proactively.
         You understand the impact of decisions on BU and company profitability and support company decisions that affect profitability.
         You identify potential new opportunities for the company to generate income and proactively take action to progress.
-        You actively engage and contribute to sales activities such as presales bids, presentations for new clients.'),
+        You actively engage and contribute to sales activities such as presales bids, presentations for new clients.', 4),
 
        ('Manager', 'You put forward sound business cases to gain support for new and more effective methods of working.
         You prioritise actions to minimise costs and maximise advantage across the organisation.
@@ -160,13 +161,13 @@ INSERT INTO band(bandName, responsibilities)
         You support the company''s commercial decisions and ensure that your team understand the reasons for these decisions.
         You understand and are able to articulate the company mission statement, culture, values and business goals and behave accordingly at all times.
         You prepare strong and influential business cases, understanding the needs of all stakeholders.
-        You understand and identify risk to the business and proactively mitigate and manage.'),
+        You understand and identify risk to the business and proactively mitigate and manage.', 5),
 
        ('Principal', 'You take a balanced view of wider impact on the organisation when making significant changes.
         You strive to add measurable and significant value to the longer term growth of Kainos and take calculated risks in order to do so.
-        You influence and negotiate creating commercial strategies that maximise return, reduce cost and drive improvement in quality.'),
+        You influence and negotiate creating commercial strategies that maximise return, reduce cost and drive improvement in quality.', 6),
 
-       ('Leadership Community', 'Competency framework does not directly apply at this Job Level.');
+       ('Leadership Community', 'Competency framework does not directly apply at this Job Level.', 7);
 
 INSERT INTO role(roleName, capabilityName, description, bandName, responsibilities, training)
     VALUES ('Designer',
