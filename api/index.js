@@ -29,7 +29,7 @@ app.get('/roles', function(req, res) {
   })
 });
 
-app.get('/detail/:jobFamily/:capabilityName/:bandName', function (req, res) {
+app.get('/:jobFamily/:capabilityName/:bandName', function (req, res) {
   var jobFamily = req.params.jobFamily;
   var capabilityName = req.params.capabilityName;
   var bandName = req.params.bandName;
