@@ -15,8 +15,8 @@ db.connect(function(err) {
     console.log('Connected to mysql');
 });
 
-exports.getCareers = function(callback) {
-    db.query("SELECT * FROM careerLattice",
+exports.getNameAndJob = function(callback) {
+    db.query("SELECT User.firstName, Job.jobName FROM User INNER JOIN Job ON User.jobID = Job.jobID",
         function(err, rows) {
             if (err) throw err;
             callback(rows);
