@@ -17,7 +17,7 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-app.get('/user_details', function(req, res) {
+app.get('/user_role', function(req, res) {
   db.getNameAndRole(function(rows) {
     res.send(rows);
   })
