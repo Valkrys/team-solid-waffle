@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS band(
     CONSTRAINT `band_responsibilities_len` CHECK ( LENGTH(responsibilities) <= 1500)
 );
 
-CREATE TABLE IF NOT EXISTS job(
-    jobID SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    jobName VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS role(
+    roleID SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    roleName VARCHAR(50) NOT NULL,
 #     capabilityID TINYINT UNSIGNED NOT NULL,
     capabilityName VARCHAR(50) NOT NULL,
     description VARCHAR(300) NOT NULL,
@@ -42,12 +42,12 @@ CREATE TABLE IF NOT EXISTS job(
 #     FOREIGN KEY (bandID) REFERENCES band(bandID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (capabilityName) REFERENCES capability(capabilityName) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (bandName) REFERENCES band(bandName) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `job_name_len` CHECK ( LENGTH(jobName) <= 50),
-    CONSTRAINT `job_description_len` CHECK ( LENGTH(description) <= 300),
-    CONSTRAINT `job_responsibilities_len` CHECK ( LENGTH(responsibilities) <= 1500),
-    CONSTRAINT `job_training_len` CHECK ( LENGTH(training) <= 1500),
-#     CONSTRAINT `job_unique_check` UNIQUE (name, capabilityID, bandID),
-    CONSTRAINT `job_unique_check` UNIQUE (jobName, capabilityName, bandName)
+    CONSTRAINT `role_name_len` CHECK ( LENGTH(roleName) <= 50),
+    CONSTRAINT `role_description_len` CHECK ( LENGTH(description) <= 300),
+    CONSTRAINT `role_responsibilities_len` CHECK ( LENGTH(responsibilities) <= 1500),
+    CONSTRAINT `role_training_len` CHECK ( LENGTH(training) <= 1500),
+#     CONSTRAINT `role_unique_check` UNIQUE (roleName, capabilityID, bandID),
+    CONSTRAINT `role_unique_check` UNIQUE (roleName, capabilityName, bandName)
 );
 
 CREATE TABLE IF NOT EXISTS capabilityLead(
@@ -70,9 +70,9 @@ CREATE TABLE IF NOT EXISTS user(
     lastName VARCHAR(50) NOT NULL,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(50) NOT NULL,
-    jobID SMALLINT UNSIGNED NOT NULL,
+    roleID SMALLINT UNSIGNED NOT NULL,
     isAdmin BOOLEAN DEFAULT 0 NOT NULL,
-    FOREIGN KEY (jobID) REFERENCES job(jobID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (roleID) REFERENCES role(roleID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `user_firstName_len` CHECK ( LENGTH(firstName) <= 50),
     CONSTRAINT `user_lastName_len` CHECK ( LENGTH(lastName) <= 50),
     CONSTRAINT `user_username_len` CHECK ( LENGTH(username) >= 8 AND LENGTH(username) <= 50),
@@ -168,7 +168,7 @@ INSERT INTO band(bandName, responsibilities)
 
        ('Leadership Community', 'Competency framework does not directly apply at this Job Level.');
 
-INSERT INTO job(jobName, capabilityName, description, bandName, responsibilities, training)
+INSERT INTO role(roleName, capabilityName, description, bandName, responsibilities, training)
     VALUES ('Designer',
         'UX Design',
         'Graduate entry level, here to learn, but primarily to contribute to projects.',
