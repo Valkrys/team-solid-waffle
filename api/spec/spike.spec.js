@@ -8,7 +8,7 @@ describe("Server", () => {
   });
 
 
-  describe("GET /courses", () => {
+  describe("GET /user_role", () => {
     var data = {};
     beforeAll((done) => {
         request.get("http://localhost:8002/user_role", (error, response, body) => {
@@ -18,8 +18,7 @@ describe("Server", () => {
         });
     });
     it("matches objects with the expect key/value pairs", function() {
-        var jsonArray = JSON.parse(data.body);
-        var jsonObject = jsonArray[0];
+        var jsonObject = JSON.parse(data.body);
 
         var expectedKeys = ["firstName", "roleName"];
         var keysFromObject = Object.keys(jsonObject);
