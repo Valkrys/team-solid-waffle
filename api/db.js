@@ -43,3 +43,11 @@ exports.getRoleSpecification = function (family, capability, band, callback) {
     )
 }
 
+exports.getCapability = function (userID, callback) {
+    db.query("select role.capabilityName, role.bandName, capability.jobFamilyName FROM role, capability, user WHERE role.roleID = user.roleID AND role.capabilityName=capability.capabilityName AND userID=?", userID,
+        function (err, rows) {
+            if (err) throw err;
+            callback(rows)
+        })
+}
+
