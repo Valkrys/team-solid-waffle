@@ -39,6 +39,13 @@ app.get('/:jobFamily/:capabilityName/:bandName', function (req, res) {
   })
 });
 
+app.get('/capability/:userID', function (req, res) {
+  var userID = req.params.userID;
+  db.getCapability(userID, function (rows) {
+    res.send(rows[0]);
+  })
+});
+
 function format(string){
   return string.replace(/-/g, " ");
 }
