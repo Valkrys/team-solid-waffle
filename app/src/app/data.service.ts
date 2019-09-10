@@ -6,7 +6,16 @@ import { User} from './user';
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient) { }
+  public user: User;
 
-  userDetails = this.http.get<User[]>('/api/user_role');
+  constructor(private http: HttpClient) {
+    this.getUser();
+   }
+
+  public getUser(): void {
+    this.http.get<User>('/api/user_role').subscribe(user => {
+      console.log(user);
+      this.user = user;
+    });
+  } 
 }
