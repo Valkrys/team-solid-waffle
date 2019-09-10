@@ -8,17 +8,17 @@ describe("Server", () => {
     });
 
 
-    describe("GET /capability/:userID", () => {
+    describe("GET /keyDetails/:userID", () => {
         var data = {};
         beforeAll((done) => {
-            request.get("http://localhost:8002/capability/1", (error, response, body) => {
+            request.get("http://localhost:8002/keyDetails/1", (error, response, body) => {
                 data.status = response.statusCode;
                 data.body = body;
                 done();
             });
         });
 
-        it("roleSpecification: matches objects with the expect key/value pairs", function () {
+        it("keyDetails: matches objects with the expect key/value pairs", function () {
             var jsonObject = JSON.parse(data.body);
 
             var expectedKeys = ["capabilityName", "bandName", "jobFamilyName"];
