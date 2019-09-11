@@ -22,7 +22,7 @@ exports.getNameAndRole = function (callback) {
         callback(rows);
     }
 );
-}
+
 
 //Query to return band name and role name for each capability
 exports.getRolesForCapabilities = function(capability, callback) {
@@ -34,7 +34,6 @@ exports.getRolesForCapabilities = function(capability, callback) {
     }
 );
 }
-
 
 exports.getJobRoles = function (callback) {
     db.query("SELECT role.name AS roleName, capability.name AS capabilityName, band.name AS bandName, jobFamily.name AS jobFamilyName FROM role " + 
@@ -53,15 +52,27 @@ exports.getRoleSpecification = function (family, capability, band, callback) {
             if (err) throw err;
             callback(rows);
         }
-    )
+    );
 }
 
-exports.getCapability = function (userID, callback) {
+exports.getCarouselRoleAndCapability = function (band, callback) {
+    db.query("SELECT role.roleName, role.capabilityName, capability.jobFamilyName FROM role " + 
+    "JOIN capability ON role.capabilityName = capability.capabilityName " +
+    "WHERE role.bandName = ?;", band,
+        function (err, rows) {
+            if (err) throw err;
+            callback(rows);
+        }
+    );
+}
+
+exports.getKeyDetails = function (userID, callback) {
     db.query("select capability.name AS capabilityName, band.name AS bandName, jobFamily.name AS jobFamilyName FROM capability JOIN jobFamily ON capability.jobFamilyID=jobFamily.jobFamilyID "+
     "JOIN role ON capability.capabilityID=role.capabilityID JOIN band ON role.bandID=band.bandID JOIN user ON role.roleID=user.roleID WHERE user.userID=?", userID,
         function (err, rows) {
             if (err) throw err;
             callback(rows)
-        })
+        }
+    );
 }
 
