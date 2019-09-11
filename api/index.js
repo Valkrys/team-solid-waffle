@@ -35,6 +35,27 @@ app.get('/:jobFamily/:capabilityName/:bandName', function (req, res) {
   var bandName = req.params.bandName;
   console.log(format(capabilityName));
   db.getRoleSpecification(jobFamily, format(capabilityName), bandName, function (rows) {
+    res.send(rows);
+  })
+});
+
+app.get('/keyDetails/:userID', function (req, res) {
+  var userID = req.params.userID;
+  db.getCapability(userID, function (rows) {
+    res.send(rows[0]);
+  })
+});
+
+app.get('/keyDetails/:userID', function (req, res) {
+  var userID = req.params.userID;
+  db.getCapability(userID, function (rows) {
+    res.send(rows[0]);
+  })
+});
+
+app.get('/keyDetails/:userID', function (req, res) {
+  var userID = req.params.userID;
+  db.getCapability(userID, function (rows) {
     res.send(rows[0]);
   })
 });

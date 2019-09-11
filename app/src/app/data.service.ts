@@ -2,22 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User} from './user';
 import { Role } from './role';
+import { KeyDetails } from './keyDetails';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  
   public user: User;
   public role: Role;
   public splittedResponsibilities: string[];
   public splittedTraining: string[];
-
-  //public description: String;
-  
+  public keyDetails: KeyDetails;
 
   constructor(private http: HttpClient) {
     this.getUser();
     this.getRoleSpecification();
+
+  constructor(private http: HttpClient) {
+    this.getUser();
+    this.getKeyDetails();
    }
 
   public getUser(): void {
@@ -26,7 +30,7 @@ export class DataService {
       this.user = user;
     });
   } 
-
+  
   public getRoleSpecification(): void {
     this.http.get<Role>('/api/technical/software-engineering/trainee').subscribe(role => {
       this.role = role;
@@ -47,5 +51,11 @@ export class DataService {
     return this.splittedTraining;
   }
 
+  public getKeyDetails(): void {
+    this.http.get<KeyDetails>('/api/keyDetails/1').subscribe(keyDetails => {
+      this.keyDetails = keyDetails;
+      console.log(this.keyDetails);
+    });
+  }
 
 }

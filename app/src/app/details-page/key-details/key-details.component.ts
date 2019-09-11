@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../data.service';
+import { KeyDetails} from '../../keyDetails';
 
 @Component({
   selector: 'app-key-details',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KeyDetailsComponent implements OnInit {
 
-  constructor() { }
+  data: DataService;
+  keyDetails: KeyDetails;
+  
+  constructor(dataService: DataService) {
+    this.data = dataService;
+   }
 
   ngOnInit() {
   }

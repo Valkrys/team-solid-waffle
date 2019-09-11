@@ -1,6 +1,5 @@
-<p>key-details works!</p>
 <div class="container border">
-    <h4>Family: </h4>
-    <h4>Capability: </h4>
-    <h4>Band: </h4>
+    <h5 *ngIf="data.keyDetails"><span class="green">Family: </span> {{data.keyDetails.jobFamilyName}}</h5>
+    <h5 *ngIf="data.keyDetails"><span class="green">Capability: </span>{{data.keyDetails.capabilityName}}</h5>
+    <h5 *ngIf="data.keyDetails"><span class="green">Band: </span>{{data.keyDetails.bandName}}</h5>
 </div>
