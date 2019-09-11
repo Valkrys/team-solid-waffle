@@ -39,6 +39,7 @@ app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req
   })
 });
 
+
 //Sends back array of JSON objects containing role name and capability name;
 app.get('/carousel/:bandName/', function (req, res) {
   var bandName = req.params.bandName;
