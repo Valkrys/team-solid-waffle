@@ -17,22 +17,23 @@ db.connect(function (err) {
 
 exports.getNameAndRole = function (callback) {
     db.query("SELECT user.firstName, role.name AS roleName FROM user INNER JOIN role ON user.roleID = role.roleID WHERE user.userID = 1",
-    function(err,  rows) {
-        if (err) throw err;
-        callback(rows);
-    }
-);
+        function(err,  rows) {
+            if (err) throw err;
+            callback(rows);
+        }   
+    )
+};
 
 
 //Query to return band name and role name for each capability
 exports.getRolesForCapabilities = function(capability, callback) {
     db.query("SELECT band.name AS bandName, role.name AS roleName, band.bandRank FROM role join band on role.bandID=band.bandID JOIN capability ON role.capabilityID=capability.capabilityID " + 
     "WHERE capability.name = ? ORDER BY band.bandRank", [capability],
-    function(err,  rows) {
-        if (err) throw err;
-        callback(rows);
-    }
-);
+        function(err,  rows) {
+            if (err) throw err;
+            callback(rows);
+        }
+    );
 }
 
 exports.getJobRoles = function (callback) {
