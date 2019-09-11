@@ -1,8 +1,6 @@
 <div class="train">
     <h2 class="details_title">Training</h2>
-    <ul>
-        <li>This is the first item </li>
-        <li>This is the second item </li>
-        <li>This is the third item </li>
+    <ul *ngFor="let responsibility of data.splittedResponsibilities">
+        <li *ngIf="responsibility!= '' "> {{responsibility}} </li>
     </ul>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../data.service';
+import { Role } from '../../role';
 
 @Component({
   selector: 'app-description',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DescriptionComponent implements OnInit {
 
-  constructor() { }
+  data: DataService;
+  role : Role;
+
+  constructor(dataservice: DataService ) { 
+    this.data = dataservice;
+  }
 
   ngOnInit() {
   }
