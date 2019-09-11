@@ -53,6 +53,17 @@ exports.getRoleSpecification = function (family, capability, band, callback) {
     );
 }
 
+exports.getCarouselRoleAndCapability = function (band, callback) {
+    db.query("SELECT role.roleName, role.capabilityName, capability.jobFamilyName FROM role " + 
+    "JOIN capability ON role.capabilityName = capability.capabilityName " +
+    "WHERE role.bandName = ?;", band,
+        function (err, rows) {
+            if (err) throw err;
+            callback(rows);
+        }
+    );
+}
+
 exports.getKeyDetails = function (userID, callback) {
     db.query("select role.capabilityName, role.bandName, capability.jobFamilyName FROM role, capability, user WHERE role.roleID = user.roleID AND role.capabilityName=capability.capabilityName AND userID=?", userID,
         function (err, rows) {
@@ -61,3 +72,4 @@ exports.getKeyDetails = function (userID, callback) {
         }
     );
 }
+

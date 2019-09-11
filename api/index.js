@@ -29,23 +29,26 @@ app.get('/roles', function(req, res) {
   })
 });
 
-app.get('/capabilities_roles', function(req, res) {
-  // console.log(req.body);
-  db.getRolesForCapabilities(req.query.capabilities, function(rows) {
-    res.send(rows);
-  })
-});
-
-app.get('/:jobFamily/:capabilityName/:bandName', function (req, res) {
+app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req, res) {
   var jobFamily = req.params.jobFamily;
   var capabilityName = req.params.capabilityName;
   var bandName = req.params.bandName;
-  // console.log(format(capabilityName));
-  db.getRoleSpecification(jobFamily, format(capabilityName), bandName, function (rows) {
+  console.log("format(capabilityName)");
+  db.getRoleSpecification(format(jobFamily), format(capabilityName), format(bandName), function (rows) {
     res.send(rows[0]);
   })
 });
 
+//Sends back array of JSON objects containing role name and capability name;
+app.get('/carousel/:bandName/', function (req, res) {
+  var bandName = req.params.bandName;
+  
+  db.getCarouselRoleAndCapability(format(bandName), function (rows) {
+    res.send(rows);
+  })
+});
+
+   
 app.get('/keyDetails/:userID', function (req, res) {
   var userID = req.params.userID;
   db.getKeyDetails(userID, function (rows) {

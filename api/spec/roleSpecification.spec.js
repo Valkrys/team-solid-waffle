@@ -11,7 +11,7 @@ describe("Server", () => {
     describe("GET /:jobFamily/:capabilityName/:bandName", () => {
         var data = {};
         beforeAll((done) => {
-            request.get("http://localhost:8002/Technical/Software-Engineering/Trainee", (error, response, body) => {
+            request.get("http://localhost:8002/roleSpecification/Technical/Software-Engineering/Trainee", (error, response, body) => {
                 data.status = response.statusCode;
                 data.body = body;
                 done();
