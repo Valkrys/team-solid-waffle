@@ -17,14 +17,14 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-app.get('/user_role', function(req, res) {
-  db.getNameAndRole(function(rows) {
+app.get('/user_role', function (req, res) {
+  db.getNameAndRole(function (rows) {
     res.send(rows[0]);
   })
 });
 
-app.get('/roles', function(req, res) {
-  db.getJobRoles(function(rows) {
+app.get('/roles', function (req, res) {
+  db.getJobRoles(function (rows) {
     res.send(rows);
   })
 });
@@ -43,13 +43,13 @@ app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req
 //Sends back array of JSON objects containing role name and capability name;
 app.get('/carousel/:bandName/', function (req, res) {
   var bandName = req.params.bandName;
-  
+
   db.getCarouselRoleAndCapability(format(bandName), function (rows) {
     res.send(rows);
   })
 });
 
-   
+
 app.get('/keyDetails/:userID', function (req, res) {
   var userID = req.params.userID;
   db.getKeyDetails(userID, function (rows) {
@@ -57,6 +57,6 @@ app.get('/keyDetails/:userID', function (req, res) {
   })
 });
 
-function format(string){
+function format(string) {
   return string.replace(/-/g, " ");
 }
