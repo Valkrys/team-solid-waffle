@@ -18,9 +18,6 @@ export class DataService {
   constructor(private http: HttpClient) {
     this.getUser();
     this.getRoleSpecification();
-
-  constructor(private http: HttpClient) {
-    this.getUser();
     this.getKeyDetails();
    }
 
