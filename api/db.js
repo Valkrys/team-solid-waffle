@@ -24,6 +24,11 @@ exports.getNameAndRole = function (callback) {
     )
 }
 
+//Query to return band name and role name for each capability
+exports.getRolesForCapabilities = function(capability, callback) {
+    db.query("SELECT role.bandName, role.roleName, band.bandRank FROM role join band on role.bandName = band.bandName WHERE role.capabilityName = ? ORDER BY band.bandRank", [capability],
+        function(err,  rows) {
+
 exports.getJobRoles = function (callback) {
     db.query("SELECT role.roleName, role.capabilityName, role.bandName, capability.jobfamilyName FROM role " + 
         "JOIN (capability) ON (role.capabilityName = capability.capabilityName);",
@@ -32,6 +37,7 @@ exports.getJobRoles = function (callback) {
             callback(rows);
         }
     )
+}
 }
 
 exports.getRoleSpecification = function (family, capability, band, callback) {
