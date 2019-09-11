@@ -271,4 +271,6 @@ $RECYCLE.BIN/
 # Database Properties
 dbprops.properties
 
+database/usersScript.sql
+
 # End of https://www.gitignore.io/api/node,macos,windows,angular,intellij,visualstudiocode
