@@ -21,7 +21,8 @@ export class DataService {
     this.getKeyDetails();
   }
 
-  public getUser(): void {
+
+   public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
       console.log(user);
       this.user = user;
