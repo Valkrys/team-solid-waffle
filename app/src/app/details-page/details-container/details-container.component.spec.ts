@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-
+import { RouterModule } from '@angular/router';
 import { DataService } from '../../data.service';
+import { KeyDetails } from '../../keyDetails';
 import { CompareRolesComponent } from '../compare-roles/compare-roles.component';
 import { CurrentRoleComponent } from '../current-role/current-role.component';
 import { DescriptionComponent } from '../description/description.component';
@@ -12,7 +13,7 @@ import { ResponsibilityComponent } from '../responsibility/responsibility.compon
 import { TimelineComponent } from '../timeline/timeline.component';
 import { TrainingComponent } from '../training/training.component';
 import { DetailsContainerComponent } from './details-container.component';
-import {KeyDetails} from '../../keyDetails';
+
 
 describe('DetailsContainerComponent', () => {
   let component: DetailsContainerComponent;
@@ -53,7 +54,10 @@ describe('DetailsContainerComponent', () => {
         TimelineComponent,
         TrainingComponent
       ],
-      imports: [HttpClientTestingModule]
+      imports: [
+        HttpClientTestingModule,
+        RouterModule.forRoot([])
+      ]
     })
       .compileComponents();
   }));
@@ -80,8 +84,7 @@ describe('DetailsContainerComponent', () => {
           method: 'GET'
         });
       })
-      )
-    );
+    ));
   });
   
   describe('HttpClient response check for timeline', () => {
@@ -103,15 +106,14 @@ describe('DetailsContainerComponent', () => {
     it('should respond with fake data', async(inject
       ([HttpClient, HttpTestingController], (http: HttpClient, backend: HttpTestingController) => {
         http.get<KeyDetails>('/api/keyDetails/1').subscribe((actualCapability) => {
-           expect(actualCapability.capabilityName).toEqual(expectedCapability);
+          expect(actualCapability.capabilityName).toEqual(expectedCapability);
         });
         backend.match({
           url: '/api/keyDetails/1',
           method: 'GET'
         });
       })
-      )
-    );
+    ));
   });
 
   describe('HttpClient response check for band', () => {
@@ -125,7 +127,6 @@ describe('DetailsContainerComponent', () => {
           method: 'GET'
         });
       })
-      )
-    );
+    ));
   });
 });

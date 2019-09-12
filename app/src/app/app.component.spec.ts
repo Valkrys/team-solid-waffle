@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 import { AppComponent } from './app.component';
 import { DetailsPageModule } from "./details-page/details-page.module";
+import { NavbarComponent } from './navbar/navbar.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -14,7 +15,8 @@ describe('AppComponent', () => {
         HttpClientTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavbarComponent
       ],
     }).compileComponents();
   }));

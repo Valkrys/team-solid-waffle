@@ -1,0 +1,15 @@
+.card{
+    width: 30%;
+}
+.info-background{
+    padding: 4px;
+    color: white;
+    border-radius:3px 3px 3px 3px;
+}
+#capability-bg{
+    background-color: #87B6A7;
+}
+
+#band-bg{
+    background-color:  rgb(210, 149, 238);
+}

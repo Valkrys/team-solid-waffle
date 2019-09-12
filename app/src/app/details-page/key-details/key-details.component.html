@@ -1,5 +1,5 @@
-<div class="container border">
-    <h5 *ngIf="data.keyDetails"><span class="green">Family: </span> {{data.keyDetails.jobFamilyName}}</h5>
-    <h5 *ngIf="data.keyDetails"><span class="green">Capability: </span>{{data.keyDetails.capabilityName}}</h5>
-    <h5 *ngIf="data.keyDetails"><span class="green">Band: </span>{{data.keyDetails.bandName}}</h5>
+<div class="container border rounded px-3 py-2">
+    <h5 *ngIf="data.keyDetails"><span>Family: </span> {{data.keyDetails.jobFamilyName}}</h5>
+    <h5 *ngIf="data.keyDetails"><span>Capability: </span>{{data.keyDetails.capabilityName}}</h5>
+    <h5 *ngIf="data.keyDetails" style="margin-bottom: 0"><span>Band: </span>{{data.keyDetails.bandName}}</h5>
 </div>
