@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User} from './user';
+import { User } from './user';
 import { Role } from './role';
 import { KeyDetails } from './keyDetails';
 
@@ -8,7 +8,7 @@ import { KeyDetails } from './keyDetails';
   providedIn: 'root'
 })
 export class DataService {
-  
+
   public user: User;
   public role: Role;
   public splittedResponsibilities: string[];
@@ -19,32 +19,30 @@ export class DataService {
     this.getUser();
     this.getRoleSpecification();
     this.getKeyDetails();
-   }
+  }
 
   public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
       console.log(user);
       this.user = user;
     });
-  } 
-  
+  }
+
   public getRoleSpecification(): void {
-    this.http.get<Role>('/api/technical/software-engineering/trainee').subscribe(role => {
+    this.http.get<Role>('/api/roleSpecification/technical/software-engineering/trainee').subscribe(role => {
       this.role = role;
-      this.splitResponsibilitiess(this.role);
-      this.splitTraining(this.role);
+      this.splitResponsibilitiess(this.role.roleResponsibilities);
+      this.splitTraining(this.role.trainingDescription);
     });
   }
 
-  public splitResponsibilitiess(role: Role)
-  {
-    this.splittedResponsibilities = this.role.responsibilities.split('.');
+  public splitResponsibilitiess(resp: string) {
+    this.splittedResponsibilities = resp.split('.');
     return this.splittedResponsibilities;
   }
 
-  public splitTraining(role: Role)
-  {
-    this.splittedTraining = this.role.training.split('.');
+  public splitTraining(training: string) {
+    this.splittedTraining = training.split(',');
     return this.splittedTraining;
   }
 

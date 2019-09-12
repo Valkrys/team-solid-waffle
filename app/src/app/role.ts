@@ -1,5 +1,5 @@
 export class Role {
-    description: string;
-    responsibilities: string;
-    training: string;
+    roleDescription: string;
+    roleResponsibilities: string;
+    trainingDescription: string;
 }
