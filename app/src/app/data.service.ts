@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User} from './user';
+import { User } from './user';
 import { Role } from './role';
 import { KeyDetails } from './keyDetails';
 
@@ -19,7 +19,7 @@ export class DataService {
     this.getUser();
     this.getRoleSpecification();
     this.getKeyDetails();
-   }
+  }
 
 
    public getUser(): void {

@@ -1,17 +1,17 @@
-import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
-import { CompareRolesComponent } from '../compare-roles/compare-roles.component';
-import { CurrentRoleComponent } from '../current-role/current-role.component';
-import { DetailsContainerComponent } from './details-container.component';
+import { DataService } from '../../data.service';
+import { CompareRolesComponent } from "../compare-roles/compare-roles.component";
+import { CurrentRoleComponent } from "../current-role/current-role.component";
 import { DescriptionComponent } from '../description/description.component';
 import { KeyDetailsComponent } from '../key-details/key-details.component';
 import { RelatedRolesComponent } from '../related-roles/related-roles.component';
 import { ResponsibilityComponent } from '../responsibility/responsibility.component';
 import { TimelineComponent } from '../timeline/timeline.component';
 import { TrainingComponent } from '../training/training.component';
-import {DataService} from '../../data.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { DetailsContainerComponent } from './details-container.component';
 
 describe('DetailsContainerComponent', () => {
   let component: DetailsContainerComponent;
@@ -27,7 +27,8 @@ describe('DetailsContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompareRolesComponent,
+      declarations: [
+        CompareRolesComponent,
         CurrentRoleComponent,
         DescriptionComponent,
         DetailsContainerComponent,
@@ -35,11 +36,11 @@ describe('DetailsContainerComponent', () => {
         RelatedRolesComponent,
         ResponsibilityComponent,
         TimelineComponent,
-        TrainingComponent ],
-      imports: [HttpClientModule, HttpClientTestingModule],
-      providers: [DataService]
+        TrainingComponent
+      ],
+      imports: [HttpClientTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -64,7 +65,7 @@ describe('DetailsContainerComponent', () => {
           method: 'GET'
         });
       })
-      )
+    )
     );
   });
 });

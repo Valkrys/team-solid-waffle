@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 import { KeyDetailsComponent } from './key-details.component';
 
@@ -8,7 +9,8 @@ describe('KeyDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KeyDetailsComponent ]
+      declarations: [ KeyDetailsComponent ],
+      imports: [ HttpClientTestingModule ]
     })
     .compileComponents();
   }));
