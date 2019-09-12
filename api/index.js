@@ -49,7 +49,6 @@ app.get('/carousel/:bandName/', function (req, res) {
   })
 });
 
-
 app.get('/keyDetails/:userID', function (req, res) {
   var userID = req.params.userID;
   db.getKeyDetails(userID, function (rows) {

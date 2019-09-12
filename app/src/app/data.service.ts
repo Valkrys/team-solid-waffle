@@ -19,8 +19,7 @@ export class DataService {
     this.getUser();
     this.getRoleSpecification();
     this.getKeyDetails();
-  }
-
+   }
 
    public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
@@ -53,5 +52,4 @@ export class DataService {
       console.log(this.keyDetails);
     });
   }
-
 }
