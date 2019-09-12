@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { Role } from './role';
 import { KeyDetails } from './keyDetails';
+import { TimelineRole } from './timelineRole';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,13 @@ export class DataService {
   public splittedResponsibilities: string[];
   public splittedTraining: string[];
   public keyDetails: KeyDetails;
+  public timelineRole: TimelineRole;
 
   constructor(private http: HttpClient) {
     this.getUser();
     this.getRoleSpecification();
     this.getKeyDetails();
+    this.getTimelineRoles();
    }
 
    public getUser(): void {
@@ -52,4 +55,13 @@ export class DataService {
       console.log(this.keyDetails);
     });
   }
+
+  public getTimelineRoles(): void {
+    this.http.get<TimelineRole>('api/capabilities_roles/Software-Engineering').subscribe(timelineRole => {      
+      console.log(timelineRole.bandName);
+      this.timelineRole = timelineRole;
+    });
+  }
+
+
 }

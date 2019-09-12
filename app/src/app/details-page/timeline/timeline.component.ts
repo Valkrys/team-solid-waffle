@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/data.service';
+import { TimelineRole } from 'src/app/timelineRole';
+import { KeyDetails } from 'src/app/keyDetails';
 
 @Component({
   selector: 'app-timeline',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimelineComponent implements OnInit {
 
-  private data = [
+  data: DataService;
+  timelineRole: TimelineRole;
+  keyDetails: KeyDetails;
+  
+  private Extradata = [
     { passed: true, title: 'Gathering Information' },
     { passed: true, title: 'Planning' },
     { passed: false, title: 'Design' },
@@ -17,13 +24,26 @@ export class TimelineComponent implements OnInit {
     { passed: false, title: 'Maintenance' }
   ];
   
-  constructor() { }
+  constructor(dataservice: DataService) { 
+    this.data = dataservice;
+  }
 
   ngOnInit() {
   }
 
+  isRoleLessThanCurrentRole(bandRank:number): boolean
+  {
+    
+    console.log(this.data.keyDetails.bandRank);
+    
+    if(bandRank <= parseInt(this.data.keyDetails.bandRank))
+    {
+      console.log("This is when it's true");
+      return true;
+    }
+
+    console.log("This is when it's false");
+    return false;
+  }
+
 }
-
-
-
-
