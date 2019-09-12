@@ -15,7 +15,7 @@ body {
     transition: all 200ms ease-in;
   }
   .timestamp {
-    width: 200px;
+    width: 260px;
     margin-bottom: 20px;
     padding: 0px 40px;
     display: flex;
@@ -80,4 +80,19 @@ body {
   ._ngcontent-gme-c1
   {
     height: 15em !important;
+  }
+
+  .larger-width
+  {
+    width: 300px;
+  }
+
+  .increase-first-child-with
+  {
+    width: 250px;
+  }
+
+  .inline-block
+  {
+    display: inline-block;
   }

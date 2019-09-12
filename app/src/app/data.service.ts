@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User} from './user';
 import { Role } from './role';
 import { KeyDetails } from './keyDetails';
+import { TimelineRole } from './timelineRole';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class DataService {
   
   public user: User;
   public role: Role;
+  public timelineRole: TimelineRole;
   public splittedResponsibilities: string[];
   public splittedTraining: string[];
   public keyDetails: KeyDetails;
@@ -19,6 +21,7 @@ export class DataService {
     this.getUser();
     this.getRoleSpecification();
     this.getKeyDetails();
+    this.getTimelineRoles();
    }
 
   public getUser(): void {
@@ -26,8 +29,16 @@ export class DataService {
       console.log(user);
       this.user = user;
     });
-  } 
+  }
   
+  public getTimelineRoles(): void
+  {
+    this.http.get<TimelineRole>('/api/capabilities_roles/Software-Engineering').subscribe(timelineRole => {
+      console.log(timelineRole[0].roleName);
+      this.timelineRole = timelineRole;
+    });
+  }
+
   public getRoleSpecification(): void {
     this.http.get<Role>('/api/technical/software-engineering/trainee').subscribe(role => {
       this.role = role;
