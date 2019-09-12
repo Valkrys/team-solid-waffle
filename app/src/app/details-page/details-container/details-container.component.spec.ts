@@ -17,13 +17,22 @@ describe('DetailsContainerComponent', () => {
   let component: DetailsContainerComponent;
   let fixture: ComponentFixture<DetailsContainerComponent>;
   let data: DataService;
-  const expectedRoleSpecification = '{roleDescription: "Graduate entry level, here to learn, but primarily to contribute to projects.",' +
+  const expectedRoleSpecification = '{' +
+    'roleDescription: "Graduate entry level, here to learn, but primarily to contribute to projects.",' +
     'roleResponsibilities: "Represent Kainos at careers fairs or Kainos open evenings events if invited.' +
     'Immediately tell your manager if your tasks are not going to be complete within the expected timeframe.' +
     ' Notify your line manager if there are dependencies that are impacting your work. ' +
     'Escalate to your line manager if you do not have appropriate project goals. ' +
     'Notify HR if you have not received your project review on time, ' +
-    'trainingDescription": "www.google.com"}';
+    'trainingDescription": "www.google.com"' +
+    '}';
+  const expectedBandHierarchy = '[' +
+    '{"bandName": "Apprentice", "roleName": "Software Engineer", "bandRank": 1 }, ' +
+    '{"bandName": "Trainee", "roleName": "Software Engineer", "bandRank": 2 }, ' +
+    '{"bandName": "Associate", "roleName": "Software Engineer", "bandRank": 3 }, ' +
+    '{"bandName": "Senior Associate", "roleName": "Software Engineer", "bandRank": 4 }, ' +
+    '{"bandName": "Consultant", "roleName": "Lead Software Engineer", "bandRank": 5 }' +
+    ']';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -61,6 +70,21 @@ describe('DetailsContainerComponent', () => {
         });
         backend.match({
           url: '/api/roleSpecification/technical/software-engineering/trainee',
+          method: 'GET'
+        });
+      })
+      )
+    );
+  });
+
+  describe('HttpClient response check for timeline', () => {
+    it('should respond with fake data', async(inject
+      ([HttpClient, HttpTestingController], (http: HttpClient, backend: HttpTestingController) => {
+        http.get('/api/capabilities_roles/Software-Engineering').subscribe((actualBandHierarchy) => {
+          expect(actualBandHierarchy).toEqual(expectedBandHierarchy);
+        });
+        backend.match({
+          url: '/capabilities_roles/Software-Engineering',
           method: 'GET'
         });
       })
