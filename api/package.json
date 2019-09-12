@@ -20,7 +20,9 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "api-console-cli": "^1.0.14",
     "jasmine": "^3.4.0",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "raml2html": "^7.4.0"
   }
 }

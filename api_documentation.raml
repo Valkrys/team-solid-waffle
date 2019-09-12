@@ -1,0 +1,301 @@
+#%RAML 1.0
+---
+title: careerLattice API
+baseUri: http://localhost:8002
+
+documentation:
+  - title: Welcome
+    content: |
+      Welcome to the Career Lattice Documentation. 
+
+  - title: Chapter one
+    content: |
+      More content here. Including **bold** text!
+
+/roles:
+    description: Collection of jobs and all the capabilities and families they belong to
+    get:
+        description: Gets an array of JSON objects containing roleID, roleName, capabilityID, capabilityName, jobFamilyID and jobFamilyName from the DB
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: | 
+                            {   
+                                "title": "roles response",
+                                "type": "JSON Object"
+                                "properties": {
+                                    "roleID": {
+                                        "type" : "number",
+                                    },
+                                    "roleName": {
+                                        "type" : "string",
+                                    },
+                                    "capabilityID": {
+                                        "type" : "number",
+                                    },
+                                    "capabilityName": {
+                                        "type" : "string",
+                                    },
+                                    "jobFamilyID": {
+                                        "type": "number"
+                                    },
+                                    "jobFamilyName ": {
+                                        "type": "string"
+                                    }
+                                }  
+                            }
+                        example: |
+                                    [
+                                        {
+                                            "roleID": 1,
+                                            "roleName": "Software Engineer", 
+                                            "jobFamilyID": 2, 
+                                            "jobFamilyName": "Technical",
+                                            "capabilityID": 1, 
+                                            "capabilityName": "Apprentice"
+                                        },
+                                        {
+                                            "roleID": 2,
+                                            "roleName": "Software Engineer", 
+                                            "jobFamilyID": 2, 
+                                            "jobFamilyName": "Technical",
+                                            "capabilityID": 2, 
+                                            "capabilityName": "Trainee"
+                                        }
+                                        
+                                    ]
+                        "success": true,
+                        "status": 200
+    /{roleID}:
+        get:
+            description: Gets a single JSON object containing roleID, roleName, capabilityID, capabilityName, jobFamilyID and jobFamilyName from the DB based on roleID
+            queryParameters:
+                roleID:
+                    type: number
+            responses:
+                200:
+                    body:
+                        application/json:
+                            schema: | 
+                                {   
+                                    "title": "roles with id response",
+                                    "type": "JSON Object"
+                                    "properties": {
+                                        "roleID": {
+                                            "type" : "number",
+                                        },
+                                        "roleName": {
+                                            "type" : "string",
+                                        },
+                                        "capabilityID": {
+                                            "type" : "number",
+                                        },
+                                        "capabilityName": {
+                                            "type" : "string",
+                                        },
+                                        "jobFamilyID": {
+                                            "type": "number"
+                                        },
+                                        "jobFamilyName ": {
+                                            "type": "string"
+                                        }
+                                    }  
+                                }
+                            example: |
+                                        {
+                                            "roleID": 6,
+                                            "roleName": "Software Engineer", 
+                                            "jobFamilyID": 2, 
+                                            "jobFamilyName": "Technical",
+                                            "capabilityID": 7, 
+                                            "capabilityName": "Software Engineering"
+                                        }
+                            "success": true,
+                            "status": 200
+                        
+
+/families:
+    description: Collection of job family names and their ids
+    get:
+        description: Gets an array JSON objects containin jobFamilyName and jobFamilyID from the DB
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: | 
+                            {   
+                                "title": "families response",
+                                "type": "JSON Object"
+                                "properties": {
+                                    "jobFamilyID": {
+                                        "type": "number"
+                                    },
+                                    "jobFamilyName ": {
+                                        "type": "string"
+                                    }
+                                }  
+                            }
+                        example: |
+                                    [
+                                        {
+                                            "jobFamilyID": 2, 
+                                            "jobFamilyName": "Technical"
+                                        },
+                                        {
+                                            "jobFamilyID": 1, 
+                                            "jobFamilyName": "Sales & Marketing"
+                                        }
+
+                                    ]
+                        "success": true,
+                        "status": 200
+
+/capabilities:
+    description: Collection of job family names and their ids along with capability names and their ids
+    get:
+        description: Gets an array of JSON objects containing jobFamilyName, jobFamilyID, capabilityName and capabilityID from the DB
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: | 
+                            {   
+                                "title": "capabilities response",
+                                "type": "JSON Object"
+                                "properties": {
+                                    "jobFamilyID": {
+                                        "type": "number"
+                                    },
+                                    "jobFamilyName ": {
+                                        "type": "string"
+                                    },
+                                    "capabilityID ": {
+                                        "type": "number"
+                                    },
+                                    "capabilityName ": {
+                                        "type": "string"
+                                    }
+                                }  
+                            }
+                        example: |
+                                    [
+                                        {
+                                            "jobFamilyID": 1, 
+                                            "jobFamilyName": "Sales & Marketing",
+                                            "capabilityID": 1, 
+                                            "capabilityName": "Business Development"
+                                        },
+                                        {
+                                            "jobFamilyID": 1, 
+                                            "jobFamilyName": "Sales & Marketing",
+                                            "capabilityID": 2, 
+                                            "capabilityName": "Account Management"
+                                        }
+                                    ]
+                        "success": true,
+                        "status": 200
+    /{capabilityID}:
+        get:
+            description: Gets a single JSON object containing jobFamilyName, jobFamilyID, capabilityName and capabilityID from the DB based on capabilityID
+            queryParameters:
+                capabilityID:
+                    type: number
+            responses:
+                200:
+                    body:
+                        application/json:
+                            schema: | 
+                                {   
+                                    "title": "capability with id response",
+                                    "type": "JSON Object"
+                                    "properties": {
+                                        "jobFamilyID": {
+                                            "type": "number"
+                                        },
+                                        "jobFamilyName ": {
+                                            "type": "string"
+                                        },
+                                        "capabilityID ": {
+                                            "type": "number"
+                                        },
+                                        "capabilityName ": {
+                                            "type": "string"
+                                        }
+                                    }   
+                                }
+                            example: |
+                                        {
+                                            "jobFamilyID": 2, 
+                                            "jobFamilyName": "Technical",   
+                                            "capabilityID": 7, 
+                                            "capabilityName": "Software Engineering"
+                                        }
+                            "success": true,
+                            "status": 200
+
+/band:
+    description: Collection of band ids and band names
+    get:
+        description: Gets an array JSON objects containing bandID and bandName from the DB
+        responses:
+            200:
+                body:
+                    application/json:
+                        schema: | 
+                            {   
+                                "title": "band response",
+                                "type": "JSON Object"
+                                "properties": {
+                                    "bandID": {
+                                        "type": "number"
+                                    },
+                                    "bandName ": {
+                                        "type": "string"
+                                    }
+                                }  
+                            }
+                        example: |
+                                    [
+                                        {
+                                            "bandID": 2, 
+                                            "bandName": "Trainee"
+                                        },
+                                        {
+                                            "bandID": 3, 
+                                            "bandName": "Associate"
+                                        }
+                                    ]
+                        "success": true,
+                        "status": 200
+    /{bandID}:
+        get:
+            description: Gets a single JSON object containing bandID and bandName from the DB based on bandID
+            queryParameters:
+                bandID:
+                    type: number
+            responses:
+                200:
+                    body:
+                        application/json:
+                            schema: | 
+                                {   
+                                    "title": "band with id response",
+                                    "type": "JSON Object"
+                                    "properties": {
+                                        "bandID": {
+                                        "type": "number"
+                                        },
+                                        "bandName ": {
+                                            "type": "string"
+                                        }
+                                    }   
+                                }
+                            example: |
+                                        {
+                                            "bandID": 2, 
+                                            "bandName": "Trainee"
+                                        }                                          
+                            "success": true,
+                            "status": 200
+
