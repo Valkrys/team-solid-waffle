@@ -34,11 +34,15 @@ export class TimelineComponent implements OnInit {
   isRoleLessThanCurrentRole(bandRank:number): boolean
   {
     
+    console.log(this.data.keyDetails.bandRank);
+    
     if(bandRank <= parseInt(this.data.keyDetails.bandRank))
     {
+      console.log("This is when it's true");
       return true;
     }
-    
+
+    console.log("This is when it's false");
     return false;
   }
 

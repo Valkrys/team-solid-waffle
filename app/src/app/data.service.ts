@@ -59,9 +59,7 @@ export class DataService {
 
   public getTimelineRoles(): void
   {
-    this.http.get<TimelineRole>('api/capabilities_roles/Software Engineering').subscribe(timelineRole => {
-      console.log("**********");
-      
+    this.http.get<TimelineRole>('api/capabilities_roles/Software-Engineering').subscribe(timelineRole => {      
       console.log(timelineRole.bandName);
       this.timelineRole = timelineRole;
     });

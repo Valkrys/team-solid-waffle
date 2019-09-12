@@ -64,7 +64,7 @@ exports.getCarouselRoleAndCapability = function (band, callback) {
 }
 
 exports.getKeyDetails = function (userID, callback) {
-  db.query("select capability.name AS capabilityName, band.name AS bandName, jobFamily.name AS jobFamilyName FROM capability JOIN jobFamily ON capability.jobFamilyID=jobFamily.jobFamilyID " +
+  db.query("select capability.name AS capabilityName, band.name AS bandName, jobFamily.name AS jobFamilyName, band.bandRank AS bandRank FROM capability JOIN jobFamily ON capability.jobFamilyID=jobFamily.jobFamilyID " +
     "JOIN role ON capability.capabilityID=role.capabilityID JOIN band ON role.bandID=band.bandID JOIN user ON role.roleID=user.roleID WHERE user.userID=?", userID,
     function (err, rows) {
       if (err) throw err;
@@ -72,3 +72,4 @@ exports.getKeyDetails = function (userID, callback) {
     }
   );
 }
+
