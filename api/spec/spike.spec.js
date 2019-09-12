@@ -1,32 +1,35 @@
 const request = require("request");
-const assert = require("assert");
+
+require("dotenv").config();
+const API_SERVER = process.env.API_SERVER;
 
 describe("Server", () => {
   var server;
+
   beforeAll(() => {
-      server = require("../");
+    server = require("../");
   });
 
 
   describe("GET /user_role", () => {
     var data = {};
     beforeAll((done) => {
-        request.get("http://localhost:8002/user_role", (error, response, body) => {
-            data.status = response.statusCode;
-            data.body = body;
-            done();
-        });
+      request.get(API_SERVER + "/user_role", (error, response, body) => {
+        data.status = response.statusCode;
+        data.body = body;
+        done();
+      });
     });
-    it("matches objects with the expect key/value pairs", function() {
-        var jsonObject = JSON.parse(data.body);
+    it("matches objects with the expect key/value pairs", function () {
+      var jsonObject = JSON.parse(data.body);
 
-        var expectedKeys = ["firstName", "roleName"];
-        var keysFromObject = Object.keys(jsonObject);
-        for(var i=0; i< expectedKeys.length;i++) {
-           expect(keysFromObject).toContain(expectedKeys[i])
-        }
+      var expectedKeys = ["firstName", "roleName"];
+      var keysFromObject = Object.keys(jsonObject);
+      for (var i = 0; i < expectedKeys.length; i++) {
+        expect(keysFromObject).toContain(expectedKeys[i])
+      }
 
-         
+
     });
 
   });
