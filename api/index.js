@@ -39,6 +39,13 @@ app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req
   })
 });
 
+app.get('/capabilities_roles/:capability', function(req, res) {
+  // console.log(req.body);
+  var capabilityName = req.params.capability;
+  db.getRolesForCapabilities(capabilityName, function(rows) {
+    res.send(rows);
+  })
+});
 
 //Sends back array of JSON objects containing role name and capability name;
 app.get('/carousel/:bandName/', function (req, res) {
