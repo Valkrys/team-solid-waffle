@@ -9,11 +9,26 @@ import { Role } from '../../role';
 })
 export class TrainingComponent implements OnInit {
 
-  data: DataService;
-  role : Role;
+  trainings: string[];
+  roleID: number;
 
-  constructor(dataservice: DataService) { 
-    this.data = dataservice;
+  constructor(private data: DataService) {
+    if((window.location.href).split('/').length == 5)
+    {
+      this.roleID = parseInt((window.location.href).split('/')[4]);
+    }
+    else if(isNaN(this.roleID))
+    {
+      this.roleID = this.data.user.userID;
+    }
+    else
+    {
+      console.log("ERROR");
+      
+    }
+    this.data.getRoleDetail(this.roleID).subscribe(role => {
+      this.trainings = role.training.split(',');
+    });
   }
 
   ngOnInit() {

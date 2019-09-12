@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
-import { TimelineRole } from 'src/app/timelineRole';
-import { KeyDetails } from 'src/app/keyDetails';
+import { Role } from 'src/app/role';
 
 @Component({
   selector: 'app-timeline',
@@ -9,41 +8,41 @@ import { KeyDetails } from 'src/app/keyDetails';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-
+  
+  roles: Role[];
+  roleID: number;
   data: DataService;
-  timelineRole: TimelineRole;
-  keyDetails: KeyDetails;
+  allRoles: Role[];
   
-  private Extradata = [
-    { passed: true, title: 'Gathering Information' },
-    { passed: true, title: 'Planning' },
-    { passed: false, title: 'Design' },
-    { passed: false, title: 'Content Writing and Assembly' },
-    { passed: false, title: 'Coding' },
-    { passed: false, title: 'Testing, Review & Launch' },
-    { passed: false, title: 'Maintenance' }
-  ];
   
-  constructor(dataservice: DataService) { 
+  constructor(private dataservice: DataService) {
     this.data = dataservice;
+    if((window.location.href).split('/').length == 5)
+    {
+      this.roleID = parseInt((window.location.href).split('/')[4]);
+    }
+    else if(isNaN(this.roleID))
+    {
+      this.roleID = this.data.user.userID;
+    }
+    else
+    {
+      console.log("ERROR");
+    }
+    this.data.getRoleList().subscribe(roles => {
+      this.allRoles = roles;
+      console.log(this.allRoles);
+      this.roles = roles.filter(role => role.capabilityID === roles[this.roleID-1].capabilityID)
+        .sort((a, b) => a.bandRank - b.bandRank);
+    });
+
+  }
+  
+  isLessThanCurrentRole(role: Role): boolean {
+    // TODO: The role bandRank should be input into this component
+    return role.bandRank <= this.allRoles[this.data.user.roleID].bandRank ? true : false;
   }
 
   ngOnInit() {
   }
-
-  isRoleLessThanCurrentRole(bandRank:number): boolean
-  {
-    
-    console.log(this.data.keyDetails.bandRank);
-    
-    if(bandRank <= parseInt(this.data.keyDetails.bandRank))
-    {
-      console.log("This is when it's true");
-      return true;
-    }
-
-    console.log("This is when it's false");
-    return false;
-  }
-
 }

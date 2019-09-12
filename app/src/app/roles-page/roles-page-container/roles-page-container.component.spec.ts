@@ -1,9 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
+import { DetailsPageModule } from 'src/app/details-page/details-page.module';
+import { RolesPageModule } from '../roles-page.module';
 import { RolesPageContainerComponent } from './roles-page-container.component';
-import { FilterHeaderComponent } from '../filter-header/filter-header.component';
-import { CardsComponent } from '../cards/cards.component';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
+
 
 describe('RolesPageContainerComponent', () => {
   let component: RolesPageContainerComponent;
@@ -11,14 +12,13 @@ describe('RolesPageContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
-        RolesPageContainerComponent,
-        FilterHeaderComponent,
-        CardsComponent,
-        SearchBarComponent
+      imports: [
+        FormsModule,
+        RolesPageModule,
+        DetailsPageModule,
+        HttpClientTestingModule
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

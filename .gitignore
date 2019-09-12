@@ -1,3 +1,5 @@
+database/usersScript.sql
+
 
 # Created by https://www.gitignore.io/api/node,macos,windows,angular,intellij,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,macos,windows,angular,intellij,visualstudiocode
@@ -7,8 +9,8 @@
 # compiled output
 /dist
 /tmp
-/app/app/**/*.js
-/app/app/**/*.js.map
+/app/src/app/**/*.js
+/app/src/app/**/*.js.map
 
 # dependencies
 /node_modules
@@ -270,7 +272,5 @@ $RECYCLE.BIN/
 
 # Logs
 /logs/*
-
-database/usersScript.sql
 
 # End of https://www.gitignore.io/api/node,macos,windows,angular,intellij,visualstudiocode

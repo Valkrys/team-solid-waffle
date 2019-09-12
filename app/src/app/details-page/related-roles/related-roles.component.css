@@ -1,0 +1,40 @@
+h2{
+  font-size: 2rem;
+}
+.img-slider{
+  min-width: 50%;
+}
+
+.card{
+  width: 30%;
+  min-width: 21rem !important; 
+  max-width: 21rem;
+}
+.info-background{
+  padding: 4px;
+  color: white;
+  border-radius:3px 3px 3px 3px;
+}
+#capability-bg{
+  background-color: #87B6A7;
+  margin-right: 1rem;
+}
+
+#band-bg{
+  background-color:  rgb(210, 149, 238);
+}
+
+#family-bg{
+  background-color: #F79F79;
+}
+.card-deck{
+  padding-left: 25px;
+}
+.info-label{
+  white-space: nowrap;
+}
+.card-body{
+  line-height: 2.5;
+}
+
+

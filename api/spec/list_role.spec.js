@@ -10,7 +10,6 @@ describe("Server", () => {
         server = require("../");
     });
 
-
     describe("GET /roles", () => {
         var data = {};
         beforeAll((done) => {
@@ -29,7 +28,7 @@ describe("Server", () => {
             var jsonArray = JSON.parse(data.body);
             var jsonObject = jsonArray[0];
 
-            var expectedKeys = ["roleName", "capabilityName", "bandName", "jobFamilyName"];
+            var expectedKeys = ["roleName", "capabilityName", "bandName", "jobfamilyName"];
             var keysFromObject = Object.keys(jsonObject);
             for (var i = 0; i < expectedKeys.length; i++) {
                 expect(keysFromObject).toContain(expectedKeys[i])
@@ -41,7 +40,5 @@ describe("Server", () => {
             var jsonArray = JSON.parse(data.body);
             expect(jsonArray.length).toBe(numberOfRows);
         });
-
     });
-
 });
