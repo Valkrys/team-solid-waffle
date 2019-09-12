@@ -96,6 +96,22 @@ app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req
   })
 });
 
+app.get('/capabilities_roles/:capability', function(req, res) {
+  logger.trace('GET carousel request');
+
+  var capabilityName = req.params.capability;
+
+  logger.debug('/carousel/ params: capabilityName- ' + capabilityName);
+
+  db.getRolesForCapabilities(format(capabilityName), function(err, rows) {
+    if(!Array.isArray(rows) || err) {
+      return handleError(err, req, res);
+    }
+    logger.info("Sending capabilities_roles back");
+    res.send(rows);
+  })
+});
+
 //Sends back array of JSON objects containing role name and capability name;
 app.get('/carousel/:bandName/', function (req, res) {
   logger.trace('GET carousel request');
@@ -113,7 +129,7 @@ app.get('/carousel/:bandName/', function (req, res) {
   })
 });
 
-   
+
 app.get('/keyDetails/:userID', function (req, res) {
   logger.trace('GET keyDetails request');
 
@@ -130,6 +146,6 @@ app.get('/keyDetails/:userID', function (req, res) {
   })
 });
 
-function format(string){
+function format(string) {
   return string.replace(/-/g, " ");
 }

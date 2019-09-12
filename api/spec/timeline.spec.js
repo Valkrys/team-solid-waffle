@@ -15,7 +15,7 @@ describe("Server", () => {
 describe("GET /capabilities_roles", () => {
     var data = {};
     beforeAll((done) => {
-        request.get(API_SERVER + "/capabilities_roles?capabilities=Software Engineering", (error, response, body) => {
+        request.get(API_SERVER + "/capabilities_roles/Software-Engineering", (error, response, body) => {
             data.status = response.statusCode;
             data.body = body;
             done();

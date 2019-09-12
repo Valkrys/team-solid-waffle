@@ -7,8 +7,8 @@
 # compiled output
 /dist
 /tmp
-/app/**/*.js
-/app/**/*.js.map
+/app/app/**/*.js
+/app/app/**/*.js.map
 
 # dependencies
 /node_modules
@@ -27,7 +27,7 @@ testem.log
 /typings
 
 # e2e
-/e2e/*.js
+# /e2e/*.js
 /e2e/*.map
 
 #System Files
@@ -270,5 +270,7 @@ $RECYCLE.BIN/
 
 # Logs
 /logs/*
+
+database/usersScript.sql
 
 # End of https://www.gitignore.io/api/node,macos,windows,angular,intellij,visualstudiocode

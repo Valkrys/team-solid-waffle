@@ -24,7 +24,7 @@ describe("Server", () => {
         it("roleSpecification: matches objects with the expect key/value pairs", function() {
             var jsonObject = JSON.parse(data.body);
 
-            var expectedKeys = ["description", "responsibilities", "training"];
+            var expectedKeys = ["roleDescription", "roleResponsibilities", "trainingDescription"];
             var keysFromObject = Object.keys(jsonObject);
             for(var i=0; i< expectedKeys.length;i++) {
                 expect(keysFromObject).toContain(expectedKeys[i])

@@ -1,69 +1,68 @@
 const mysql = require('mysql');
 
 const db = mysql.createConnection({
-    host: process.env.DB_HOSTNAME,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+  host: process.env.DB_HOSTNAME,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 });
 
 db.connect(function (err) {
-    if (err) {
-        throw err;
-    }
-
-    console.log('Connected to mysql');
+  if (err) throw err;
+  console.log('Connected to mysql');
 });
 
 exports.getNameAndRole = function (callback) {
-    db.query("SELECT user.firstName, role.roleName FROM user INNER JOIN role ON user.roleID = role.roleID WHERE user.userID = 1",
-        function (err, rows, fields) {
-            callback(err, rows);
-        }
-    );
+  db.query("SELECT user.firstName, role.name AS roleName FROM user INNER JOIN role ON user.roleID = role.roleID WHERE user.userID = 1",
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
 }
 
 //Query to return band name and role name for each capability
-exports.getRolesForCapabilities = function(capability, callback) {
-    db.query("SELECT role.bandName, role.roleName, band.bandRank FROM role join band on role.bandName = band.bandName WHERE role.capabilityName = ? ORDER BY band.bandRank", [capability],
-        function(err, rows, fields) {
-            callback(err, rows);
-        }
-    );
+exports.getRolesForCapabilities = function (capability, callback) {
+  db.query("SELECT band.name AS bandName, role.name AS roleName, band.bandRank FROM role join band on role.bandID=band.bandID JOIN capability ON role.capabilityID=capability.capabilityID " +
+    "WHERE capability.name = ? ORDER BY band.bandRank", [capability],
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
 }
 
 exports.getJobRoles = function (callback) {
-    db.query("SELECT role.roleName, role.capabilityName, role.bandName, capability.jobfamilyName FROM role " + 
-        "JOIN (capability) ON (role.capabilityName = capability.capabilityName);",
-        function (err, rows, fields) {
-            callback(err, rows);
-        }
-    );
+  db.query("SELECT role.name AS roleName, capability.name AS capabilityName, band.name AS bandName, jobFamily.name AS jobFamilyName FROM role " +
+    "JOIN capability ON role.capabilityID = capability.capabilityID JOIN band ON role.bandID = band.bandID JOIN jobFamily ON capability.jobFamilyID = jobFamily.jobFamilyID",
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
 }
 
 exports.getRoleSpecification = function (family, capability, band, callback) {
-    db.query("SELECT role.description, role.responsibilities, role.training FROM role JOIN capability ON (role.capabilityName=capability.capabilityName) WHERE capability.jobFamilyName=? AND role.capabilityName=? AND role.bandName=?", [family, capability, band],
-        function (err, rows, fields) {
-            callback(err, rows);
-        }
-    );
+  db.query("SELECT role.description AS roleDescription, role.responsibilities AS roleResponsibilities, training.description AS trainingDescription FROM role JOIN capability ON role.capabilityID=capability.capabilityID JOIN jobFamily ON " +
+    "capability.jobFamilyID=jobFamily.jobFamilyID JOIN band ON role.bandID=band.bandID join training on role.trainingID=training.trainingID WHERE jobFamily.name=? AND capability.name=? AND band.name=?", [family, capability, band],
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
 }
 
 exports.getCarouselRoleAndCapability = function (band, callback) {
-    db.query("SELECT role.roleName, role.capabilityName, capability.jobFamilyName FROM role " + 
-    "JOIN capability ON role.capabilityName = capability.capabilityName " +
-    "WHERE role.bandName = ?;", band,
-        function (err, rows, fields) {
-            callback(err, rows);
-        }
-    );
+  db.query("SELECT role.name AS roleName, capability.name AS capabilityName, jobFamily.name AS jobFamilyName FROM role " +
+    "JOIN capability ON role.capabilityID = capability.capabilityID JOIN jobFamily ON capability.jobFamilyID=jobFamily.jobFamilyID JOIN band " +
+    "ON role.bandID=band.bandID WHERE band.name = ?", band,
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
 }
 
 exports.getKeyDetails = function (userID, callback) {
-    db.query("select role.capabilityName, role.bandName, capability.jobFamilyName FROM role, capability, user WHERE role.roleID = user.roleID AND role.capabilityName=capability.capabilityName AND userID=?", userID,
-        function (err, rows, fields) {
-            callback(err, rows)
-        }
-    );
+  db.query("select capability.name AS capabilityName, band.name AS bandName, jobFamily.name AS jobFamilyName FROM capability JOIN jobFamily ON capability.jobFamilyID=jobFamily.jobFamilyID " +
+    "JOIN role ON capability.capabilityID=role.capabilityID JOIN band ON role.bandID=band.bandID JOIN user ON role.roleID=user.roleID WHERE user.userID=?", userID,
+    function (err, rows, fields) {
+      callback(err, rows);
+    }
+  );
 }
-
