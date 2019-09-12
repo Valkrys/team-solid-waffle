@@ -38,7 +38,7 @@ export class TimelineComponent implements OnInit {
     {
       return true;
     }
-
+    
     return false;
   }
 
