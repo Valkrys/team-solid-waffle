@@ -13,19 +13,29 @@ import { DetailsContainerComponent } from './details-container/details-container
 
 
 @NgModule({
-  declarations: [TimelineComponent, DescriptionComponent, ResponsibilityComponent,TrainingComponent, KeyDetailsComponent, RelatedRolesComponent, CompareRolesComponent, CurrentRoleComponent, DetailsContainerComponent],
+  declarations: [
+    TimelineComponent, 
+    DescriptionComponent, 
+    ResponsibilityComponent, 
+    TrainingComponent, 
+    KeyDetailsComponent, 
+    RelatedRolesComponent, 
+    CompareRolesComponent, 
+    CurrentRoleComponent, 
+    DetailsContainerComponent
+  ],
   imports: [
     CommonModule
   ],
   exports: [
-    // CurrentRoleComponent,
-    // CompareRolesComponent,
-    // DescriptionComponent,
-    // TimelineComponent,
-    // ResponsibilityComponent,
-    // TrainingComponent,
-    // RelatedRolesComponent,
-    // KeyDetailsComponent
+    CurrentRoleComponent,
+    CompareRolesComponent,
+    DescriptionComponent,
+    TimelineComponent,
+    ResponsibilityComponent,
+    TrainingComponent,
+    RelatedRolesComponent,
+    KeyDetailsComponent,
     DetailsContainerComponent
   ]
 

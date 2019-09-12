@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User} from './user';
+import { User } from './user';
 import { Role } from './role';
 import { KeyDetails } from './keyDetails';
 import { TimelineRole } from './timelineRole';
@@ -23,7 +23,6 @@ export class DataService {
     this.getKeyDetails();
     this.getTimelineRoles();
    }
-
 
    public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
@@ -63,5 +62,6 @@ export class DataService {
       this.timelineRole = timelineRole;
     });
   }
+
 
 }

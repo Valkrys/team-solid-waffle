@@ -268,8 +268,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Database Properties
-dbprops.properties
+# Logs
+/logs/*
 
 database/usersScript.sql
 

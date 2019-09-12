@@ -4,3 +4,4 @@ export class KeyDetails {
     jobFamilyName: string;
     bandRank: string;
 }
+

@@ -1,17 +1,20 @@
 const request = require("request");
-const assert = require("assert");
+
+require("dotenv").config();
+const API_SERVER = process.env.API_SERVER;
 
 describe("Server", () => {
     var server;
+    
     beforeAll(() => {
-        server = require("../");
+        server = require("..");
     });
 
 
     describe("GET /keyDetails/:userID", () => {
         var data = {};
         beforeAll((done) => {
-            request.get("http://localhost:8002/keyDetails/1", (error, response, body) => {
+            request.get(API_SERVER + "/keyDetails/1", (error, response, body) => {
                 data.status = response.statusCode;
                 data.body = body;
                 done();
