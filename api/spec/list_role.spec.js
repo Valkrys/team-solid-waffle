@@ -29,7 +29,7 @@ describe("Server", () => {
             var jsonArray = JSON.parse(data.body);
             var jsonObject = jsonArray[0];
 
-            var expectedKeys = ["roleName", "capabilityName", "bandName", "jobFamilyName"];
+            var expectedKeys = ["roleName", "capabilityName", "bandName", "jobfamilyName"];
             var keysFromObject = Object.keys(jsonObject);
             for (var i = 0; i < expectedKeys.length; i++) {
                 expect(keysFromObject).toContain(expectedKeys[i])

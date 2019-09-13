@@ -66,4 +66,3 @@ exports.getKeyDetails = function (userID, callback) {
     }
   );
 }
-

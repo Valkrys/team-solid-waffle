@@ -24,3 +24,8 @@ h1 {
     font-size: 6em;
     padding-bottom: 20px;
 }
+
+/* Top margins */
+.top10 { margin-top:10px; }
+.top15 { margin-top:15px; }
+.top30 { margin-top:30px; }

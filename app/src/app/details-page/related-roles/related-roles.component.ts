@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../data.service';
+import { CarouselRole } from '../../carouselRole';
 
 @Component({
   selector: 'app-related-roles',
@@ -6,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./related-roles.component.css']
 })
 export class RelatedRolesComponent implements OnInit {
+  card = [];
+  data: DataService;
+  carouselRole: CarouselRole;
 
-  constructor() { }
+  constructor(dataservice: DataService) { 
+    this.data = dataservice;
+
+  }
 
   ngOnInit() {
   }
