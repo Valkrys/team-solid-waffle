@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { Role } from './role';
 import { KeyDetails } from './keyDetails';
+import { TimelineRole } from './timelineRole';
+import { CarouselRole } from './carouselRole';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +17,15 @@ export class DataService {
   public splittedResponsibilities: string[];
   public splittedTraining: string[];
   public keyDetails: KeyDetails;
+  public timelineRole: TimelineRole;
 
+  public carouselRole: CarouselRole[] = [];
   constructor(private http: HttpClient) {
     this.getUser();
     this.getRoleSpecification();
     this.getKeyDetails();
+    this.getTimelineRoles();
+    this.getCarouselRoleDetails();
    }
 
    public getUser(): void {
@@ -52,4 +59,22 @@ export class DataService {
       console.log(this.keyDetails);
     });
   }
+
+  public getTimelineRoles(): void {
+    this.http.get<TimelineRole>('api/capabilities_roles/Software-Engineering').subscribe(timelineRole => {      
+      console.log(timelineRole.bandName);
+      this.timelineRole = timelineRole;
+    });
+  }
+
+
+
+  public getCarouselRoleDetails(): void {
+    this.http.get<CarouselRole[]>('/api/carousel/Trainee').subscribe(carouselRoleDetails => {
+      this.carouselRole = carouselRoleDetails;
+    });
+  }
+
 }
+
+
