@@ -6,13 +6,13 @@
         <select id="family-drp" [(ngModel)]="selectedFamily" (change)="onFamilyChange()">
             <option value="" disabled selected>Family</option>
             <option value="">All Families</option>
-            <option *ngFor=" let fam of data.family" value={{fam.jobFamilyID}}>{{fam.jobFamilyName}}</option>
+            <option *ngFor=" let fam of families" value={{fam.jobFamilyID}}>{{fam.jobFamilyName}}</option>
         </select>
 
         <select id="cap-drp" [(ngModel)]="selectedCapability">
             <option value="" disabled selected>Capability</option>
             <option value="">All Capabilities</option>
-            <option *ngFor=" let cap of data.capability | capabilityFilter:selectedFamily" value={{cap.capabilityID}}>
+            <option *ngFor=" let cap of capabilities | capabilityFilter:selectedFamily" value={{cap.capabilityID}}>
                 {{ cap.capabilityName}}
             </option>
         </select>
@@ -20,7 +20,7 @@
         <select id="band-drp" [(ngModel)]="selectedBand">
             <option value="" disabled selected>Band</option>
             <option value="">All Bands</option>
-            <option *ngFor=" let band of data.band" value={{band.bandName}}>{{ band.bandName }}</option>
+            <option *ngFor=" let band of bands" value={{band.bandName}}>{{ band.bandName }}</option>
         </select>
 
         <span class="expand"></span>
@@ -33,11 +33,11 @@
         </div>
     </div>
     <p id="sorryy"
-        *ngIf="(data.roles | rolesFilter: searchText : selectedBand : selectedCapability : selectedFamily).length === 0">
+        *ngIf="(roles | rolesFilter: searchText : selectedBand : selectedCapability : selectedFamily).length === 0">
         Sorry, no results matched your search</p>
     <div class="card-deck mx-auto">
         <div class="card mb-3" style="min-width: 18rem !important; max-width: 20rem;"
-            *ngFor="let role of data.roles | rolesFilter: searchText : selectedBand : selectedCapability : selectedFamily">
+            *ngFor="let role of roles | rolesFilter: searchText : selectedBand : selectedCapability : selectedFamily">
             <img class="card-img-top" src="assets/stock_card.jpeg" alt="softeng">
             <div class="card-body">
                 <h4 class="card-title">{{ role.roleName }}</h4>

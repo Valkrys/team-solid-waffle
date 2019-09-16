@@ -1,20 +1,19 @@
+// Load configuration from .env
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
-
-var log4js = require('log4js');
+const log4js = require('log4js');
 
 log4js.configure({
   appenders: { 
     console: { type: 'stdout' },
-    express_endpoint: { type: 'dateFile', filename: 'logs/express_endpoint.log'}
+    file: { type: 'dateFile', filename: 'logs/express_endpoint.log'}
   },
-  categories: { default: { appenders: ['express_endpoint', 'console'], level: 'all' } }
+  categories: { default: { appenders: (process.env.NODE_ENV !== "test" ? ['file', 'console'] : ['file']), level: 'all' } }
 });
 
-const logger = log4js.getLogger('express_endpoint');
-
-// Load configuration from .env
-require("dotenv").config();
+const logger = log4js.getLogger('');
 
 const app = express();
 const port = process.env.PORT || 8002;
@@ -24,12 +23,6 @@ const db = require('./db.js');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
-
-
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
-
 
 function handleError(err, req, res) {
   logger.trace('Entered handleError');
@@ -51,9 +44,81 @@ function handleError(err, req, res) {
   logger.error(`${err.errno} (${err.code}) : ${err.sqlMessage}`);
 
   res.status(err.status || 500).send({
-      message: 'Database error. ' + err.sqlMessage
+    message: 'Database error. ' + err.sqlMessage
   });
 }
+
+// Log every request to the server
+app.use(function (req, res, next) {
+  logger.trace(`${req.method} ${req.path}`);
+  next();
+});
+
+app.get('/roles', (req, res) => {
+  db.getRoles((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
+});
+
+app.get('/role/:id', (req, res) => {
+  const id = req.params.id;
+  db.getRoleDetail(id, (err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows[0]);
+  });
+});
+
+app.get('/capabilities', (req, res) => {
+  db.getCapabilities((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
+});
+
+app.get('/capability/:id', (req, res) => {
+  const id = req.params.id;
+  db.getCapabilityDetail(id, (err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows[0]);
+  });
+});
+
+app.get('/bands', (req, res) => {
+  db.getBands((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
+});
+
+app.get('/band/:id', (req, res) => {
+  const id = req.params.id;
+  db.getBandDetail(id, (err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows[0]);
+  });
+});
+
+app.get('/families', (req, res) => {
+  db.getFamilies((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
+});
 
 app.get('/user_role', function(req, res) {
   logger.trace('GET user_role request');
@@ -65,125 +130,10 @@ app.get('/user_role', function(req, res) {
     logger.info("Sending user_role results back");
     res.send(rows[0]);
   });
-
 });
 
-app.get('/roles', function(req, res) {
-  logger.trace('GET role request');
-
-  db.getJobRoles(function(err, rows) {
-    if(!Array.isArray(rows) || err) { 
-      return handleError(err, req, res); 
-    }
-    logger.info("Sending roles results back");
-    res.send(rows);
-  });
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 
-app.get('/family', function (req, res) {
-  logger.trace('GET family request');
-
-  db.getFamily(function (err, rows) {
-    if (!Array.isArray(rows) || err) {
-      return handleError(err, req, res);
-    }
-    logger.info('Sending family results back');
-    res.send(rows);
-  });
-});
-
-app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req, res) {
-  logger.trace('GET roleSpecification request');
-
-  var jobFamily = req.params.jobFamily;
-  var capabilityName = req.params.capabilityName;
-  var bandName = req.params.bandName;
-
-  logger.debug('/roleSpecification/ params: jobFamily-' + jobFamily + 
-  ', capabilityName- ' + capabilityName + ', bandName- ' + bandName);
-
-  db.getRoleSpecification(format(jobFamily), format(capabilityName), format(bandName), function (err, rows) {
-    if(!Array.isArray(rows) || !rows.length || err) { 
-      return handleError(err, req, res); 
-    }
-    logger.info("Sending roleSpecification results back");
-    res.send(rows[0]);
-  })
-});
-
-app.get('/band', function (req, res) {
-  logger.trace('GET band request');
-
-  db.getBand(function (err, rows) {
-    if (!Array.isArray(rows) || err) {
-      return handleError(err, req, res);
-    }
-    logger.info('Sending band results back');
-    res.send(rows);
-  });
-});
-
-app.get('/capability', function (req, res) {
-  logger.trace('GET capability request');
-
-  db.getCapability(function (err, rows) {
-    if (!Array.isArray(rows) || err) {
-      return handleError(err, req, res);
-    }
-    logger.info('Sending capability results back');
-    res.send(rows);
-  });
-});
-
-app.get('/capabilities_roles/:capability', function(req, res) {
-  logger.trace('GET carousel request');
-
-  var capabilityName = req.params.capability;
-
-  logger.debug('/carousel/ params: capabilityName- ' + capabilityName);
-
-  db.getRolesForCapabilities(format(capabilityName), function(err, rows) {
-    if(!Array.isArray(rows) || err) {
-      return handleError(err, req, res);
-    }
-    logger.info("Sending capabilities_roles back");
-    res.send(rows);
-  })
-});
-
-//Sends back array of JSON objects containing role name and capability name;
-app.get('/carousel/:bandName/', function (req, res) {
-  logger.trace('GET carousel request');
-
-  var bandName = req.params.bandName;
-  
-  logger.debug('/carousel/ params: bandName- ' + bandName);
-
-  db.getCarouselRoleAndCapability(format(bandName), function (err, rows) {
-    if(!Array.isArray(rows) || err) {
-      return handleError(err, req, res);
-    }
-    logger.info("Sending carousel results back");
-    res.send(rows);
-  })
-});
-
-app.get('/keyDetails/:userID', function (req, res) {
-  logger.trace('GET keyDetails request');
-
-  var userID = req.params.userID;
-
-  logger.debug('/keyDetails/ params: userID- ' + userID);
-
-  db.getKeyDetails(userID, function (err, rows) {
-    if(!Array.isArray(rows) || !rows.length || err) {
-      return handleError(err, req, res);
-    }
-    logger.info("Sending keyDetails results back");
-    res.send(rows[0]);
-  })
-});
-
-function format(string) {
-  return string.replace(/-/g, " ");
-}
+module.exports = app;
