@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { DetailsPageModule } from 'src/app/details-page/details-page.module';
 import { RolesPageModule } from '../roles-page.module';
 import { RolesPageContainerComponent } from './roles-page-container.component';
+import { RouterTestingModule } from '@angular/router/testing';
+
 
 
 describe('RolesPageContainerComponent', () => {
@@ -16,7 +18,8 @@ describe('RolesPageContainerComponent', () => {
         FormsModule,
         RolesPageModule,
         DetailsPageModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([])
       ]
     }).compileComponents();
   }));

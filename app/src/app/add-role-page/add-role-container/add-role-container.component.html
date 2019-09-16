@@ -1,0 +1,64 @@
+<div class="container" [hidden]="submitted">
+        <h1>Add Role Form</h1>
+        <form (ngSubmit)="onSubmit()" #addRoleForm="ngForm" appInvalidCapabilityBand>
+                <div class="form-group">
+                        <label for="roleName">Role name</label>
+                        <input type="text" class="form-control" id="roleName" required
+                        [(ngModel)]="model.roleName" name="roleName" #roleName="ngModel" maxlength="50">
+                        <div [hidden]="roleName.valid || roleName.pristine" class="error">Role name is required</div>
+                </div>
+                
+
+                <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea rows="8" cols="30" class="form-control" id="description" placeholder="Description" required
+                        [(ngModel)]="model.roleDescription" name="roleDescription" #roleDescription="ngModel" maxlength="300">
+                        </textarea>
+                        <div [hidden]="roleDescription.valid || roleDescription.pristine" class="error">Description is required</div>
+                </div>
+
+                <div class="form-group">
+                        <label for="responsibilities">Responsibilities</label>
+                        <textarea rows="4" cols="30"  class="form-control" id="responsibilities" placeholder="Responsibilities" required
+                        [(ngModel)]="model.responsibilities" name="responsibilities" #responsibilities="ngModel" maxlength="1500">
+                        </textarea>
+                        <div [hidden]="responsibilities.valid || responsibilities.pristine" class="error">Responsibilities are required</div>
+                </div>
+
+                <div class="form-group">
+                        <label for="capabilities">Capabilities</label>
+                        <select class="form-control" id="capabilityID" required [(ngModel)]="model.capabilityID" name="capabilityID" #capabilityID="ngModel">
+                                <option value="" selected disabled>Please Select</option>
+                                <option *ngFor="let capability of capabilities" [value]="capability.capabilityID">{{capability.capabilityName}}</option>
+                        </select>
+
+                </div>
+
+                <div class="form-group">
+                        <label for="band">Band</label>
+                        <select class="form-control" id="bandID"  [(ngModel)]="model.bandID" name="bandID" #bandID="ngModel" required
+                        ng-invalid="addRoleForm.errors?.invalidCombo">
+                                <option value="" selected disabled>Please Select</option>
+                                <option *ngFor="let band of bands" [value]="band.bandID">{{band.bandName}}</option>
+                        </select>
+                        <div *ngIf="addRoleForm.errors?.invalidCombo && (bandID.touched || bandID.dirty || capabilityID.touched || capabilityID.dirty)" 
+                        class="cross-validation-error-message error">Role exists in selected band and capability.</div>
+                </div>
+
+                <div class="form-group">
+                        <label for="training">Training</label>
+                        <select class="form-control" id="training" [(ngModel)]="model.trainingID"  name="training" #trainingDescription="ngModel" required>
+                                <option value="" selected disabled>Please Select</option>
+                                <option *ngFor="let train of trainings" [ngValue]="train.trainingID" id="train.trainingID">{{train.description}}</option>
+                        </select>
+                </div>
+                
+                
+                <button type="submit" class="btn btn-default" [disabled]="!addRoleForm.form.valid">Submit</button>
+        </form>
+</div>
+
+<div [hidden]="!submitted">
+        <h2>You have added a new role!</h2>
+        <button (click)="routeToRoles()">Go to Roles</button>
+</div>
