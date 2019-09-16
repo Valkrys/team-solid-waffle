@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>Capability</h1>
+    <div class="dropdownContainer">
+        <span>Filter by:</span>
+
+        <select id="family-drp" [(ngModel)]="selectedFamily" (change)="onFamilyChange($event.target.value)">
+            <option value="" disabled selected>Family</option>
+            <option value="">All Families</option>
+            <option *ngFor=" let fam of data.family" value={{fam.jobFamilyID}}>{{fam.jobFamilyName}}</option>
+        </select>
+
+        <span class="expand"></span>
+
+        <div id="search">
+            <div class="active-cyan-4">
+                <input class="form-control" autocomplete="off" name="search" [(ngModel)]="searchText" type=" text"
+                    placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mx-auto">
+        <div class="card mb-3" style="min-width: 18rem !important; max-width: 20rem;"
+            *ngFor="let cap of data.capability ">
+            <img class="card-img-top" src="assets/stock_card.jpeg" alt="softeng">
+            <div class="card-body">
+                <h4 class="card-title">{{ cap.capabilityName }}</h4>
+                <span class="info-background" id="family-bg"><span
+                        class="info-label">{{ cap.jobFamilyName }}</span></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -79,4 +79,11 @@ describe('Router', () => {
       expect(location.path()).toBe('/bands');
     });
   }));
+
+  it('navigate to "capabilities" redirects you to /capabilities', fakeAsync(() => {
+    router.navigate(['/capabilities']).then(() => {
+      tick(1000);
+      expect(location.path()).toBe('/capabilities');
+    });
+  }));
 });

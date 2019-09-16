@@ -1,0 +1,70 @@
+#cards {
+    display: inline-block;
+    width: 100%;
+    padding-top: 3rem;
+}
+
+.card {
+    width: 30%;
+}
+
+.info-background{
+    padding: 4px;
+    color: white;
+    border-radius:3px 3px 3px 3px;
+}
+
+#family-bg {
+    background-color: #F79F79;
+    border-color: #F79F79;
+}
+
+.card-deck {
+    padding-left: 90px;
+    padding-top: 3rem;
+}
+
+.info-label {
+    white-space: nowrap;
+}
+
+.card-body {
+    line-height: 2.5;
+}
+
+#family-drp {
+    background-color: #F79F79;
+    border-color: #F79F79;
+}
+
+select {
+    height: 2.3em;
+    color: white;
+}
+
+select:focus {
+    outline: none;
+}
+
+.dropdownContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.dropdownContainer > *:not(:last-child) {
+    margin-right: 2rem;
+}
+
+.expand {
+    flex-grow: 1;
+}
+
+#search {
+    width: 23%;
+}
+
+input:focus {
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px black;
+}
