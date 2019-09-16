@@ -6,7 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DetailsPageModule } from './details-page/details-page.module';
 import { NavbarComponent } from './navbar/navbar.component';
+<<<<<<< HEAD
 import { RolesPageModule } from './roles-page/roles-page.module';
+=======
+import { AddRolePageModule } from './add-role-page/add-role-page.module';
+>>>>>>> setup angular frontend modules and components
 
 @NgModule({
   declarations: [
@@ -20,7 +24,8 @@ import { RolesPageModule } from './roles-page/roles-page.module';
     DetailsPageModule,
     HttpClientModule,
     NgbModule,
-    RolesPageModule
+    RolesPageModule,
+    AddRolePageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

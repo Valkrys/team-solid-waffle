@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DetailsContainerComponent } from './details-page/details-container/details-container.component';
 import { RolesPageContainerComponent } from "./roles-page/roles-page-container/roles-page-container.component";
+import { AddRoleContainerComponent } from './add-role-page/add-role-container/add-role-container.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'roles',
     component: RolesPageContainerComponent
+  },
+  {
+    path: 'addRole',
+    component: AddRoleContainerComponent
   }
 ];
 
