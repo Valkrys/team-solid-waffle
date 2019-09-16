@@ -94,9 +94,10 @@ exports.getRoleSpecification = function (family, capability, band, callback) {
 exports.getCarouselRoleAndCapability = function (band, callback) {
   db.query("SELECT role.name AS roleName, capability.name AS capabilityName, jobFamily.name AS jobFamilyName FROM role " +
     "JOIN capability ON role.capabilityID = capability.capabilityID JOIN jobFamily ON capability.jobFamilyID=jobFamily.jobFamilyID JOIN band " +
-    "ON role.bandID=band.bandID WHERE role.name = ?", band,
+    "ON role.bandID=band.bandID WHERE band.name = ?", band,
     function (err, rows, fields) {
       callback(err, rows);
+
     }
   );
 }
