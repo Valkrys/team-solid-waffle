@@ -12,14 +12,12 @@ import { RelatedRolesComponent } from './details-page/related-roles/related-role
 import { ResponsibilityComponent } from './details-page/responsibility/responsibility.component';
 import { TimelineComponent } from './details-page/timeline/timeline.component';
 import { TrainingComponent } from './details-page/training/training.component';
-import { CardsComponent } from './roles-page/cards/cards.component';
-import { FilterHeaderComponent } from './roles-page/filter-header/filter-header.component';
 import { RolesPageContainerComponent } from './roles-page/roles-page-container/roles-page-container.component';
-import { SearchBarComponent } from './roles-page/search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
 import { CapabilityFilterPipe } from './roles-page/capability-filter.pipe';
 import { RolesPageModule } from './roles-page/roles-page.module';
 import { DetailsPageModule } from './details-page/details-page.module';
+import { BandPageModule } from './band-page/band-page.module';
 
 
 describe('Router', () => {
@@ -32,7 +30,8 @@ describe('Router', () => {
         RouterTestingModule.withRoutes(routes),
         FormsModule,
         RolesPageModule,
-        DetailsPageModule
+        DetailsPageModule,
+        BandPageModule
       ],
       declarations: [
       ]
@@ -42,7 +41,7 @@ describe('Router', () => {
     location = TestBed.get(Location);
     router.initialNavigation();
   });
-  
+
   it('fakeAsync works', fakeAsync(() => {
     let promise = new Promise(resolve => {
       setTimeout(resolve, 10);
@@ -71,6 +70,13 @@ describe('Router', () => {
     router.navigate(['/details']).then(() => {
       tick(1000);
       expect(location.path()).toBe('/details');
+    });
+  }));
+
+  it('navigate to "bands" redirects you to /bands', fakeAsync(() => {
+    router.navigate(['/bands']).then(() => {
+      tick(1000);
+      expect(location.path()).toBe('/bands');
     });
   }));
 });

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { DetailsPageModule } from './details-page/details-page.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RolesPageModule } from './roles-page/roles-page.module';
+import { BandPageModule } from './band-page/band-page.module'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RolesPageModule } from './roles-page/roles-page.module';
     DetailsPageModule,
     HttpClientModule,
     NgbModule,
-    RolesPageModule
+    RolesPageModule,
+    BandPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

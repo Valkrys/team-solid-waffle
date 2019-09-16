@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Bands</h1>
+
+    <div class="searchContainer">
+        <span class="expand"></span>
+        <div id="search">
+            <div class="active-cyan-4">
+                <input class="form-control" autocomplete="off" name="search" [(ngModel)]="searchText" type=" text"
+                    placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mx-auto">
+        <div class="card mb-3" style="min-width: 18rem !important; max-width: 20rem;"
+            *ngFor="let band of data.band | bandsFilter: searchText">
+            <img class="card-img-top" src="assets/stock_card.jpeg" alt="softeng">
+            <div class="card-body">
+                <h4 class="card-title">{{ band.bandName }}</h4>
+            </div>
+        </div>
+    </div>
+</div>

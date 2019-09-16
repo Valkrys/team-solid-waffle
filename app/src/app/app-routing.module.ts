@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DetailsContainerComponent } from './details-page/details-container/details-container.component';
 import { RolesPageContainerComponent } from "./roles-page/roles-page-container/roles-page-container.component";
+import { BandPageContainerComponent } from './band-page/band-page-container/band-page-container.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'roles',
     component: RolesPageContainerComponent
+  },
+  {
+    path: 'bands',
+    component: BandPageContainerComponent
   }
 ];
 

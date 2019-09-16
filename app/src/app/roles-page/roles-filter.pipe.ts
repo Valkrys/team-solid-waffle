@@ -13,18 +13,7 @@ export class RolesFilterPipe implements PipeTransform {
 
     if (Roles && Roles.length > 0) {
       return Roles.filter(it => {
-        // if (it.jobFamilyID == parseInt(selectedFamily)) {
-        //   console.log("FAM FILTER FOUND:" + it.jobFamilyID);
-        //   console.log("FAM FILTER FOUND:" + selectedFamily);
-        //   return it.jobFamilyID == parseInt(selectedFamily);
-        // }
-        // if (it.capabilityID == parseInt(selectedCapability)) {
-        //   console.log("CAP FILTER FOUND:" + selectedCapability);
-        //   return it.capabilityID == parseInt(selectedCapability);
-        // }
-        // if (it.bandName.includes(selectedBand) != []) {
-        //   return it.bandName.includes(selectedBand)
-        // }
+
         console.log(it);
         return (it.roleName.toLowerCase().includes(searchText.toLowerCase())
           || it.capabilityName.toLowerCase().includes(searchText.toLowerCase())
