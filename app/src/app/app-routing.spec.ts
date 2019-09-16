@@ -1,17 +1,17 @@
 import { Location } from '@angular/common';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AddBandPageModule } from './add-band-page/add-band-page.module';
 import { AddRolePageModule } from './add-role-page/add-role-page.module';
 import { routes } from './app-routing.module';
+import { BandDetailsModule } from './band-details/band-details.module';
 import { BandPageModule } from './band-page/band-page.module';
 import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
 import { CapabilityListModule } from './capability-page/capability-list.module';
 import { DetailsPageModule } from './details-page/details-page.module';
 import { RolesPageModule } from './roles-page/roles-page.module';
-
 
 describe('Router', () => {
   let location: Location;
@@ -28,7 +28,9 @@ describe('Router', () => {
         CapabilityListModule,
         CapabilityLeadPageModule,
         AddRolePageModule,
-        AddBandPageModule
+        AddBandPageModule,
+        BandDetailsModule,
+        RouterModule
       ],
       declarations: [
       ]

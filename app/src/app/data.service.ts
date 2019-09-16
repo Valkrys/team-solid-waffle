@@ -25,7 +25,6 @@ export class DataService {
 
   public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
-      console.log(user);
       this.user = user;
     });
   }
@@ -72,5 +71,8 @@ export class DataService {
     return this.http.post<Training>('api/training', newTraining);
   }
 
+  public getBandDetails(id: number): Observable<Band> {
+    return this.http.get<Band>(`/api/band/${id}`);
+  }
 }
 

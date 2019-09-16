@@ -7,6 +7,7 @@ import { AddBandPageModule } from './add-band-page/add-band-page.module';
 import { AddRolePageModule } from './add-role-page/add-role-page.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BandDetailsModule } from './band-details/band-details.module';
 import { BandPageModule } from './band-page/band-page.module';
 import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
 import { CapabilityListModule } from './capability-page/capability-list.module';
@@ -33,7 +34,8 @@ import { RolesPageModule } from './roles-page/roles-page.module';
     AddRolePageModule,
     AddBandPageModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BandDetailsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

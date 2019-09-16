@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BandPageContainerComponent } from './band-page-container/band-page-container.component';
 import { BandsFilterPipe } from './bands-filter.pipe';
+import {RouterModule} from "@angular/router";
 
 
 
@@ -13,7 +14,8 @@ import { BandsFilterPipe } from './bands-filter.pipe';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class BandPageModule { }
