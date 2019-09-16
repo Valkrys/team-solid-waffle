@@ -16,6 +16,7 @@ import { CardsComponent } from './roles-page/cards/cards.component';
 import { FilterHeaderComponent } from './roles-page/filter-header/filter-header.component';
 import { RolesPageContainerComponent } from './roles-page/roles-page-container/roles-page-container.component';
 import { SearchBarComponent } from './roles-page/search-bar/search-bar.component';
+import {BandDetailsModule} from './band-details/band-details.module';
 
 
 describe('Router: App', () => {
@@ -24,7 +25,10 @@ describe('Router: App', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(routes)],
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        BandDetailsModule
+      ],
       declarations: [
         DetailsContainerComponent,
         RolesPageContainerComponent,
@@ -48,7 +52,7 @@ describe('Router: App', () => {
     location = TestBed.get(Location);
     router.initialNavigation();
   });
-  
+
   it('fakeAsync works', fakeAsync(() => {
     let promise = new Promise(resolve => {
       setTimeout(resolve, 10);

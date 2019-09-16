@@ -145,6 +145,19 @@ app.get('/keyDetails/:userID', function (req, res) {
   })
 });
 
+app.get('/band/:bandID', function (req, res) {
+  logger.trace("GET bandDetails request");
+  var bandID = req.params.bandID;
+  logger.debug('/band/ params: bandID - ' + bandID);
+  db.getBandDetails(bandID, function (err, rows) {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    logger.info("Sending bandDetails results bank");
+    res.send(rows[0]);
+  })
+});
+
 function format(string) {
   return string.replace(/-/g, " ");
 }

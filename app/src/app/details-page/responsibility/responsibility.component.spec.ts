@@ -32,12 +32,12 @@ describe('ResponsibilityComponent', () => {
 
   describe('splitResponsibilities', () => {
     it('should split responsibilities', async(() => {
-      const result = data.splitResponsibilitiess('should be respectful.should be honest');
+      const result = data.split('should be respectful.should be honest', '.');
       expect(result).toEqual([ 'should be respectful', 'should be honest' ]);
     }));
 
     it('should split null responsibilities', async(() => {
-      const result = data.splitResponsibilitiess('');
+      const result = data.split('', '.');
       expect(result).toEqual([ '' ]);
     }));
   });

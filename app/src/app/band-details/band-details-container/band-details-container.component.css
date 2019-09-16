@@ -1,0 +1,23 @@
+li {
+  font-size: 1.3em;
+}
+@media (min-width: 1200px)
+{
+  .container {
+    max-width: 1300px;
+  }
+}
+.container
+{
+  margin-top: 40px;
+}
+
+.top_margin
+{
+  margin-top: 20px;
+}
+.right
+{
+  text-align: right;
+}
+
