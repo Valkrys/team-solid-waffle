@@ -5,6 +5,8 @@ import { Role } from './role';
 import { KeyDetails } from './keyDetails';
 import { TimelineRole } from './timelineRole';
 import { CarouselRole } from './carouselRole';
+import {Band} from './band';
+
 
 
 @Injectable({
@@ -14,15 +16,28 @@ export class DataService {
 
   public user: User;
   public role: Role;
-  public splittedResponsibilities: string[];
-  public splittedTraining: string[];
+  public band: Band;
+
+  public splittedRoleResponsibilities: string[];
+  public splittedRoleTraining: string[];
+
+  public splittedBandCommercial: string[];
+  public splittedBandCommunication: string[];
+  public splittedBandInnovation: string[];
+  public splittedBandCustomerFocus: string[];
+  public slittedBandDevelopment: string[];
+  public slittedBandPlanning: string[];
+  public slittedBandKnowledge: string[];
+
+  public splittedBandTraining: string[];
   public keyDetails: KeyDetails;
   public timelineRole: TimelineRole;
 
   public carouselRole: CarouselRole[] = [];
+
   constructor(private http: HttpClient) {
-    this.getUser();
     this.getRoleSpecification();
+    this.getUser();
     this.getKeyDetails();
     this.getTimelineRoles();
     this.getCarouselRoleDetails();
@@ -38,20 +53,15 @@ export class DataService {
   public getRoleSpecification(): void {
     this.http.get<Role>('/api/roleSpecification/technical/software-engineering/trainee').subscribe(role => {
       this.role = role;
-      this.splitResponsibilitiess(this.role.roleResponsibilities);
-      this.splitTraining(this.role.trainingDescription);
+      this.splittedRoleResponsibilities = this.split(this.role.roleResponsibilities, '.');
+      this.splittedRoleTraining = this.split(this.role.trainingDescription, ',');
     });
   }
 
-  public splitResponsibilitiess(resp: string) {
-    this.splittedResponsibilities = resp.split('.');
-    return this.splittedResponsibilities;
+  public split(toBeSpilitted: string, separator: string) {
+      return toBeSpilitted.split(separator);
   }
 
-  public splitTraining(training: string) {
-    this.splittedTraining = training.split(',');
-    return this.splittedTraining;
-  }
 
   public getKeyDetails(): void {
     this.http.get<KeyDetails>('/api/keyDetails/1').subscribe(keyDetails => {
@@ -61,13 +71,11 @@ export class DataService {
   }
 
   public getTimelineRoles(): void {
-    this.http.get<TimelineRole>('api/capabilities_roles/Software-Engineering').subscribe(timelineRole => {      
+    this.http.get<TimelineRole>('api/capabilities_roles/Software-Engineering').subscribe(timelineRole => {
       console.log(timelineRole.bandName);
       this.timelineRole = timelineRole;
     });
   }
-
-
 
   public getCarouselRoleDetails(): void {
     this.http.get<CarouselRole[]>('/api/carousel/Trainee').subscribe(carouselRoleDetails => {
@@ -75,6 +83,19 @@ export class DataService {
     });
   }
 
+  public getBandDetails(): void {
+    this.http.get<Band>('/api/band/2').subscribe(band => {
+        this.band = band;
+        this.splittedBandCommercial = this.split(this.band.commercial, '.');
+        this.splittedBandCommunication = this.split(this.band.communication, '.');
+        this.splittedBandInnovation = this.split(this.band.innovation, '.');
+        this.splittedBandCustomerFocus = this.split(this.band.customerFocus, '.');
+        this.slittedBandDevelopment = this.split(this.band.development, '.');
+        this.slittedBandPlanning = this.split(this.band.planning, '.');
+        this.slittedBandKnowledge = this.split(this.band.knowledge, '.');
+        this.splittedBandTraining = this.split(this.band.trainingDescription, ',');
+    });
+  }
 }
 
 

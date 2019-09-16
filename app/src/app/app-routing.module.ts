@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DetailsContainerComponent } from './details-page/details-container/details-container.component';
-import { RolesPageContainerComponent } from "./roles-page/roles-page-container/roles-page-container.component";
+import {BandDetailsContainerComponent} from './band-details/band-details-container/band-details-container.component';
+import {RolesPageContainerComponent} from './roles-page/roles-page-container/roles-page-container.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
   {
     path: 'roles',
     component: RolesPageContainerComponent
+  },
+  {
+    path: 'band/:band',
+    component: BandDetailsContainerComponent
   }
 ];
 
