@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" [hidden]="submitted">
         <h1>Add Role Form</h1>
         {{diagnostic}}
-        <form #addRoleForm="ngForm">
+        <form (ngSubmit)="onSubmit()" #addRoleForm="ngForm">
                 <div class="form-group">
                         <label for="roleName">Role name</label>
                         <input type="text" class="form-control" id="roleName" required 
@@ -40,11 +40,16 @@
 
                 <div class="form-group">
                         <label for="training">Training</label>
-                        <select class="form-control" id="training" required>
+                        <select class="form-control" id="training" required [(ngModel)]="model.training" name="training">
                                 <option *ngFor="let trn of training" [value]="trn">{{trn}}</option>
                         </select>
                 </div>
 
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn btn-default" (click)="submitRole(); addRoleForm.reset();" [disabled]="!addRoleForm.form.valid">Submit</button>
         </form>
+</div>
+
+<div [hidden]="!submitted">
+        <h1>You have added a new role!</h1>
+        <h2>TODO: ADD DETAILS OR SOMETHING</h2>
 </div>
