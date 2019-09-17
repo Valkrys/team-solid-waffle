@@ -31,7 +31,6 @@ export class DataService {
 
    public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
-      console.log(user);
       this.user = user;
     });
   }
@@ -41,11 +40,6 @@ export class DataService {
       this.role = role;
     });
   }
-
-  public split(toBeSpilitted: string, separator: string) {
-      return toBeSpilitted.split(separator);
-  }
-
 
   public getKeyDetails(): void {
     this.http.get<KeyDetails>('/api/keyDetails/1').subscribe(keyDetails => {

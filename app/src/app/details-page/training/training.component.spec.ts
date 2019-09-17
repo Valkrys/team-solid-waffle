@@ -30,20 +30,4 @@ describe('TrainingComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('splitTraining', () => {
-    it('should split training', async(() => {
-      const result = data.split('www.google.com,www.google.com', ',');
-      expect(result).toEqual(['www.google.com', 'www.google.com']);
-    }));
-
-    it('should split null training', async(() => {
-      const result = data.split('', ',');
-      expect(result).toEqual(['']);
-    }));
-
-    it('should not split training', async(() => {
-      const result = data.split('www.google.com', ',');
-      expect(result).toEqual(['www.google.com']);
-    }));
-  });
 });
