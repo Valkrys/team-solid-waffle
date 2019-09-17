@@ -58,6 +58,9 @@ describe('BandDetailsContainerComponent', () => {
     '     You use appropriate tools, technology or process for the task.' +
     '     You take decisions independently and are able to get on with your job, escalating decisions only when appropriate.' +
     '}';
+  const expectedBandTraining = '{' +
+    'www.google.com' +
+    '}';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -89,6 +92,7 @@ describe('BandDetailsContainerComponent', () => {
           expect(actualCompetenciesList.knowledge).toEqual(expectedBandKnowledge);
           expect(actualCompetenciesList.development).toEqual(expectedBandDevelopment);
           expect(actualCompetenciesList.planning).toEqual(expectedBandPlanning);
+          expect(actualCompetenciesList.trainingDescription).toEqual(expectedBandTraining);
         });
         backend.match({
           url: '/api/band/2',

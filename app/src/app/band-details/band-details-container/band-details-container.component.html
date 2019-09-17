@@ -40,6 +40,12 @@
     </ul>
     <br>
   </div>
+  <div class="training">
+    <h2 class="details_title">Training</h2>
+    <ul *ngFor="let training of data.splittedBandTraining">
+      <li *ngIf="training != '' "> {{training}} </li>
+    </ul>
+  </div>
 </div>
 
 
