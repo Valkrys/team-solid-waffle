@@ -3,7 +3,7 @@
     <div class="dropdownContainer">
         <span>Filter by:</span>
 
-        <select id="family-drp" [(ngModel)]="selectedFamily" (change)="onFamilyChange($event.target.value)">
+        <select id="family-drp" [(ngModel)]="selectedFamily">
             <option value="" disabled selected>Family</option>
             <option value="">All Families</option>
             <option *ngFor=" let fam of data.family" value={{fam.jobFamilyID}}>{{fam.jobFamilyName}}</option>
@@ -20,7 +20,7 @@
     </div>
     <div class="card-deck mx-auto">
         <div class="card mb-3" style="min-width: 18rem !important; max-width: 20rem;"
-            *ngFor="let cap of data.capability ">
+            *ngFor="let cap of data.capability | capabilityListPipe: searchText : selectedFamily">
             <img class="card-img-top" src="assets/stock_card.jpeg" alt="softeng">
             <div class="card-body">
                 <h4 class="card-title">{{ cap.capabilityName }}</h4>

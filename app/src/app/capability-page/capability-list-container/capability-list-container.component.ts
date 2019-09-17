@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
-import { Family } from 'src/app/family';
 
 
 @Component({
@@ -19,10 +18,4 @@ export class CapabilityListContainerComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  onFamilyChange(family: Family): void {
-    console.log(family);
-    console.log(`SelectedFamily: ${this.selectedFamily}`)
-  }
-
 }
