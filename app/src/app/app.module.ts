@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { RolesPageModule } from './roles-page/roles-page.module';
 =======
 import { AddRolePageModule } from './add-role-page/add-role-page.module';
 >>>>>>> setup angular frontend modules and components
+
 
 @NgModule({
   declarations: [
@@ -24,8 +26,9 @@ import { AddRolePageModule } from './add-role-page/add-role-page.module';
     DetailsPageModule,
     HttpClientModule,
     NgbModule,
+    FormsModule,
     RolesPageModule,
-    AddRolePageModule
+    AddRolePageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
