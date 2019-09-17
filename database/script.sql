@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS band(
     development VARCHAR(1500),
     planning VARCHAR(1500),
     knowledge VARCHAR(1500),
+    responsibilities VARCHAR(1500),
     trainingID SMALLINT UNSIGNED,
     bandRank TINYINT UNSIGNED UNIQUE NOT NULL,
     FOREIGN KEY (trainingID) REFERENCES training(trainingID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -44,7 +45,8 @@ CREATE TABLE IF NOT EXISTS band(
     CONSTRAINT `band_customer_focus_len` CHECK ( LENGTH(customerFocus) <= 1500),
     CONSTRAINT `band_development_len` CHECK ( LENGTH(development) <= 1500),
     CONSTRAINT `band_planning_len` CHECK ( LENGTH(planning) <= 1500),
-    CONSTRAINT `band_knowledge_len` CHECK ( LENGTH(knowledge) <= 1500)
+    CONSTRAINT `band_knowledge_len` CHECK ( LENGTH(knowledge) <= 1500),
+    CONSTRAINT `band_responsibilities_len` CHECK ( LENGTH(responsibilities) <= 1500)
 );
 
 CREATE TABLE IF NOT EXISTS role(
@@ -139,8 +141,8 @@ INSERT INTO capability(name, jobFamilyID) VALUES ('Business Development', 1),
 INSERT INTO training(description)
     VALUES("www.google.com");
 
-INSERT INTO band(name, commercial, communication, innovation, customerFocus, development, planning, knowledge, trainingID, bandRank)
-    VALUES ('Apprentice', "", "", "", "", "", "", "", null, 1),
+INSERT INTO band(name, commercial, communication, innovation, customerFocus, development, planning, knowledge, responsibilities, trainingID, bandRank)
+    VALUES ('Apprentice', "", "", "", "", "", "", "", "", null, 1),
 
        ('Trainee',
         'You consistently cooperate with the business processes completing accurately and honestly eg timesheets/EOY review/travel requests.
@@ -160,6 +162,8 @@ INSERT INTO band(name, commercial, communication, innovation, customerFocus, dev
         You are honest and escalate to your manager if you do not believe that you can complete your tasks within the specified time.",
         "You actively cooperate and participate in training completing all pre and post training work.
         You understand the investment that the company has made in you and set personal development goals to allow you to address gaps and advance to an Associate level within 18 months of joining the company.",
+        "You will have to be actively involved in projects.
+        You will have to attend training courses if invited.",
         1,
         2),
 
@@ -195,6 +199,8 @@ INSERT INTO band(name, commercial, communication, innovation, customerFocus, dev
         "You respect the need for you to do your role well and actively learn the functional and technical knowledge and skills that are necessary to do your job with a high level of accomplishment (determined).
         You use appropriate tools, technology or process for the task.
         You take decisions independently and are able to get on with your job, escalating decisions only when appropriate.",
+        "You will have to be actively involved in projects.
+        You will have to support trainees if necessary.",
         1,
         3),
 
@@ -230,6 +236,8 @@ INSERT INTO band(name, commercial, communication, innovation, customerFocus, dev
         "You have the capability and knowledge base to share job specific skills with others.
         You demonstrate an active interest in enhancing current skills and learning new ones.
         You demonstrate a good level of accomplishment in job performance.",
+        "You will have to be actively involved in projects.
+        You will have to support trainees if necessary.",
         1,
         4),
 
@@ -273,6 +281,8 @@ INSERT INTO band(name, commercial, communication, innovation, customerFocus, dev
         You improve or redesign processes, tools, or technologies to achieve business needs
         You consistently share expertise with others, teach skills and explain concepts
         You demonstrate an avid interest in continuously enhancing current skills and learning new ones",
+        "You will have to be actively involved in projects.
+        You will have to support trainees if necessary.",
         1,
         5),
 
@@ -319,6 +329,8 @@ INSERT INTO band(name, commercial, communication, innovation, customerFocus, dev
         You continually seeks to improve or redesign processes, tools, or technologies to enhance business efficiency and relevance.
         You are sought by others for functional or technical expertise and knowledge and for troubleshooting of complex issues.
         You demonstrates an excellent level of accomplishment in job performance.",
+        "You will have to be actively involved in projects.
+        You will have to support trainees if necessary",
         1,
         6),
 
@@ -348,10 +360,12 @@ INSERT INTO band(name, commercial, communication, innovation, customerFocus, dev
         "You anticipate and understand future trends in functional or technical skills and process.
         You actively drive the necessary changes to role and learning requirements to ensure the Company is best placed to adapt to new challenges.
         You demonstrates an outstanding level of accomplishment in job performance.",
+        "You will have to be actively involved in projects.
+        You will have to support trainees if necessary",
         1,
         7),
 
-       ('Leadership Community', "", "", "", "", "", "", "", null, 8);
+       ('Leadership Community', "", "", "", "", "", "", "", "", null, 8);
 
 INSERT INTO role(name, capabilityID, description, bandID, responsibilities, trainingID)
     VALUES ('Designer',

@@ -68,7 +68,7 @@ exports.getKeyDetails = function (userID, callback) {
 }
 
 exports.getBandDetails = function(bandID, callback) {
-    db.query("SELECT band.bandID, band.name, band.commercial, band.communication, band.innovation, band.customerFocus, band.development, band.planning, band.knowledge, band.bandRank, training.trainingID, training.description AS trainingDescription from band join training on (band.trainingID=training.trainingID) where band.bandID = ?", bandID,
+    db.query("SELECT band.bandID, band.name, band.commercial, band.communication, band.innovation, band.customerFocus, band.development, band.planning, band.knowledge, band.responsibilities, band.bandRank, training.trainingID, training.description AS trainingDescription from band left join training on (band.trainingID=training.trainingID) where band.bandID = ?", bandID,
         function(err, rows) {
         callback(err, rows);
     });

@@ -62,6 +62,11 @@ describe('BandDetailsContainerComponent', () => {
     'www.google.com' +
     '}';
 
+  const expectedBandResponsibilities = '{' +
+    'You will have to be actively involved in projects.' +
+    'You will have to attend training courses if invited.' +
+    '}';
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BandDetailsContainerComponent ],
@@ -93,6 +98,7 @@ describe('BandDetailsContainerComponent', () => {
           expect(actualCompetenciesList.development).toEqual(expectedBandDevelopment);
           expect(actualCompetenciesList.planning).toEqual(expectedBandPlanning);
           expect(actualCompetenciesList.trainingDescription).toEqual(expectedBandTraining);
+          expect(actualCompetenciesList.responsibilities).toEqual(expectedBandResponsibilities);
         });
         backend.match({
           url: '/api/band/2',

@@ -8,6 +8,7 @@ export class Band {
   development: string;
   planning: string;
   knowledge: string;
+  responsibilities: string;
   bandRank: string;
   trainingID: string;
   trainingDescription: string;
