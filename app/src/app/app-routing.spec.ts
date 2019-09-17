@@ -12,35 +12,26 @@ import { RelatedRolesComponent } from './details-page/related-roles/related-role
 import { ResponsibilityComponent } from './details-page/responsibility/responsibility.component';
 import { TimelineComponent } from './details-page/timeline/timeline.component';
 import { TrainingComponent } from './details-page/training/training.component';
-import { CardsComponent } from './roles-page/cards/cards.component';
-import { FilterHeaderComponent } from './roles-page/filter-header/filter-header.component';
 import { RolesPageContainerComponent } from './roles-page/roles-page-container/roles-page-container.component';
-import { SearchBarComponent } from './roles-page/search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
+import { CapabilityFilterPipe } from './roles-page/capability-filter.pipe';
+import { RolesPageModule } from './roles-page/roles-page.module';
+import { DetailsPageModule } from './details-page/details-page.module';
 
 
-describe('Router: App', () => {
+describe('Router', () => {
   let location: Location;
   let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(routes)],
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        FormsModule,
+        RolesPageModule,
+        DetailsPageModule
+      ],
       declarations: [
-        DetailsContainerComponent,
-        RolesPageContainerComponent,
-        CompareRolesComponent,
-        CurrentRoleComponent,
-        DescriptionComponent,
-        DetailsContainerComponent,
-        KeyDetailsComponent,
-        RelatedRolesComponent,
-        ResponsibilityComponent,
-        TimelineComponent,
-        TrainingComponent,
-        RolesPageContainerComponent,
-        FilterHeaderComponent,
-        CardsComponent,
-        SearchBarComponent
       ]
     });
 
@@ -48,7 +39,7 @@ describe('Router: App', () => {
     location = TestBed.get(Location);
     router.initialNavigation();
   });
-  
+
   it('fakeAsync works', fakeAsync(() => {
     let promise = new Promise(resolve => {
       setTimeout(resolve, 10);

@@ -14,7 +14,6 @@ import { TimelineComponent } from '../timeline/timeline.component';
 import { TrainingComponent } from '../training/training.component';
 import { DetailsContainerComponent } from './details-container.component';
 
-
 describe('DetailsContainerComponent', () => {
   let component: DetailsContainerComponent;
   let fixture: ComponentFixture<DetailsContainerComponent>;
@@ -57,7 +56,8 @@ describe('DetailsContainerComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterModule.forRoot([])
-      ]
+      ],
+      providers: [DataService]
     })
       .compileComponents();
   }));

@@ -5,13 +5,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DetailsPageModule } from './details-page/details-page.module';
-import { RolesPageModule } from './roles-page/roles-page.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RolesPageModule } from './roles-page/roles-page.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+
   ],
   imports: [
     AppRoutingModule,

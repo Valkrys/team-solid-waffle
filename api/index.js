@@ -4,8 +4,11 @@ const bodyParser = require("body-parser");
 var log4js = require('log4js');
 
 log4js.configure({
-  appenders: { express_endpoint: { type: 'dateFile', filename: 'logs/express_endpoint.log'} },
-  categories: { default: { appenders: ['express_endpoint'], level: 'all' } }
+  appenders: { 
+    console: { type: 'stdout' },
+    express_endpoint: { type: 'dateFile', filename: 'logs/express_endpoint.log'}
+  },
+  categories: { default: { appenders: ['express_endpoint', 'console'], level: 'all' } }
 });
 
 const logger = log4js.getLogger('express_endpoint');
@@ -74,7 +77,19 @@ app.get('/roles', function(req, res) {
     }
     logger.info("Sending roles results back");
     res.send(rows);
-  })
+  });
+});
+
+app.get('/family', function (req, res) {
+  logger.trace('GET family request');
+
+  db.getFamily(function (err, rows) {
+    if (!Array.isArray(rows) || err) {
+      return handleError(err, req, res);
+    }
+    logger.info('Sending family results back');
+    res.send(rows);
+  });
 });
 
 app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req, res) {
@@ -94,6 +109,30 @@ app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req
     logger.info("Sending roleSpecification results back");
     res.send(rows[0]);
   })
+});
+
+app.get('/band', function (req, res) {
+  logger.trace('GET band request');
+
+  db.getBand(function (err, rows) {
+    if (!Array.isArray(rows) || err) {
+      return handleError(err, req, res);
+    }
+    logger.info('Sending band results back');
+    res.send(rows);
+  });
+});
+
+app.get('/capability', function (req, res) {
+  logger.trace('GET capability request');
+
+  db.getCapability(function (err, rows) {
+    if (!Array.isArray(rows) || err) {
+      return handleError(err, req, res);
+    }
+    logger.info('Sending capability results back');
+    res.send(rows);
+  });
 });
 
 app.get('/capabilities_roles/:capability', function(req, res) {

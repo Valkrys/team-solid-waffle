@@ -1,9 +1,8 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-
-import { TrainingComponent } from './training.component';
-import { DataService } from '../../data.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { DataService } from '../../data.service';
+import { TrainingComponent } from './training.component';
 
 describe('TrainingComponent', () => {
   let component: TrainingComponent;
@@ -28,6 +27,17 @@ describe('TrainingComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('HttpClient', () => {
+    it('should issue request', async(inject([HttpClient, HttpTestingController], (http: HttpClient, backend: HttpTestingController) => {
+      http.get('/api/roleSpecification/technical/software-engineering/trainee').subscribe();
+      backend.match({
+        url: '/api/roleSpecification/technical/software-engineering/trainee',
+        method: 'GET'
+      });
+    }))
+    );
   });
 
   describe('splitTraining', () => {
