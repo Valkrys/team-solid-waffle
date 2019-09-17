@@ -83,6 +83,7 @@ export class DataService {
     });
   }
 
+  /* TO DO: make api call dynamic */
   public getBandDetails(): void {
     this.http.get<Band>('/api/band/2').subscribe(band => {
         this.band = band;
