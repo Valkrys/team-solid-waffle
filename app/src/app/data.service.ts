@@ -15,9 +15,6 @@ import { User } from './user';
 export class DataService {
 
   public user: User;
-  public role: Role;
-  public splittedResponsibilities: string[];
-  public splittedTraining: string[];
 
   constructor(private http: HttpClient) {
     this.getUser();
@@ -41,6 +38,10 @@ export class DataService {
     return this.http.get<Capability[]>('/api/capabilities');
   }
 
+  public getCapabilityLeadDetails(id: number): Observable<CapabilityLead> {
+    return this.http.get<CapabilityLead>(`/api/capability/${id}`);
+  }
+
   public getFamilyList(): Observable<Family[]> {
     return this.http.get<Family[]>('/api/families');
   }
@@ -49,8 +50,8 @@ export class DataService {
     return this.http.get<Band[]>('/api/bands');
   }
 
-  public getCapabilityLeadDetails(id: number): Observable<CapabilityLead> {
-    return this.http.get<CapabilityLead>(`/api/capability/${id}`);
+  public updateRole(id: number, updates: Role): Observable<Role> {
+    return this.http.put<Role>(`/api/role/${id}`, updates);
   }
   
   public getTrainingList(): Observable<Training[]> {

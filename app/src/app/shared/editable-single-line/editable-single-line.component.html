@@ -1,0 +1,2 @@
+<div *ngIf="!editMode">{{data}}</div>
+<input *ngIf="editMode" (focusout)="onFocusOut()" [(ngModel)]="data" type="text">
