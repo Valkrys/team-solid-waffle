@@ -9,11 +9,12 @@ import { Role } from '../../role';
 })
 export class TrainingComponent implements OnInit {
 
-  data: DataService;
-  role : Role;
+  trainings: string[];
 
-  constructor(dataservice: DataService) { 
-    this.data = dataservice;
+  constructor(private data: DataService) { 
+    this.data.getRoleDetail(1).subscribe(role => {
+      this.trainings = role.training.split(',');
+    });
   }
 
   ngOnInit() {

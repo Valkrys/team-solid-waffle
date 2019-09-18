@@ -10,18 +10,15 @@ import { CompareRolesComponent } from '../compare-roles/compare-roles.component'
   styleUrls: ['./responsibility.component.css']
 })
 export class ResponsibilityComponent implements OnInit {
+  
+  responsibilities: string[];
 
-  data: DataService;
-  role : Role;
-
-
-  constructor(dataservice: DataService) { 
-    this.data = dataservice;
+  constructor(private data: DataService) { 
+    this.data.getRoleDetail(1).subscribe(role => {
+      this.responsibilities = role.responsibilities.split('.');
+    });
   }
 
   ngOnInit() {
   }
-
-
-
 }

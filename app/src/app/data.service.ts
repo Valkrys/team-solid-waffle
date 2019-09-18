@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Band } from './band';
+import { Capability } from './capability';
+import { Family } from './family';
 import { Role } from './role';
-import { KeyDetails } from './keyDetails';
-import { TimelineRole } from './timelineRole';
-import { CarouselRole } from './carouselRole';
+import { User } from './user';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,68 +16,38 @@ import * as moment from 'moment';
 export class DataService {
 
   public user: User;
-  public role: Role;
-  public splittedResponsibilities: string[];
-  public splittedTraining: string[];
-  public keyDetails: KeyDetails;
-  public timelineRole: TimelineRole;
   public token: string;
   public correctLogin: boolean;
 
-  public carouselRole: CarouselRole[] = [];
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.getUser();
-    this.getRoleSpecification();
-    this.getKeyDetails();
-    this.getTimelineRoles();
-    this.getCarouselRoleDetails();
-   }
+  }
 
-   public getUser(): void {
+  public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
       console.log(user);
       this.user = user;
     });
   }
 
-  public getRoleSpecification(): void {
-    this.http.get<Role>('/api/roleSpecification/technical/software-engineering/trainee').subscribe(role => {
-      this.role = role;
-      this.splitResponsibilitiess(this.role.roleResponsibilities);
-      this.splitTraining(this.role.trainingDescription);
-    });
+  public getRoleDetail(id: number): Observable<Role> {
+    return this.http.get<Role>(`/api/role/${id}`);
   }
 
-  public splitResponsibilitiess(resp: string) {
-    this.splittedResponsibilities = resp.split('.');
-    return this.splittedResponsibilities;
+  public getRoleList(): Observable<Role[]> {
+    return this.http.get<Role[]>('/api/roles');
   }
 
-  public splitTraining(training: string) {
-    this.splittedTraining = training.split(',');
-    return this.splittedTraining;
+  public getCapabilityList(): Observable<Capability[]> {
+    return this.http.get<Capability[]>('/api/capabilities');
   }
 
-  public getKeyDetails(): void {
-    this.http.get<KeyDetails>('/api/keyDetails/1').subscribe(keyDetails => {
-      this.keyDetails = keyDetails;
-      console.log(this.keyDetails);
-    });
+  public getFamilyList(): Observable<Family[]> {
+    return this.http.get<Family[]>('/api/families');
   }
 
-  public getTimelineRoles(): void {
-    this.http.get<TimelineRole>('api/capabilities_roles/Software-Engineering').subscribe(timelineRole => {      
-      console.log(timelineRole.bandName);
-      this.timelineRole = timelineRole;
-    });
-  }
-
-
-
-  public getCarouselRoleDetails(): void {
-    this.http.get<CarouselRole[]>('/api/carousel/Trainee').subscribe(carouselRoleDetails => {
-      this.carouselRole = carouselRoleDetails;
-    });
+  public getBandList(): Observable<Band[]> {
+    return this.http.get<Band[]>('/api/bands');
   }
 
   public login(user: User): void {
@@ -90,11 +62,8 @@ export class DataService {
           const expiresAt = moment().add(res.expiresIn,'second');
           localStorage.setItem('token', res.token);
           localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+          this.router.navigate(['/details']);
           this.correctLogin = true;
-        }
-        else
-        {
-          this.correctLogin = false;
         }
         
       }
@@ -116,7 +85,9 @@ export class DataService {
     localStorage.removeItem("token");
     localStorage.removeItem("expiresAt");
   }
+ 
+
+
 
 }
-
 

@@ -47,15 +47,15 @@ export class LoginBoxComponent implements OnInit {
   }
 
   checkLogin(loginForm) {
-    console.log(loginForm);
     if (loginForm.valid) {
         this.data.login(this.user);
-        if(this.data.loggedIn())
-        {
-          this.router.navigate(['/details']);
-        }
-      } else {
-        alert("Please make sure that email and password are filled correctly")
+        
+      //   if(this.data.loggedIn())
+      //   {
+      //     this.router.navigate(['/details']);
+      //   }
+      // } else {
+      //   alert("Please make sure that email and password are filled correctly")
       }
   }
 

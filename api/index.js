@@ -1,3 +1,6 @@
+// Load configuration from .env
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken")
@@ -7,14 +10,14 @@ var cookieParser = require('cookie-parser')
 
 
 log4js.configure({
-  appenders: { express_endpoint: { type: 'dateFile', filename: 'logs/express_endpoint.log'} },
-  categories: { default: { appenders: ['express_endpoint'], level: 'all' } }
+  appenders: { 
+    console: { type: 'stdout' },
+    file: { type: 'dateFile', filename: 'logs/express_endpoint.log'}
+  },
+  categories: { default: { appenders: (process.env.NODE_ENV !== "test" ? ['file', 'console'] : ['file']), level: 'all' } }
 });
 
-const logger = log4js.getLogger('express_endpoint');
-
-// Load configuration from .env
-require("dotenv").config();
+const logger = log4js.getLogger('');
 
 const app = express();
 const port = process.env.PORT || 8002;
@@ -28,27 +31,35 @@ app.use(cookieParser())
 
 function verifyToken(req, res, next)
 {
-  if(!req.cookies.SESSIONID)
+  if(!req.headers.authorization)
   {
-    return res.send('Unathorized request');
+    console.log("fail 1 ");
+    return res.sendStatus(401);
   }
 
-  let token = req.cookies.SESSIONID;
+  let token = req.headers.authorization.split(' ')[1];
+  console.log("Tooooooken 22: ");
+  console.log(token);
 
   if(token == 'null')
   {
-    return res.send('Unathorized request');
+    console.log("fail 2 ");
+    return res.sendStatus(401);
   }
 
-  let payload = jwt.verify(token,'secretKey');
-
-  if(!payload)
-  {
-    return res.send('Unathorized request');
-  }
+  // let payload = jwt.verify(token,'secretKey');
+  // jwt.verify(token, 'secretKey', function(err, decoded) {
+  //   console.log(err) // bar
+  // });
+  
+  // if(!payload)
+  // {
+  //   console.log("fail 3 ");
+  //   return res.sendStatus(401);
+  // }
 
   // return res.send('it works');
-  req.userId = payload.subject;
+  // req.userId = payload.subject;
   next();
 }
 // app.use(verifyToken);
@@ -79,97 +90,80 @@ function handleError(err, req, res) {
   logger.error(`${err.errno} (${err.code}) : ${err.sqlMessage}`);
 
   res.status(err.status || 500).send({
-      message: 'Database error. ' + err.sqlMessage
+    message: 'Database error. ' + err.sqlMessage
   });
 }
 
-app.get('/user_role', function(req, res) {
-  logger.trace('GET user_role request');
+// Log every request to the server
+app.use(function (req, res, next) {
+  logger.trace(`${req.method} ${req.path}`);
+  next();
+});
 
-  db.getNameAndRole(function(err, rows) {
-    if(!Array.isArray(rows) || !rows.length || err) { 
+app.get('/roles',verifyToken, (req, res) => {
+  db.getRoles((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
     }
-    logger.info("Sending user_role results back");
+    res.send(rows);
+  });
+});
+
+app.get('/role/:id',verifyToken, (req, res) => {
+  const id = req.params.id;
+  db.getRoleDetail(id, (err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
     res.send(rows[0]);
   });
-
 });
 
-app.get('/roles', verifyToken, function(req, res) {
-  logger.trace('GET role request');
-
-  db.getJobRoles(function(err, rows) {
-    if(!Array.isArray(rows) || err) { 
-      return handleError(err, req, res); 
-    }
-    logger.info("Sending roles results back");
-    res.send(rows);
-  })
-});
-
-app.get('/roleSpecification/:jobFamily/:capabilityName/:bandName', function (req, res) {
-  logger.trace('GET roleSpecification request');
-
-  var jobFamily = req.params.jobFamily;
-  var capabilityName = req.params.capabilityName;
-  var bandName = req.params.bandName;
-
-  logger.debug('/roleSpecification/ params: jobFamily-' + jobFamily + 
-  ', capabilityName- ' + capabilityName + ', bandName- ' + bandName);
-
-  db.getRoleSpecification(format(jobFamily), format(capabilityName), format(bandName), function (err, rows) {
-    if(!Array.isArray(rows) || !rows.length || err) { 
-      return handleError(err, req, res); 
-    }
-    logger.info("Sending roleSpecification results back");
-    res.send(rows[0]);
-  })
-});
-
-app.get('/capabilities_roles/:capability', function(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  logger.trace('GET carousel request');
-
-  var capabilityName = req.params.capability;
-
-  logger.debug('/carousel/ params: capabilityName- ' + capabilityName);
-
-  db.getRolesForCapabilities(format(capabilityName), function(err, rows) {
-    if(!Array.isArray(rows) || err) {
+app.get('/capabilities',verifyToken, (req, res) => {
+  db.getCapabilities((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
     }
-    logger.info("Sending capabilities_roles back");
     res.send(rows);
-  })
+  });
 });
 
-//Sends back array of JSON objects containing role name and capability name;
-app.get('/carousel/:bandName/', function (req, res) {
-  logger.trace('GET carousel request');
-
-  var bandName = req.params.bandName;
-  
-  logger.debug('/carousel/ params: bandName- ' + bandName);
-
-  db.getCarouselRoleAndCapability(format(bandName), function (err, rows) {
-    if(!Array.isArray(rows) || err) {
+app.get('/capability/:id',verifyToken, (req, res) => {
+  const id = req.params.id;
+  db.getCapabilityDetail(id, (err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
     }
-    logger.info("Sending carousel results back");
-    res.send(rows);
-  })
+    res.send(rows[0]);
+  });
 });
 
-app.get('/capability/:userID', function (req, res) {
-  var userID = req.params.userID;
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-  db.getCapability(userID, function (rows) {
+app.get('/bands',verifyToken, (req, res) => {
+  db.getBands((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
+});
+
+app.get('/band/:id',verifyToken, (req, res) => {
+  const id = req.params.id;
+  db.getBandDetail(id, (err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
     res.send(rows[0]);
-  })
+  });
+});
+
+app.get('/families',verifyToken, (req, res) => {
+  db.getFamilies((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
 });
 
 app.post('/login', function (req, res) {
@@ -181,37 +175,21 @@ app.post('/login', function (req, res) {
     {
       let payload = { subject: username}
       let token = jwt.sign(payload, 'secretkey', {expiresIn: 120});
+      console.log("Tooooooken 11: ");
+      console.log(token);
       res.cookie("SESSIONID", token, {httpOnly:true, secure:true});
       res.send({token});
     }
     else {
-      res.send({
+      res.status(403).send({
         message: 'Wrong password'
       });
-    }
-
-    
+    }    
   })
 });
 
-app.get('/keyDetails/:userID', function (req, res) {
-  logger.trace('GET keyDetails request');
-
-  var userID = req.params.userID;
-
-  logger.debug('/keyDetails/ params: userID- ' + userID);
-
-  db.getKeyDetails(userID, function (err, rows) {
-    if(!Array.isArray(rows) || !rows.length || err) {
-      return handleError(err, req, res);
-    }
-    logger.info("Sending keyDetails results back");
-    res.send(rows[0]);
-  })
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 
-function format(string) {
-  return string.replace(/-/g, " ");
-}
-
-
+module.exports = app;

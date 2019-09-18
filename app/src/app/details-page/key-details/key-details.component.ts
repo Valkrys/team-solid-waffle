@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from 'src/app/role';
 import { DataService } from '../../data.service';
-import { KeyDetails} from '../../keyDetails';
 
 @Component({
   selector: 'app-key-details',
@@ -9,12 +9,11 @@ import { KeyDetails} from '../../keyDetails';
 })
 export class KeyDetailsComponent implements OnInit {
 
-  data: DataService;
-  keyDetails: KeyDetails;
-  
-  constructor(dataService: DataService) {
-    this.data = dataService;
-   }
+  role: Role;
+
+  constructor(private data: DataService) {
+    this.data.getRoleDetail(1).subscribe(role => this.role = role);
+  }
 
   ngOnInit() {
   }
