@@ -78,7 +78,7 @@ xdescribe("GET /band/1", function () {
   });
 });
 
-xdescribe("GET /band/0", function() {
+xdescribe("GET /band/0", function () {
   let err;
   let res;
   let body;
@@ -100,7 +100,7 @@ xdescribe("GET /band/0", function() {
     expect(res.statusCode).toBe(404);
   });
 
-  it("should have an error message in the body", function() {
+  it("should have an error message in the body", function () {
     expect(body).toEqual({
       message: "SQL query returns 0 rows or was NULL."
     });

@@ -18,6 +18,7 @@ import { CapabilityFilterPipe } from './roles-page/capability-filter.pipe';
 import { RolesPageModule } from './roles-page/roles-page.module';
 import { DetailsPageModule } from './details-page/details-page.module';
 import { BandPageModule } from './band-page/band-page.module';
+import { CapabilityListModule } from './capability-page/capability-list.module'
 
 
 describe('Router', () => {
@@ -31,7 +32,9 @@ describe('Router', () => {
         FormsModule,
         RolesPageModule,
         DetailsPageModule,
-        BandPageModule
+        BandPageModule,
+        CapabilityListModule
+
       ],
       declarations: [
       ]
@@ -77,6 +80,13 @@ describe('Router', () => {
     router.navigate(['/bands']).then(() => {
       tick(1000);
       expect(location.path()).toBe('/bands');
+    });
+  }));
+
+  it('navigate to "capabilities" redirects you to /capabilities', fakeAsync(() => {
+    router.navigate(['/capabilities']).then(() => {
+      tick(1000);
+      expect(location.path()).toBe('/capabilities');
     });
   }));
 });
