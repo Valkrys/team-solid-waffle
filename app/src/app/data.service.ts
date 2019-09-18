@@ -25,23 +25,8 @@ export class DataService {
     });
   }
 
-<<<<<<< HEAD
   public getRoleDetail(id: number): Observable<Role> {
     return this.http.get<Role>(`/api/role/${id}`);
-=======
-  public getRoleSpecification(): void {
-    this.http.get<Role>('/api/roleSpecification/technical/software-engineering/trainee').subscribe(role => {
-      this.role = role;
-      console.log(role)
-      this.splitResponsibilitiess(this.role.responsibilities);
-      this.splitTraining(this.role.training);
-    });
-  }
-
-  public splitResponsibilitiess(resp: string) {
-    this.splittedResponsibilities = resp.split('.');
-    return this.splittedResponsibilities;
->>>>>>> added light invalid messages
   }
 
   public getRoleList(): Observable<Role[]> {
@@ -56,15 +41,8 @@ export class DataService {
     return this.http.get<Family[]>('/api/families');
   }
 
-<<<<<<< HEAD
   public getBandList(): Observable<Band[]> {
     return this.http.get<Band[]>('/api/bands');
-=======
-  public getCarouselRoleDetails(): void {
-    this.http.get<CarouselRole[]>('/api/carousel/Trainee').subscribe(carouselRoleDetails => {
-      this.carouselRole = carouselRoleDetails;
-    });
->>>>>>> added directive to check invalid band capability
   }
 }
 

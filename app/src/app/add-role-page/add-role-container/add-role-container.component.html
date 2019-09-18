@@ -30,7 +30,7 @@
                         <label for="capabilities">Capabilities</label>
                         <select class="form-control" id="capabilityName" required [(ngModel)]="model.capabilityName" name="capabilityName" #capabilityName="ngModel">
                                 <option value="" selected disabled>Please Select</option>
-                                <option *ngFor="let cap of capabilities" [value]="cap" selected>{{cap}}</option>
+                                <option *ngFor="let cap of capability" [value]="cap" selected>{{cap}}</option>
                         </select>
 
                 </div>
