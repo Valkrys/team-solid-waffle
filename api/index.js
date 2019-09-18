@@ -51,7 +51,7 @@ function verifyToken(req, res, next)
   req.userId = payload.subject;
   next();
 }
-app.use(verifyToken);
+// app.use(verifyToken);
 
 
 app.listen(port, () => {
@@ -96,7 +96,7 @@ app.get('/user_role', function(req, res) {
 
 });
 
-app.get('/roles', function(req, res) {
+app.get('/roles', verifyToken, function(req, res) {
   logger.trace('GET role request');
 
   db.getJobRoles(function(err, rows) {
