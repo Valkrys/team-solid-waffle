@@ -118,3 +118,90 @@ describe("GET /role/0", function () {
     });
   });
 });
+
+describe("PUT /role/1", function () {
+  let err;
+  let res;
+  let body;
+
+  beforeAll(function (done) {
+    request(
+        {
+          method: "PUT", 
+          uri: `${BASE_URL}/role/1`, 
+          body: {roleName: 'Hello world!'}, 
+          json: true
+        }, 
+        (e, r, b) => {
+      err = e;
+      res = r;
+      body = b;
+      done();
+    });
+  });
+
+  it("should not return an error", function () {
+    expect(err).toBeUndefined;
+  });
+
+  it("should have status code 200", function () {
+    expect(res.statusCode).toBe(200);
+  });
+
+  it("should have correctly formatted body", function () {
+    const expectedKeys = [
+      'roleID',
+      'roleName',
+      'description',
+      'capabilityID',
+      'capabilityName',
+      'bandID',
+      'bandName',
+      'jobFamilyID',
+      'jobFamilyName',
+      'responsibilities',
+      'training'
+    ];
+    for (let key of expectedKeys) {
+      expect(Object.keys(body)).toContain(key);
+    }
+  });
+
+  it("should contain the updated key:value", function () {
+    expect(body.roleName).toBe("Hello world!");
+  });
+});
+
+describe("PUT /role/0", function () {
+  let err;
+  let res;
+  let body;
+
+  beforeAll(function (done) {
+    request.put(
+        {
+          method: "PUT", 
+          uri: `${BASE_URL}/role/0`, 
+          body: {roleName: 'Hello world!'}, 
+          json: true
+        }, 
+        (e, r, b) => {
+      err = e;
+      res = r;
+      body = b;
+      done();
+    });
+  });
+
+  it("should not return an error", function () {
+    expect(err).toBeUndefined;
+  });
+
+  it("should have status code 404", function () {
+    expect(res.statusCode).toBe(404);
+  });
+
+  it("should have an error message in the body", function() {
+    expect(body).toBe('Not Found');
+  });
+});

@@ -54,6 +54,9 @@ app.use(function (req, res, next) {
   next();
 });
 
+/*
+* Roles
+*/
 app.get('/roles', (req, res) => {
   db.getRoles((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
@@ -73,6 +76,41 @@ app.get('/role/:id', (req, res) => {
   });
 });
 
+function pick(obj, props) {
+  let picked = {};
+  props.forEach((prop) => {
+    if (obj[prop]) picked[prop] = obj[prop];
+  });
+
+  return picked;
+};
+
+app.put('/role/:id', (req, res) => {
+  const id = req.params.id;
+  req.body.name = req.body.roleName;
+  const changes = pick(req.body, ['name', 'description', 'capabilityID', 'bandID', 'responsibilities']);
+  db.updateRole(id, changes, (err, result) => {
+    if (err) {
+      handleError(err);
+    }
+    if (result.affectedRows === 0) {
+      logger.error(`404 not found`)
+      return res.sendStatus(404);
+    } else if (err) {
+      return handleError(err, req, res);
+    }
+    db.getRoleDetail(id, (err, rows) => {
+      if (!Array.isArray(rows) || !rows.length || err) {
+        return handleError(err, req, res);
+      }
+      res.send(rows[0]);
+    });
+  });
+});
+
+/*
+* Capabilities
+*/
 app.get('/capabilities', (req, res) => {
   db.getCapabilities((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
@@ -92,6 +130,9 @@ app.get('/capability/:id', (req, res) => {
   });
 });
 
+/*
+* Bands
+*/
 app.get('/bands', (req, res) => {
   db.getBands((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
@@ -111,6 +152,9 @@ app.get('/band/:id', (req, res) => {
   });
 });
 
+/*
+* Families
+*/
 app.get('/families', (req, res) => {
   db.getFamilies((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
@@ -120,6 +164,9 @@ app.get('/families', (req, res) => {
   });
 });
 
+/*
+* Login
+*/
 app.get('/user_role', function (req, res) {
   logger.trace('GET user_role request');
 

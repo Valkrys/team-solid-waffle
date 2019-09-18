@@ -47,6 +47,18 @@ exports.getRoleDetail = (id, callback) => {
   );
 }
 
+exports.updateRole = (id, changes, callback) => {
+  db.query(
+    'UPDATE role ' +
+    'SET ? ' +
+    'WHERE roleID = ?',
+    [changes, id],
+    (err, rows, fields) => {
+      callback(err, rows);
+    }
+  );
+}
+
 exports.getCapabilities = (callback) => {
   db.query(
     'SELECT capability.capabilityID AS capabilityID, capability.name AS capabilityName, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName ' +

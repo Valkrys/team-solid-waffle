@@ -1,18 +1,15 @@
-<div class="details_title mt-10">
-    <h2>Related Roles</h2>
-    <div class="container-fluid" style="width:100%; overflow-x: scroll;">
-        <div class="card-deck mx-auto row" style="width:max-content;">
-            <div *ngFor="let card of roles">
-                <div class="card m-3">
-                    <div class="card-body">
-                        <h4 class="card-title" id="role-bg">{{card.roleName}}</h4>
-                        <span class="info-background" id="capability-bg">
-                            <span class="info-label">{{card.capabilityName}}</span>
-                        </span>
-                        <span class="info-background" id="family-bg">
-                            <span class="info-label">{{card.jobFamilyName}}</span>
-                        </span>
-                    </div>
+<div class="container-fluid" style="width:100%; overflow-x: scroll;">
+    <div class="card-deck mx-auto row" style="width:max-content;">
+        <div *ngFor="let card of roles">
+            <div class="card m-3">
+                <div class="card-body">
+                    <h4 class="card-title" id="role-bg">{{card.roleName}}</h4>
+                    <span class="info-background" id="capability-bg">
+                        <span class="info-label">{{card.capabilityName}}</span>
+                    </span>
+                    <span class="info-background" id="family-bg">
+                        <span class="info-label">{{card.jobFamilyName}}</span>
+                    </span>
                 </div>
             </div>
         </div>

@@ -1,0 +1,10 @@
+<ul *ngIf="!editMode">
+  <li *ngFor="let item of items">{{item}}</li>
+</ul>
+<div *ngIf="editMode">
+  <div class="input-row" *ngFor="let item of items; let i = index; trackBy:trackByFn">
+    <input (focusout)="onFocusOut()" [(ngModel)]="items[i]" type="text">
+    <button (click)="items.splice(i, 1); onFocusOut()">Delete</button>
+  </div>
+  <button (click)="items.push(''); onFocusOut()">Add new</button>
+</div>

@@ -137,7 +137,7 @@ INSERT INTO capability(name, jobFamilyID) VALUES ('Business Development', 1),
 
 
 INSERT INTO training(description)
-    VALUES("www.google.com");
+    VALUES("https://learning.kainos.com");
 
 INSERT INTO band(name, commercial, communication, innovation, customerFocus, development, planning, knowledge, trainingID, bandRank)
     VALUES ('Apprentice', "", "", "", "", "", "", "", null, 1),

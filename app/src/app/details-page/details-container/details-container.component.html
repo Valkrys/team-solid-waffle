@@ -1,46 +1,70 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-10">
-            <app-current-role></app-current-role>
-        </div>
-        
-        <!-- TODO: Hidden until this functionality exists -->
-        <!-- <div class="col-md-2 right top_margin">
-            <app-compare-roles></app-compare-roles>
-        </div> -->
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-8">
-            <app-description></app-description>
-        </div>
-        <div class="col-md-4">
-            <app-key-details></app-key-details>
-        </div>
-    </div>
+<div class="container mt-4" *ngIf="role">
 
-    <div class="row">
-        <div class="col-md-12">
-            <app-timeline></app-timeline>
-        </div>
-    </div>
+  <div class="buttons">
+    <button *ngIf="!editMode" type="button" class="btn btn-primary mr-2" (click)="editMode = true">Edit</button>
+    <button *ngIf="!editMode" type="button" class="btn btn-primary">Compare</button>
 
-    <div class="row">
-        <div class="col-md-12">
-            <app-responsibility></app-responsibility>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-12">
-            <app-training></app-training>
-        </div>
-    </div>
+    <button *ngIf="editMode" type="button" class="btn btn-primary mr-2" (click)="saveEdit()">Save</button>
+    <button *ngIf="editMode" type="button" class="btn btn-secondary mr-2" (click)="cancelEdit()">Cancel</button>
+  </div>
 
-    <div class="row top30">
-        <div class="col-md-12">
-            <app-related-roles></app-related-roles>
-        </div>
+  <div class="row mb-3">
+    <div class="col">
+      <h1 class="title">Welcome back, Jana!</h1>
+      <!-- <h1>{{role.roleName}}</h1> -->
+      <app-editable-single-line class="subheading" [data]="role.roleName" [editMode]="editMode"
+        (focusOut)="updateRole('roleName', $event)"></app-editable-single-line>
     </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-8">
+      <h2 class="details-title">Description</h2>
+      <!-- <p class="details-info">{{role.description}}</p> -->
+      <app-editable-multi-line [data]="role.description" [editMode]="editMode"
+        (focusOut)="updateRole('description', $event)"></app-editable-multi-line>
+    </div>
+    <div class="key-details col-4 border rounded px-3 py-2">
+      <div>
+        <span>Family:</span>
+        {{role.jobFamilyName}}
+      </div>
+      <div>
+        <span>Capability:</span>
+        <app-editable-option class="dropdown" [data]="capabilityOptions" [selected]="role.capabilityID" [editMode]="editMode" (focusOut)="updateRole('capabilityID', $event)"></app-editable-option>
+      </div>
+      <div>
+        <span>Band:</span>
+        <app-editable-option class="dropdown" [data]="bandOptions" [selected]="role.bandID" [editMode]="editMode" (focusOut)="updateRole('bandID', $event)"></app-editable-option>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col">
+      <app-timeline></app-timeline>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <h2 class="details-title">Responsibilities</h2>
+      <app-editable-ul [items]="responsibilities" [editMode]="editMode" (focusOut)="updateRole('responsibilities', $event)"></app-editable-ul>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <h2 class="details-title">Training</h2>
+      <app-editable-ul [items]="training" [editMode]="editMode" (focusOut)="updateRole('training', $event)"></app-editable-ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h2 class="details-title">Related Roles</h2>
+      <app-related-roles></app-related-roles>
+    </div>
+  </div>
 
 </div>

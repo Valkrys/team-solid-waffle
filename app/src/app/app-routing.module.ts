@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { DetailsContainerComponent } from './details-page/details-container/details-container.component';
-import { RolesPageContainerComponent } from "./roles-page/roles-page-container/roles-page-container.component";
+import { RouterModule, Routes } from '@angular/router';
 import { BandPageContainerComponent } from './band-page/band-page-container/band-page-container.component';
 import { CapabilityListContainerComponent } from './capability-page/capability-list-container/capability-list-container.component';
+import { DetailsContainerComponent } from './details-page/details-container/details-container.component';
+import { RolesPageContainerComponent } from "./roles-page/roles-page-container/roles-page-container.component";
 
 export const routes: Routes = [
   {

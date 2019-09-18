@@ -44,5 +44,9 @@ export class DataService {
   public getBandList(): Observable<Band[]> {
     return this.http.get<Band[]>('/api/bands');
   }
+
+  public updateRole(id: number, updates: Role): Observable<Role> {
+    return this.http.put<Role>(`/api/role/${id}`, updates);
+  }
 }
 

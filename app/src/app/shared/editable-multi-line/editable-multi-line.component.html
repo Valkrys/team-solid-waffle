@@ -1,0 +1,2 @@
+<div *ngIf="!editMode">{{data}}</div>
+<textarea *ngIf="editMode" (focusout)="onFocusOut()" [(ngModel)]="data" rows="5"></textarea>
