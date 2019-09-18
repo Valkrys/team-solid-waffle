@@ -1,6 +1,7 @@
 import { Directive } from '@angular/core';
 import { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors, ValidatorFn, FormGroup } from '@angular/forms';
 import { DataService } from './data.service';
+import { Role } from 'src/app/role';
 
 @Directive({
   selector: '[appInvalidCapabilityBand]',
@@ -8,25 +9,31 @@ import { DataService } from './data.service';
 })
 export class InvalidCapabilityBandDirective implements Validator {
 
+  roles: Role[];
+
   validate(control: AbstractControl): ValidationErrors {
     return this.invalidCapabilityBandDirective(control);
   }
 
   constructor(private dataService: DataService){
-    this.dataService = dataService;
+    dataService.getRoleList().subscribe(roles => this.roles = roles);
   }
 
   invalidCapabilityBandDirective: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
     const bandName = control.get('bandName');
     const capabilityName = control.get('capabilityName');
     
-    return capabilityName && bandName && this.checkBandCapabilityValid(bandName, capabilityName) ? { 'invalidCombo': true } : null;
+    return capabilityName && bandName && this.checkBandCapabilityInvalid(bandName, capabilityName) ? { 'invalidCombo': true } : null;
   };
 
-  checkBandCapabilityValid (bandName, capabilityName){
-    this.dataService.get
+  checkBandCapabilityInvalid (bandName, capabilityName){
+    for(let role of this.roles) {
+      if(role.bandName == bandName && role.capabilityName == capabilityName) {
+        return true;
+      }
+    }
     
-    return bandName.value=="Trainee" && capabilityName.value=="Technical" ;
+    return false;
   };
 }
 
