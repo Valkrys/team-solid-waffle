@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Role } from '../../role';
+import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-role-container',
@@ -9,6 +10,7 @@ import { Role } from '../../role';
 export class AddRoleContainerComponent implements OnInit {
 
   submitted = false;
+  addRoleForm: FormGroup;
 
   model = <Role> {
     roleName: "Software Engineer",
@@ -20,17 +22,21 @@ export class AddRoleContainerComponent implements OnInit {
     capabilityName: "wgweg.g "
   } 
   
+  
   //HARD CODED TESTS
-  capabilities = ["Test", "Technical", "Sales"];
-  band = ["To be fired", "Trainee", "I don't work here"];
+  capabilities = ["Test", "Technical", "Sales", "Google"];
+  band = ["To be fired", "Trainee", "I don't work here", "Google"];
   training = ["Google", "StackOverflow"];
 
-  constructor() {}
+  constructor() {
+      this.model.bandName = this.band[0]
+      this.model.capabilityName = this.capabilities[0];
+      this.model.training = this.training[0];
+    }
 
   onSubmit() { this.submitted = true; }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void{}
 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }

@@ -56,8 +56,15 @@ export class DataService {
     return this.http.get<Family[]>('/api/families');
   }
 
+<<<<<<< HEAD
   public getBandList(): Observable<Band[]> {
     return this.http.get<Band[]>('/api/bands');
+=======
+  public getCarouselRoleDetails(): void {
+    this.http.get<CarouselRole[]>('/api/carousel/Trainee').subscribe(carouselRoleDetails => {
+      this.carouselRole = carouselRoleDetails;
+    });
+>>>>>>> added directive to check invalid band capability
   }
 }
 

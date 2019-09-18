@@ -1,46 +1,55 @@
 <div class="container" [hidden]="submitted">
         <h1>Add Role Form</h1>
         {{diagnostic}}
-        <form (ngSubmit)="onSubmit()" #addRoleForm="ngForm">
-                <div class="form-group">
+        <form (ngSubmit)="onSubmit()" #addRoleForm="ngForm" appInvalidCapabilityBand>
+                <div class="form-group" ngModelGroup>
                         <label for="roleName">Role name</label>
-                        <input type="text" class="form-control" id="roleName" required 
-                        [(ngModel)]="model.roleName" name="roleName" #name="ngModel" #spy>
-                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Role name is required</div>
+                        <input type="text" class="form-control" id="roleName" required
+                        [(ngModel)]="model.roleName" name="roleName" #roleName="ngModel" maxlength="50">
+                        <div [hidden]="roleName.valid || roleName.pristine" class="alert alert-danger">Role name is required</div>
                 </div>
                 
 
                 <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="Description" required
-                        [(ngModel)]="model.roleDescription" name="roleDescription">
-                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Description is required</div>
+                        <textarea rows="8" cols="30" class="form-control" id="description" placeholder="Description" required
+                        [(ngModel)]="model.roleDescription" name="roleDescription" #roleDescription="ngModel" maxlength="300">
+                        </textarea>
+                        <div [hidden]="roleDescription.valid || roleDescription.pristine" class="alert alert-danger">Description is required</div>
                 </div>
 
                 <div class="form-group">
                         <label for="responsibilities">Responsibilities</label>
-                        <input type="text" class="form-control" id="responsibilities" placeholder="Responsibilities" required
-                        [(ngModel)]="model.responsibilities" name="responsibilities">
-                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Responsibilities are required</div>
+                        <textarea rows="4" cols="30"  class="form-control" id="responsibilities" placeholder="Responsibilities" required
+                        [(ngModel)]="model.responsibilities" name="responsibilities" #responsibilities="ngModel" maxlength="1500">
+                        </textarea>
+                        <div [hidden]="responsibilities.valid || responsibilities.pristine" class="alert alert-danger">Responsibilities are required</div>
                 </div>
 
                 <div class="form-group">
                         <label for="capabilities">Capabilities</label>
-                        <select class="form-control" id="capabilities" required [(ngModel)]="model.capabilityName" name="capabilityName">
-                                <option *ngFor="let cap of capabilities" [value]="cap">{{cap}}</option>
+                        <select class="form-control" id="capabilityName" required [(ngModel)]="model.capabilityName" name="capabilityName" #capabilityName="ngModel">
+                                <option value="" selected disabled>Please Select</option>
+                                <option *ngFor="let cap of capabilities" [value]="cap" selected>{{cap}}</option>
                         </select>
+
                 </div>
 
                 <div class="form-group">
                         <label for="band">Band</label>
-                        <select class="form-control" id="band" required [(ngModel)]="model.bandName" name="bandName">
-                                <option *ngFor="let bnd of band" [value]="bnd">{{bnd}}</option>
+                        <select class="form-control" id="band" required [(ngModel)]="model.bandName" name="bandName" #bandName="ngModel"
+                        ng-invalid="addRoleForm.errors?.invalidCombo">
+                                <option value="please_select" selected disabled>Please Select</option>
+                                <option *ngFor="let bnd of band" [value]="bnd" >{{bnd}}</option>
                         </select>
+                        <div *ngIf="addRoleForm.errors?.invalidCombo && (bandName.touched || bandName.dirty || capabilityName.touched || capabilityName.dirty)" 
+                        class="cross-validation-error-message alert alert-danger">Role exists in selected band and capability.</div>
                 </div>
 
                 <div class="form-group">
                         <label for="training">Training</label>
                         <select class="form-control" id="training" required [(ngModel)]="model.training" name="training">
+                                <option value="" selected disabled>Please Select</option>
                                 <option *ngFor="let trn of training" [value]="trn">{{trn}}</option>
                         </select>
                 </div>
