@@ -23,17 +23,20 @@ export class InvalidCapabilityBandDirective implements Validator {
     const bandName = control.get('bandName');
     const capabilityName = control.get('capabilityName');
     
-    return capabilityName && bandName && this.checkBandCapabilityInvalid(bandName, capabilityName) ? { 'invalidCombo': true } : null;
+    return capabilityName && bandName && this.checkBandCapabilityInvalid(bandName.value, capabilityName.value) ? { 'invalidCombo': true } : null;
   };
 
   checkBandCapabilityInvalid (bandName, capabilityName){
-    for(let role of this.roles) {
-      if(role.bandName == bandName && role.capabilityName == capabilityName) {
-        return true;
-      }
+    if(!this.roles) {
+      return false;
     }
-    
+
+    for(let i = 0; i < this.roles.length; i++) {
+        if(this.roles[i].bandName === bandName && this.roles[i].capabilityName === capabilityName) {
+          return true;
+        }
+    };
     return false;
   };
-}
+};
 

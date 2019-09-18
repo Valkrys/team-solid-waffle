@@ -132,6 +132,18 @@ app.get('/user_role', function(req, res) {
   });
 });
 
+app.get('/trainings', function (req, res) {
+  logger.trace('GET trainings request');
+
+  db.getTrainings(function (err, rows) {
+    if(!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    logger.info("Sending trainings results back");
+    res.send(rows);
+  })
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

@@ -3,6 +3,7 @@ export interface Role {
   roleName: string;
   roleDescription: string;
   responsibilities: string;
+  trainingID: number;
   training: string;
   bandID: number;
   bandName: string;

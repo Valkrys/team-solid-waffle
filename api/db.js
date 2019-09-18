@@ -85,3 +85,12 @@ exports.getFamilies = (callback) => {
     }
   );
 }
+
+exports.getTrainings = function (callback) {
+  db.query(
+    'SELECT * FROM training',
+    (err, rows, fields) => {
+      callback(err, rows);
+    }
+  );
+}

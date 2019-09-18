@@ -6,6 +6,7 @@ import { Capability } from './capability';
 import { Family } from './family';
 import { Role } from './role';
 import { User } from './user';
+import { Training } from './training';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,18 @@ export class DataService {
 
   public getBandList(): Observable<Band[]> {
     return this.http.get<Band[]>('/api/bands');
+  }
+
+  public getTrainingList(): Observable<Training[]> {
+    return this.http.get<Training[]>('/api/trainings');
+  }
+
+  /*----------POST------------*/
+  public addNewRole(role : Role) {
+    this.http.post<Role>('/api/add_role', role).subscribe(res => {
+        console.log('POSTED');
+    });
+
   }
 }
 

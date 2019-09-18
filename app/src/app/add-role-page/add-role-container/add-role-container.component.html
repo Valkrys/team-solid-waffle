@@ -2,7 +2,7 @@
         <h1>Add Role Form</h1>
         {{diagnostic}}
         <form (ngSubmit)="onSubmit()" #addRoleForm="ngForm" appInvalidCapabilityBand>
-                <div class="form-group" ngModelGroup>
+                <div class="form-group">
                         <label for="roleName">Role name</label>
                         <input type="text" class="form-control" id="roleName" required
                         [(ngModel)]="model.roleName" name="roleName" #roleName="ngModel" maxlength="50">
@@ -28,19 +28,19 @@
 
                 <div class="form-group">
                         <label for="capabilities">Capabilities</label>
-                        <select class="form-control" id="capabilityName" required [(ngModel)]="model.capabilityName" name="capabilityName" #capabilityName="ngModel">
+                        <select class="form-control" id="capabilityName" required [(ngModel)]="model.capabilityID" name="capabilityName" #capabilityName="ngModel">
                                 <option value="" selected disabled>Please Select</option>
-                                <option *ngFor="let cap of capability" [value]="cap" selected>{{cap}}</option>
+                                <option *ngFor="let capability of capabilities" [value]="capability.capabilityID">{{capability.capabilityName}}</option>
                         </select>
 
                 </div>
 
                 <div class="form-group">
                         <label for="band">Band</label>
-                        <select class="form-control" id="band" required [(ngModel)]="model.bandName" name="bandName" #bandName="ngModel"
+                        <select class="form-control" id="band"  [(ngModel)]="model.bandID" name="bandName" #bandName="ngModel" required
                         ng-invalid="addRoleForm.errors?.invalidCombo">
-                                <option value="please_select" selected disabled>Please Select</option>
-                                <option *ngFor="let bnd of band" [value]="bnd" >{{bnd}}</option>
+                                <option value="" selected disabled>Please Select</option>
+                                <option *ngFor="let band of bands" [value]="band.bandID">{{band.bandName}}</option>
                         </select>
                         <div *ngIf="addRoleForm.errors?.invalidCombo && (bandName.touched || bandName.dirty || capabilityName.touched || capabilityName.dirty)" 
                         class="cross-validation-error-message alert alert-danger">Role exists in selected band and capability.</div>
@@ -48,13 +48,13 @@
 
                 <div class="form-group">
                         <label for="training">Training</label>
-                        <select class="form-control" id="training" required [(ngModel)]="model.training" name="training">
+                        <select class="form-control" id="training" [(ngModel)]="model.trainingID"  name="training" #trainingDescription="ngModel" required>
                                 <option value="" selected disabled>Please Select</option>
-                                <option *ngFor="let trn of training" [value]="trn">{{trn}}</option>
+                                <option *ngFor="let train of trainings" [ngValue]="train.trainingID" id="train.trainingID">{{train.description}}</option>
                         </select>
                 </div>
 
-                <button type="submit" class="btn btn-default" (click)="submitRole(); addRoleForm.reset();" [disabled]="!addRoleForm.form.valid">Submit</button>
+                <button type="submit" class="btn btn-default" [disabled]="!addRoleForm.form.valid">Submit</button>
         </form>
 </div>
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 import { DataService } from 'src/app/data.service';
-import { Role } from 'src/app/role';
 import { Capability } from 'src/app/capability';
 import { Band } from 'src/app/band';
-//import { Training } from 'src/app/training';
+import { Training } from 'src/app/training';
+import { Role } from 'src/app/role';
 
 @Component({
   selector: 'app-add-role-container',
@@ -17,42 +17,41 @@ export class AddRoleContainerComponent implements OnInit {
   addRoleForm: FormGroup;
 
   //TODO: change model variable to point to different lists.
-  model = <Role> {
-    roleName: "Software Engineer",
-    roleDescription: "gwg.gwrgwrg ",
-    responsibilities: "Hfw.wgw",
-    training: "wg,wgwgw ",
-    bandName: " wggw.grg",
-    jobFamilyName: "wg.wgwgw ",
-    capabilityName: "wgweg.g "
-  } 
-  
-  
-  //HARD CODED TESTS
-  capability = ["Test", "Technical", "Sales", "Google"];
-  band = ["To be fired", "Trainee", "I don't work here", "Google"];
-  training = ["Google", "StackOverflow"];
-
+  model = <Role> {};
   /*
-  roles: Role[];
+    roleID= ,
+    roleName: "",
+    roleDescription: "",
+    responsibilities: "",
+    training: "",
+    bandID: null,
+    bandName: "",
+    bandRank: null,
+    jobFamilyID: null,
+    jobFamilyName: "",
+    capabilityID: ,
+    capabilityName: "";
+  } */
+
   capabilities: Capability[];
   bands: Band[];
-  training: Training[];*/
+  trainings: Training[];
 
 
   constructor(private dataService: DataService) {
-   //   dataService.getRoleList().subscribe(roles => this.roles = roles);
-    //  dataService.getCapabilityList().subscribe(capabilities => this.capabilities = capabilities);
-     // dataService.getBandList().subscribe(bands => this.bands = bands);
-      //dataService.getTrainingList().subscribe(training => this.training = training);
-      this.model.bandName = this.band[0]
-      this.model.capabilityName = this.capability[0];
-      this.model.training = this.training[0];
+
+      dataService.getCapabilityList().subscribe(capabilities => this.capabilities = capabilities);
+      dataService.getBandList().subscribe(bands => this.bands = bands);
+      dataService.getTrainingList().subscribe(trainings => this.trainings = trainings);
     }
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() { 
+    this.submitted = true; 
+    this.dataService.addNewRole(this.model);
+  }
 
-  ngOnInit(): void{}
+  ngOnInit(): void{
+  }
 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }
