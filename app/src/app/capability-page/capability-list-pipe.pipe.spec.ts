@@ -60,13 +60,13 @@ describe('CapabilityListPipePipe', () => {
       },
       {
         capabilityID: 3,
-        capabilityName: "Salesperson",
+        capabilityName: "Marketing",
         jobFamilyID: 1,
         jobFamilyName: "Sales"
       });
 
     const filtered = caplistPipe.transform(items, 'Salesperson', null);
-    expect(filtered.length).toBe(2);
+    expect(filtered.length).toBe(1);
   })
 
   it('should filter family-drpdwn correctly', () => {
@@ -93,7 +93,7 @@ describe('CapabilityListPipePipe', () => {
       },
       {
         capabilityID: 3,
-        capabilityName: "Salesperson",
+        capabilityName: "Marketing",
         jobFamilyID: 1,
         jobFamilyName: "Sales"
       });
@@ -126,12 +126,12 @@ describe('CapabilityListPipePipe', () => {
       },
       {
         capabilityID: 3,
-        capabilityName: "Salesperson",
+        capabilityName: "Marketing",
         jobFamilyID: 1,
         jobFamilyName: "Sales"
       });
 
-    const filtered = caplistPipe.transform(items, 'UX', "2");
-    expect(filtered).toEqual([items[1]]);
+    const filtered = caplistPipe.transform(items, "Marketing", "1");
+    expect(filtered).toEqual([items[3]]);
   })
 });

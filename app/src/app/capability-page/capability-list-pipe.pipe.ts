@@ -13,7 +13,7 @@ export class CapabilityListPipePipe implements PipeTransform {
       return capability.filter(it => {
         return (
           it.capabilityName.toLowerCase().includes(searchText.toLowerCase())
-          || it.jobFamilyID.toLowerCase().includes(searchText.toLowerCase())
+          || (it.jobFamilyName.toLowerCase().includes(searchText.toLowerCase()))
         )
           && (!selectedFamily || it.jobFamilyID == selectedFamily)
       });

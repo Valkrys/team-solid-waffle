@@ -14,7 +14,6 @@ import { CapabilityListModule } from './capability-page/capability-list.module'
   declarations: [
     AppComponent,
     NavbarComponent,
-
   ],
   imports: [
     AppRoutingModule,

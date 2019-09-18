@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
+import { Capability } from 'src/app/capability';
+import { Family } from 'src/app/family';
 
 
 @Component({
@@ -8,12 +10,15 @@ import { DataService } from 'src/app/data.service';
   styleUrls: ['./capability-list-container.component.css']
 })
 export class CapabilityListContainerComponent implements OnInit {
-  data: DataService;
+  capabilities: Capability[];
+  families: Family[];
+
   selectedFamily: string = "";
   searchText: string = "";
 
   constructor(data: DataService) {
-    this.data = data;
+    data.getCapabilityList().subscribe(capabilities => this.capabilities = capabilities);
+    data.getFamilyList().subscribe(families => this.families = families);
   }
 
   ngOnInit() {

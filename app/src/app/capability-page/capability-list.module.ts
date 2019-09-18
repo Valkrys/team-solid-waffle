@@ -6,10 +6,16 @@ import { CapabilityListPipePipe } from './capability-list-pipe.pipe';
 
 
 @NgModule({
-  declarations: [CapabilityListContainerComponent, CapabilityListPipePipe],
+  declarations: [
+    CapabilityListContainerComponent,
+    CapabilityListPipePipe],
   imports: [
     CommonModule,
     FormsModule
+  ],
+  exports: [
+    CapabilityListContainerComponent,
+    CapabilityListPipePipe
   ]
 })
 export class CapabilityListModule { }

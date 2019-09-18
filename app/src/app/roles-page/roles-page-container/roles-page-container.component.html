@@ -4,13 +4,13 @@
         <span>Filter by:</span>
 
         <select id="family-drp" [(ngModel)]="selectedFamily" (change)="onFamilyChange()">
-            <option value="" disabled selected>Family</option>
+            <option value="" disabled selected hidden>Family</option>
             <option value="">All Families</option>
             <option *ngFor=" let fam of families" value={{fam.jobFamilyID}}>{{fam.jobFamilyName}}</option>
         </select>
 
         <select id="cap-drp" [(ngModel)]="selectedCapability">
-            <option value="" disabled selected>Capability</option>
+            <option value="" disabled selected hidden>Capability</option>
             <option value="">All Capabilities</option>
             <option *ngFor=" let cap of capabilities | capabilityFilter:selectedFamily" value={{cap.capabilityID}}>
                 {{ cap.capabilityName}}
@@ -18,7 +18,7 @@
         </select>
 
         <select id="band-drp" [(ngModel)]="selectedBand">
-            <option value="" disabled selected>Band</option>
+            <option value="" disabled selected hidden>Band</option>
             <option value="">All Bands</option>
             <option *ngFor=" let band of bands" value={{band.bandName}}>{{ band.bandName }}</option>
         </select>
