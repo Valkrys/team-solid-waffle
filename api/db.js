@@ -85,3 +85,11 @@ exports.getFamilies = (callback) => {
     }
   );
 }
+
+exports.insertRole = (data, callback) => {
+  db.query('INSERT INTO role SET ?', data,
+    (err) => {
+      callback(err);
+    }
+  );
+}
