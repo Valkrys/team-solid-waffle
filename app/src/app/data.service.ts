@@ -73,6 +73,10 @@ export class DataService {
 
   public loggedIn()
   {
+    console.log("***********************");
+    
+    console.log(document.cookie);
+    
     return !!localStorage.getItem('token');
   }
 
