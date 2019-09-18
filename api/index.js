@@ -64,6 +64,12 @@ function verifyToken(req, res, next)
 }
 // app.use(verifyToken);
 
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+
+
 function handleError(err, req, res) {
   logger.trace('Entered handleError');
   logger.warn('DB result contains an err');
