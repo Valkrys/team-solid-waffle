@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { CapabilityFilterPipe } from './roles-page/capability-filter.pipe';
 import { RolesPageModule } from './roles-page/roles-page.module';
 import { DetailsPageModule } from './details-page/details-page.module';
+import { BandPageModule } from './band-page/band-page.module';
 
 
 describe('Router', () => {
@@ -29,7 +30,8 @@ describe('Router', () => {
         RouterTestingModule.withRoutes(routes),
         FormsModule,
         RolesPageModule,
-        DetailsPageModule
+        DetailsPageModule,
+        BandPageModule
       ],
       declarations: [
       ]
@@ -68,6 +70,13 @@ describe('Router', () => {
     router.navigate(['/details']).then(() => {
       tick(1000);
       expect(location.path()).toBe('/details');
+    });
+  }));
+
+  it('navigate to "bands" redirects you to /bands', fakeAsync(() => {
+    router.navigate(['/bands']).then(() => {
+      tick(1000);
+      expect(location.path()).toBe('/bands');
     });
   }));
 });
