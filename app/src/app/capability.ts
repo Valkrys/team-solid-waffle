@@ -1,5 +1,6 @@
-export class Capability {
-    capabilityID: number;
-    capabilityName: number;
-    jobFamilyID: number;
+export interface Capability {
+  capabilityID: number;
+  capabilityName: string;
+  jobFamilyID: number;
+  jobFamilyName: string;
 }

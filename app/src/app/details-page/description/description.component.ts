@@ -9,11 +9,10 @@ import { Role } from '../../role';
 })
 export class DescriptionComponent implements OnInit {
 
-  data: DataService;
   role : Role;
 
-  constructor(dataservice: DataService ) { 
-    this.data = dataservice;
+  constructor(private data: DataService ) { 
+    this.data.getRoleDetail(1).subscribe(role => this.role = role);
   }
 
   ngOnInit() {

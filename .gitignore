@@ -9,8 +9,8 @@ database/usersScript.sql
 # compiled output
 /dist
 /tmp
-/app/app/**/*.js
-/app/app/**/*.js.map
+/app/src/app/**/*.js
+/app/src/app/**/*.js.map
 
 # dependencies
 /node_modules

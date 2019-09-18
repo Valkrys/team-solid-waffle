@@ -1,9 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { DataService } from '../../data.service';
 import { ResponsibilityComponent } from './responsibility.component';
-import {DataService} from '../../data.service';
-import {HttpClientModule} from '@angular/common/http';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('ResponsibilityComponent', () => {
   let component: ResponsibilityComponent;
@@ -12,11 +11,11 @@ describe('ResponsibilityComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResponsibilityComponent ],
+      declarations: [ResponsibilityComponent],
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [DataService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -28,17 +27,5 @@ describe('ResponsibilityComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('splitResponsibilities', () => {
-    it('should split responsibilities', async(() => {
-      const result = data.splitResponsibilitiess('should be respectful.should be honest');
-      expect(result).toEqual([ 'should be respectful', 'should be honest' ]);
-    }));
-
-    it('should split null responsibilities', async(() => {
-      const result = data.splitResponsibilitiess('');
-      expect(result).toEqual([ '' ]);
-    }));
   });
 });

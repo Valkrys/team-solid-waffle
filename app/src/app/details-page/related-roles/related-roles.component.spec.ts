@@ -1,10 +1,9 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
-import { RelatedRolesComponent } from './related-roles.component';
-import { CarouselRole } from 'src/app/carouselRole';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { Role } from 'src/app/role';
 import { DataService } from '../../data.service';
+import { RelatedRolesComponent } from './related-roles.component';
 
 describe('RelatedRolesComponent', () => {
   let component: RelatedRolesComponent;
@@ -38,7 +37,7 @@ describe('RelatedRolesComponent', () => {
   describe('HttpClient response check for related role', () => {
     it('should respond with fake data', async(inject
       ([HttpClient, HttpTestingController], (http: HttpClient, backend: HttpTestingController) => {
-        http.get<CarouselRole>('/api/carousel/Trainee').subscribe((actualRelatedRole) => {
+        http.get<Role>('/api/carousel/Trainee').subscribe((actualRelatedRole) => {
            expect(actualRelatedRole[0]).toEqual(expectedRelatedRole);
         });
         backend.match({

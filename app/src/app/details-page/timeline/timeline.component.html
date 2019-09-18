@@ -1,14 +1,13 @@
 <div class="swiper-container adjustedHeight"> 
     <div class="swiper-wrapper timeline">
-        <div *ngFor="let item of data.timelineRole; let i = index" class="swiper-slide">
-                <div class="timestamp inline-block">
-                    <span class="date">
-                        {{item.bandName}}
-                    </span>
-                </div>
-            <div [ngClass]="{'larger-width': item.roleName.length > 17, 'increase-first-child-with': i == 0, 'currentRule': isRoleLessThanCurrentRole(item.bandRank)}" class="status" >
+        <div *ngFor="let item of roles" class="swiper-slide">
+            <div class="timestamp inline-block">
+                <span class="date">
+                    {{item.bandName}}
+                </span>
+            </div>
+            <div [ngClass]="{'larger-width': item.roleName.length > 17, 'increase-first-child-with': i == 0, 'currentRule': isLessThanCurrentRole(item)}" class="status" >
                 <span >{{item.roleName}}</span>
- 
             </div>
         </div>
     </div>
