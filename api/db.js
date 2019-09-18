@@ -85,3 +85,11 @@ exports.getFamilies = (callback) => {
     }
   );
 }
+exports.getUserByUsername = function (username, callback) {
+    db.query("select user.userID, user.firstName, user.lastName, user.username, user.password, user.isAdmin, role.name as roleName FROM user JOIN role ON (user.roleID = role.roleID) WHERE user.username=?", username,
+        function (err, rows) {
+            if (err) throw err;
+            callback(rows);
+        });
+};
+

@@ -4,7 +4,7 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 import { AppComponent } from './app.component';
 import { DetailsPageModule } from "./details-page/details-page.module";
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './shared-features/navbar/navbar.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

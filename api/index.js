@@ -3,7 +3,11 @@ require("dotenv").config();
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const log4js = require('log4js');
+const jwt = require("jsonwebtoken")
+var log4js = require('log4js');
+var md5 = require('md5');
+var cookieParser = require('cookie-parser')
+
 
 log4js.configure({
   appenders: { 
@@ -23,6 +27,42 @@ const db = require('./db.js');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+app.use(cookieParser())
+
+function verifyToken(req, res, next)
+{
+  if(!req.headers.authorization)
+  {
+    console.log("fail 1 ");
+    return res.sendStatus(401);
+  }
+
+  let token = req.headers.authorization.split(' ')[1];
+  console.log("Tooooooken 22: ");
+  console.log(token);
+
+  if(token == 'null')
+  {
+    console.log("fail 2 ");
+    return res.sendStatus(401);
+  }
+
+  // let payload = jwt.verify(token,'secretKey');
+  // jwt.verify(token, 'secretKey', function(err, decoded) {
+  //   console.log(err) // bar
+  // });
+  
+  // if(!payload)
+  // {
+  //   console.log("fail 3 ");
+  //   return res.sendStatus(401);
+  // }
+
+  // return res.send('it works');
+  // req.userId = payload.subject;
+  next();
+}
+// app.use(verifyToken);
 
 function handleError(err, req, res) {
   logger.trace('Entered handleError');
@@ -54,7 +94,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/roles', (req, res) => {
+app.get('/roles',verifyToken, (req, res) => {
   db.getRoles((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
@@ -63,7 +103,7 @@ app.get('/roles', (req, res) => {
   });
 });
 
-app.get('/role/:id', (req, res) => {
+app.get('/role/:id',verifyToken, (req, res) => {
   const id = req.params.id;
   db.getRoleDetail(id, (err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
@@ -73,7 +113,7 @@ app.get('/role/:id', (req, res) => {
   });
 });
 
-app.get('/capabilities', (req, res) => {
+app.get('/capabilities',verifyToken, (req, res) => {
   db.getCapabilities((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
@@ -82,7 +122,7 @@ app.get('/capabilities', (req, res) => {
   });
 });
 
-app.get('/capability/:id', (req, res) => {
+app.get('/capability/:id',verifyToken, (req, res) => {
   const id = req.params.id;
   db.getCapabilityDetail(id, (err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
@@ -92,7 +132,7 @@ app.get('/capability/:id', (req, res) => {
   });
 });
 
-app.get('/bands', (req, res) => {
+app.get('/bands',verifyToken, (req, res) => {
   db.getBands((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
@@ -101,7 +141,7 @@ app.get('/bands', (req, res) => {
   });
 });
 
-app.get('/band/:id', (req, res) => {
+app.get('/band/:id',verifyToken, (req, res) => {
   const id = req.params.id;
   db.getBandDetail(id, (err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
@@ -111,7 +151,7 @@ app.get('/band/:id', (req, res) => {
   });
 });
 
-app.get('/families', (req, res) => {
+app.get('/families',verifyToken, (req, res) => {
   db.getFamilies((err, rows) => {
     if (!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
@@ -120,16 +160,26 @@ app.get('/families', (req, res) => {
   });
 });
 
-app.get('/user_role', function(req, res) {
-  logger.trace('GET user_role request');
+app.post('/login', function (req, res) {
+  var username = req.body.username;
+  var plainPasswrod = req.body.password;
+  db.getUserByUsername(username, function (rows) {
 
-  db.getNameAndRole(function(err, rows) {
-    if(!Array.isArray(rows) || !rows.length || err) { 
-      return handleError(err, req, res);
+    if(md5(plainPasswrod) == rows[0].password)
+    {
+      let payload = { subject: username}
+      let token = jwt.sign(payload, 'secretkey', {expiresIn: 120});
+      console.log("Tooooooken 11: ");
+      console.log(token);
+      res.cookie("SESSIONID", token, {httpOnly:true, secure:true});
+      res.send({token});
     }
-    logger.info("Sending user_role results back");
-    res.send(rows[0]);
-  });
+    else {
+      res.status(403).send({
+        message: 'Wrong password'
+      });
+    }    
+  })
 });
 
 app.listen(port, () => {

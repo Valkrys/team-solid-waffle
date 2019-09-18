@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,16 +11,15 @@ import { User } from './user';
 })
 export class AppComponent {
   title = 'app';
+  router: string;
 
-  user: User;
   data: DataService;
   
+  
 
-
-  constructor (dataService: DataService){
+  constructor (dataService: DataService, private _router: Router){
     this.data = dataService;
-    console.log("This is only a test");
-    console.log(this.data.user);
+    this.router = _router.url;
   }
 }
 

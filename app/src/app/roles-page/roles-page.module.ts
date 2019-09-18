@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SharedFeaturesModule } from '../shared-features/shared-features.module';
 import { CapabilityFilterPipe } from './capability-filter.pipe';
 import { RolesFilterPipe } from './roles-filter.pipe';
 import { RolesPageContainerComponent } from './roles-page-container/roles-page-container.component';
@@ -9,11 +10,12 @@ import { RolesPageContainerComponent } from './roles-page-container/roles-page-c
   declarations: [
     RolesPageContainerComponent,
     RolesFilterPipe,
-    CapabilityFilterPipe
+    CapabilityFilterPipe,
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    SharedFeaturesModule
   ],
   exports: [
     RolesPageContainerComponent,
