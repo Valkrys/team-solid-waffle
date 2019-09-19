@@ -1,55 +1,55 @@
-<div class="container" *ngIf="data.band">
+<div class="container" *ngIf="band">
   <div class="title">
-    <h1>{{data.band.name}}</h1>
+    <h1>{{band.bandName}}</h1>
   </div>
   <div class="competencies">
     <h2 class="details_title">Competencies</h2>
-    <h4 *ngIf="data.band.commercial"> Commercial Awareness</h4>
-    <ul *ngFor="let commercial of data.band.commercial.split('.')">
+    <h4 *ngIf="band.commercial"> Commercial Awareness</h4>
+    <ul *ngFor="let commercial of band.commercial.split('.')">
       <li *ngIf="commercial != '' "> {{commercial}} </li>
     </ul>
     <br>
-    <h4 *ngIf="data.band.communication"> Communicating & Teamwork</h4>
-    <ul *ngFor="let communication of data.band.communication.split('.')">
+    <h4 *ngIf="band.communication"> Communicating & Teamwork</h4>
+    <ul *ngFor="let communication of band.communication.split('.')">
       <li *ngIf="communication != '' "> {{communication}} </li>
     </ul>
     <br>
-    <h4 *ngIf="data.band.innovation"> Innovation and Continuous Improvement </h4>
-    <ul *ngFor="let innovation of data.band.innovation.split('.')">
+    <h4 *ngIf="band.innovation"> Innovation and Continuous Improvement </h4>
+    <ul *ngFor="let innovation of band.innovation.split('.')">
       <li *ngIf="innovation != '' "> {{innovation}} </li>
     </ul>
     <br>
-    <h4 *ngIf="data.band.customerFocus"> Customer Focus </h4>
-    <ul *ngFor="let customerFocus of data.band.customerFocus.split('.')">
+    <h4 *ngIf="band.customerFocus"> Customer Focus </h4>
+    <ul *ngFor="let customerFocus of band.customerFocus.split('.')">
       <li *ngIf="customerFocus != '' "> {{customerFocus}} </li>
     </ul>
     <br>
-    <h4 *ngIf="data.band.development"> Developing Yourself and Others </h4>
-    <ul *ngFor="let development of data.band.development.split('.')">
+    <h4 *ngIf="band.development"> Developing Yourself and Others </h4>
+    <ul *ngFor="let development of band.development.split('.')">
       <li *ngIf="development != '' "> {{development}} </li>
     </ul>
     <br>
-    <h4 *ngIf="data.band.planning"> Planning and Organising </h4>
-    <ul *ngFor="let planning of data.band.planning.split('.')">
+    <h4 *ngIf="band.planning"> Planning and Organising </h4>
+    <ul *ngFor="let planning of band.planning.split('.')">
       <li *ngIf="planning != '' "> {{planning}} </li>
     </ul>
     <br>
-    <h4 *ngIf="data.band.knowledge"> Job Specific Knowledge </h4>
-    <ul *ngFor="let knowledge of data.band.knowledge.split('.')">
+    <h4 *ngIf="band.knowledge"> Job Specific Knowledge </h4>
+    <ul *ngFor="let knowledge of band.knowledge.split('.')">
       <li *ngIf="knowledge != '' "> {{knowledge}} </li>
     </ul>
     <br>
   </div>
   <div class="responsibilities">
     <h2 class="details_title">Responsibilities</h2>
-    <ul *ngFor="let responsibility of data.band.responsibilities.split('.')">
+    <ul *ngFor="let responsibility of band.responsibilities.split('.')">
       <li *ngIf="responsibility != '' "> {{responsibility}} </li>
     </ul>
   </div>
   <br>
   <div class="training">
     <h2 class="details_title">Training</h2>
-    <ul *ngFor="let training of data.band.trainingDescription.split(',');">
+    <ul *ngFor="let training of band.trainingDescription.split(',');">
       <li *ngIf="training != '' "> {{training}} </li>
     </ul>
   </div>

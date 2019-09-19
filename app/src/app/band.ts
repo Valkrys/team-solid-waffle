@@ -1,6 +1,6 @@
 export class Band {
   bandID: string;
-  name: string;
+  bandName: string;
   commercial: string;
   communication: string;
   innovation: string;
@@ -13,3 +13,4 @@ export class Band {
   trainingID: string;
   trainingDescription: string;
 }
+

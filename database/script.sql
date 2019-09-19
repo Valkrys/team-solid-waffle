@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS training(
 
 CREATE TABLE IF NOT EXISTS band(
     bandID TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) UNIQUE NOT NULL,
+    bandName VARCHAR(50) UNIQUE NOT NULL,
     commercial VARCHAR(1500),
     communication VARCHAR(1500),
     innovation VARCHAR(1500),
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS band(
     trainingID SMALLINT UNSIGNED,
     bandRank TINYINT UNSIGNED UNIQUE NOT NULL,
     FOREIGN KEY (trainingID) REFERENCES training(trainingID) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `band_name_len` CHECK ( LENGTH(name) <= 50),
+    CONSTRAINT `band_name_len` CHECK ( LENGTH(bandName) <= 50),
     CONSTRAINT `band_commercial_len` CHECK ( LENGTH(commercial) <= 1500),
     CONSTRAINT `band_communication_len` CHECK ( LENGTH(communication) <= 1500),
     CONSTRAINT `band_innovatoon_len` CHECK ( LENGTH(innovation) <= 1500),
@@ -141,7 +141,7 @@ INSERT INTO capability(name, jobFamilyID) VALUES ('Business Development', 1),
 INSERT INTO training(description)
     VALUES("www.google.com");
 
-INSERT INTO band(name, commercial, communication, innovation, customerFocus, development, planning, knowledge, responsibilities, trainingID, bandRank)
+INSERT INTO band(bandName, commercial, communication, innovation, customerFocus, development, planning, knowledge, responsibilities, trainingID, bandRank)
     VALUES ('Apprentice', "", "", "", "", "", "", "", "", null, 1),
 
        ('Trainee',

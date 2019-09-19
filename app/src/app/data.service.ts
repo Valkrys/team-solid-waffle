@@ -6,6 +6,7 @@ import { KeyDetails } from './keyDetails';
 import { TimelineRole } from './timelineRole';
 import { CarouselRole } from './carouselRole';
 import {Band} from './band';
+import {Observable} from "rxjs";
 
 
 
@@ -27,9 +28,9 @@ export class DataService {
     this.getKeyDetails();
     this.getTimelineRoles();
     this.getCarouselRoleDetails();
-   }
+  }
 
-   public getUser(): void {
+  public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
       this.user = user;
     });
@@ -60,10 +61,8 @@ export class DataService {
   }
 
   /* TO DO: make api call dynamic */
-  public getBandDetails(): void {
-    this.http.get<Band>('/api/band/2').subscribe(band => {
-        this.band = band;
-    });
+  public getBandDetails(id: number): Observable<Band> {
+    return this.http.get<Band>(`/api/band/${id}`);
   }
 }
 
