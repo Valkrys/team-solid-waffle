@@ -1,0 +1,42 @@
+<div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 *ngIf=capabilityLead class="capabilityLead_capability">
+                        {{capabilityLead.capabilityName}}
+                </h1>
+            </div>
+        </div>
+        <div class="row" id="familyRow">
+            <div class="col-sm-4">
+                <span class="info-background" id="family-bg">
+                    <span class="info-label" *ngIf="capabilityLead">
+                            {{capabilityLead.jobFamilyName}}
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="row card-body">
+                        <div class="col-sm-6">
+                            <h4>Capability Lead</h4>
+                            <p class="card-text">
+                                <h4>
+                                    <p *ngIf="capabilityLead" class="capabilityLead_name">
+                                        {{capabilityLead.firstName}}
+                                        {{capabilityLead.lastName}}
+                                    </p>
+                                </h4>
+                                <p *ngIf="capabilityLead" class="capabilityLead_message">
+                                    {{capabilityLead.message}}
+                                </p>
+                        </div>
+                        <div class="col-sm-6" *ngIf="capabilityLead">
+                            <img  ng-src="{capabilityLead.picture}" class="img-fluid" alt="Picture of the capability lead">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

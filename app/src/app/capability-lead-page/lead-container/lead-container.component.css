@@ -1,0 +1,17 @@
+
+.info-background{
+    padding: 4px;
+    color: white;
+    border-radius:3px 3px 3px 3px;
+}
+ 
+#family-bg{
+    background-color: #F79F79;
+    border-color: #F79F79;
+    margin-right: 1rem;
+    font-size: 200%;
+}
+
+#familyRow{
+    margin-bottom: 2rem;
+}

@@ -5,6 +5,7 @@ import { CapabilityListContainerComponent } from './capability-list-container.co
 import { FormsModule } from '@angular/forms';
 import { CapabilityListPipePipe } from '../capability-list-pipe.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Router, RouterModule } from '@angular/router';
 
 describe('CapabilityListContainerComponent', () => {
   let component: CapabilityListContainerComponent;
@@ -17,7 +18,8 @@ describe('CapabilityListContainerComponent', () => {
         CapabilityListPipePipe],
       imports: [
         FormsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterModule
       ]
     })
       .compileComponents();

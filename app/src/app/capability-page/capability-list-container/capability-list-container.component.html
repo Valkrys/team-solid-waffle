@@ -26,7 +26,9 @@
             *ngFor="let cap of capabilities | capabilityListPipe: searchText : selectedFamily">
             <img class="card-img-top" src="assets/stock_card.jpeg" alt="softeng">
             <div class="card-body">
-                <h4 class="card-title">{{ cap.capabilityName }}</h4>
+                <a [routerLink]="['/capability/' + cap.capabilityID]" routerLinkAcvtive="active" class="custom-card">
+                    <h4 class="card-title">{{ cap.capabilityName }}</h4>
+                </a>
                 <span class="info-background" id="family-bg"><span
                         class="info-label">{{ cap.jobFamilyName }}</span></span>
             </div>

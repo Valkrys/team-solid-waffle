@@ -19,6 +19,7 @@ import { RolesPageModule } from './roles-page/roles-page.module';
 import { DetailsPageModule } from './details-page/details-page.module';
 import { BandPageModule } from './band-page/band-page.module';
 import { CapabilityListModule } from './capability-page/capability-list.module'
+import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
 
 
 describe('Router', () => {
@@ -33,8 +34,8 @@ describe('Router', () => {
         RolesPageModule,
         DetailsPageModule,
         BandPageModule,
-        CapabilityListModule
-
+        CapabilityListModule,
+        CapabilityLeadPageModule
       ],
       declarations: [
       ]
@@ -89,4 +90,12 @@ describe('Router', () => {
       expect(location.path()).toBe('/capabilities');
     });
   }));
+  
+  it('navigate to "capability" redirects you to /capability/{id}', fakeAsync(() => {
+    router.navigate(['/capability/:id']).then(() => {
+      tick(1000);
+      expect(location.path()).toBe('/capability/:id');
+    });
+  }));
+
 });
