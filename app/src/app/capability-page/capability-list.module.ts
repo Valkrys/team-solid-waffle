@@ -3,19 +3,22 @@ import { CommonModule } from '@angular/common';
 import { CapabilityListContainerComponent } from './capability-list-container/capability-list-container.component';
 import { FormsModule } from '@angular/forms';
 import { CapabilityListPipePipe } from './capability-list-pipe.pipe';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     CapabilityListContainerComponent,
-    CapabilityListPipePipe],
+    CapabilityListPipePipe
+  ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     CapabilityListContainerComponent,
-    CapabilityListPipePipe
+    CapabilityListPipePipe,
   ]
 })
 export class CapabilityListModule { }

@@ -6,6 +6,8 @@ import { Capability } from './capability';
 import { Family } from './family';
 import { Role } from './role';
 import { User } from './user';
+import { CapabilityLead } from './capabilityLead';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,13 @@ import { User } from './user';
 export class DataService {
 
   public user: User;
+  public role: Role;
+  public splittedResponsibilities: string[];
+  public splittedTraining: string[];
 
   constructor(private http: HttpClient) {
     this.getUser();
-  }
+   }
 
   public getUser(): void {
     this.http.get<User>('/api/user_role').subscribe(user => {
@@ -43,6 +48,10 @@ export class DataService {
 
   public getBandList(): Observable<Band[]> {
     return this.http.get<Band[]>('/api/bands');
+  }
+
+  public getCapabilityLeadDetails(id: number): Observable<CapabilityLead> {
+    return this.http.get<CapabilityLead>(`/api/capability/${id}`);
   }
 }
 

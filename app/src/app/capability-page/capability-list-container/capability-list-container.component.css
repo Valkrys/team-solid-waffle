@@ -73,4 +73,7 @@ input:focus {
     padding-left: 2rem;
     color: darkgray;
 }
+a.custom-card, a.custom-card:hover {
+    color:inherit;
+}
 

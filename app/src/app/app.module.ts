@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RolesPageModule } from './roles-page/roles-page.module';
 import { BandPageModule } from './band-page/band-page.module'
 import { CapabilityListModule } from './capability-page/capability-list.module'
+import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CapabilityListModule } from './capability-page/capability-list.module'
     NgbModule,
     RolesPageModule,
     BandPageModule,
-    CapabilityListModule
+    CapabilityListModule,
+    CapabilityLeadPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

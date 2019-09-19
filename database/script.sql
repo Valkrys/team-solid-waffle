@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS capability(
     capabilityID TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL,
     jobFamilyID TINYINT UNSIGNED NOT NULL,
-    FOREIGN KEY (jobFamilyID) REFERENCES jobFamily(jobFamilyID) ON DELETE CASCADE ON UPDATE CASCADE,
+    capabilityLeadID TINYINT UNSIGNED,
+    FOREIGN KEY (jobFamilyID) REFERENCES jobFamily(jobFamilyID) ON UPDATE CASCADE,
+    FOREIGN KEY (capabilityLeadID) REFERENCES jobFamily(jobFamilyID) ON UPDATE CASCADE,
     CONSTRAINT `capability_name_len` CHECK ( LENGTH(name) <= 50)
 );
 
@@ -36,7 +38,7 @@ CREATE TABLE IF NOT EXISTS band(
     knowledge VARCHAR(1500),
     trainingID SMALLINT UNSIGNED,
     bandRank TINYINT UNSIGNED UNIQUE NOT NULL,
-    FOREIGN KEY (trainingID) REFERENCES training(trainingID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (trainingID) REFERENCES training(trainingID)ON UPDATE CASCADE,
     CONSTRAINT `band_name_len` CHECK ( LENGTH(name) <= 50),
     CONSTRAINT `band_commercial_len` CHECK ( LENGTH(commercial) <= 1500),
     CONSTRAINT `band_communication_len` CHECK ( LENGTH(communication) <= 1500),
@@ -55,9 +57,9 @@ CREATE TABLE IF NOT EXISTS role(
     bandID TINYINT UNSIGNED NOT NULL,
     responsibilities VARCHAR(1500),
     trainingID SMALLINT UNSIGNED,
-    FOREIGN KEY (trainingID) REFERENCES training(trainingID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (capabilityID) REFERENCES capability(capabilityID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (bandID) REFERENCES band(bandID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (trainingID) REFERENCES training(trainingID)ON UPDATE CASCADE,
+    FOREIGN KEY (capabilityID) REFERENCES capability(capabilityID)ON UPDATE CASCADE,
+    FOREIGN KEY (bandID) REFERENCES band(bandID)ON UPDATE CASCADE,
     CONSTRAINT `role_name_len` CHECK ( LENGTH(name) <= 50),
     CONSTRAINT `role_description_len` CHECK ( LENGTH(description) <= 300),
     CONSTRAINT `role_responsibilities_len` CHECK ( LENGTH(responsibilities) <= 1500),
@@ -72,7 +74,7 @@ CREATE TABLE IF NOT EXISTS user(
     password VARCHAR(50) NOT NULL,
     roleID SMALLINT UNSIGNED NOT NULL,
     isAdmin BOOLEAN DEFAULT 0 NOT NULL,
-    FOREIGN KEY (roleID) REFERENCES role(roleID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (roleID) REFERENCES role(roleID)ON UPDATE CASCADE,
     CONSTRAINT `user_firstName_len` CHECK ( LENGTH(firstName) <= 50),
     CONSTRAINT `user_lastName_len` CHECK ( LENGTH(lastName) <= 50),
     CONSTRAINT `user_username_len` CHECK ( LENGTH(username) >= 8 AND LENGTH(username) <= 50),
@@ -85,12 +87,10 @@ CREATE TABLE IF NOT EXISTS capabilityLead(
     picture VARCHAR(200),
     message VARCHAR(300),
     userID SMALLINT UNSIGNED NOT NULL,
-    FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (userID) REFERENCES user(userID)ON UPDATE CASCADE,
     CONSTRAINT `capabilityLead_picture_len` CHECK ( LENGTH(picture) <= 100),
     CONSTRAINT `capabilityLead_message_len` CHECK ( LENGTH(message) <= 300)
 );
-
-
 
 INSERT INTO jobFamily(name) VALUES ('Sales & Marketing'),
                                    ('Technical'),
@@ -99,41 +99,41 @@ INSERT INTO jobFamily(name) VALUES ('Sales & Marketing'),
                                    ('Management'),
                                    ('Central Services Teams');
 
-INSERT INTO capability(name, jobFamilyID) VALUES ('Business Development', 1),
-                                                ('Account Management',1),
-                                                ('Sales',1),
-                                                ('Inside Sales Development',1),
-                                                ('Pre Sales & Bid Management',1),
-                                                ('Marketing',1),
-                                                ('Software Engineering', 2),
-                                                ('Data Engineering', 2),
-                                                ('Cyber Security', 2),
-                                                ('Architect', 2),
-                                                ('Ops', 2),
-                                                ('Infrastructure', 2),
-                                                ('Testing', 2),
-                                                ('Analytics', 2),
-                                                ('Integration', 2),
-                                                ('Product Specialist', 2),
-                                                ('Product Support', 2),
-                                                ('Technical Specialist', 2),
-                                                ('Product', 3),
-                                                ('Agile', 3),
-                                                ('HCM', 3),
-                                                ('Research', 4),
-                                                ('UX Design', 4),
-                                                ('Creative Design', 4),
-                                                ('Service Design', 4),
-                                                ('Project Management', 5),
-                                                ('Support Management', 5),
-                                                ('Finance & P M O', 6),
-                                                ('Commercial', 6),
-                                                ('People', 6),
-                                                ('Facilities', 6),
-                                                ('Administration', 6),
-                                                ('Travel', 6),
-                                                ('Strategy', 6),
-                                                ('Systems', 6);
+INSERT INTO capability(name, jobFamilyID, capabilityLeadID) VALUES ('Business Development', 1, 1),
+                                                ('Account Management',1, 1),
+                                                ('Sales',1, 1),
+                                                ('Inside Sales Development',1, 1),
+                                                ('Pre Sales & Bid Management',1, 1),
+                                                ('Marketing',1, 1),
+                                                ('Software Engineering', 2, 1),
+                                                ('Data Engineering', 2, 1),
+                                                ('Cyber Security', 2, 1),
+                                                ('Architect', 2, 1),
+                                                ('Ops', 2, 1),
+                                                ('Infrastructure', 2, 1),
+                                                ('Testing', 2, 1),
+                                                ('Analytics', 2, 1),
+                                                ('Integration', 2, 1),
+                                                ('Product Specialist', 2, 1),
+                                                ('Product Support', 2, 1),
+                                                ('Technical Specialist', 2, 1),
+                                                ('Product', 3, 1),
+                                                ('Agile', 3, 1),
+                                                ('HCM', 3, 1),
+                                                ('Research', 4, 1),
+                                                ('UX Design', 4, 1),
+                                                ('Creative Design', 4, 1),
+                                                ('Service Design', 4, 1),
+                                                ('Project Management', 5, 1),
+                                                ('Support Management', 5, 1),
+                                                ('Finance & P M O', 6, 1),
+                                                ('Commercial', 6, 1),
+                                                ('People', 6, 1),
+                                                ('Facilities', 6, 1),
+                                                ('Administration', 6, 1),
+                                                ('Travel', 6, 1),
+                                                ('Strategy', 6, 1),
+                                                ('Systems', 6, 1);
 
 
 INSERT INTO training(description)
@@ -405,8 +405,8 @@ INSERT INTO role(name, capabilityID, description, bandID, responsibilities, trai
        Contribute to presales activities – completion of bids, presenting, tender qualification, bid management etc.
        Provide constructive feedback and record it on Workday.', 1);
 
-SOURCE database/usersScript.sql;
+ SOURCE database/usersScript.sql;
 
-INSERT INTO capabilityLead(picture, message, capabilityLeadID, userID)
-VALUES (null, 'Please let me know if you have any questions about Sales', 3, 1),
-       (null, 'I am be available in the Birmingham office between 9am and 5pm', 7, 2);
+INSERT INTO capabilityLead(picture, message, userID)
+VALUES (null, 'Please let me know if you have any questions about Sales', 1),
+       (null, 'I am be available in the Birmingham office between 9am and 5pm', 2);
