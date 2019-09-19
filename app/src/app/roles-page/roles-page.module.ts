@@ -5,10 +5,6 @@ import { CapabilityFilterPipe } from './capability-filter.pipe';
 import { RolesFilterPipe } from './roles-filter.pipe';
 import { RolesPageContainerComponent } from './roles-page-container/roles-page-container.component';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> add band functionality
 @NgModule({
   declarations: [
     RolesPageContainerComponent,

@@ -1,4 +1,4 @@
-export interface Capability {
+export class Capability {
   capabilityID: number;
   capabilityName: string;
   jobFamilyID: number;

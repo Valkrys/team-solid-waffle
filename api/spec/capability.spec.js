@@ -90,7 +90,7 @@ xdescribe("GET /capability/0", function() {
       err = e;
       res = r;
       body = JSON.parse(b);
-      done();
+      done();statusCode
     });
   });
 

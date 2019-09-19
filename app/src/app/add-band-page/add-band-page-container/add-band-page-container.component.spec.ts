@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddBandPageContainerComponent } from './add-band-page-container.component';
+import {FormsModule} from '@angular/forms';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('AddBandPageContainerComponent', () => {
   let component: AddBandPageContainerComponent;
@@ -8,7 +10,11 @@ describe('AddBandPageContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddBandPageContainerComponent ]
+      declarations: [ AddBandPageContainerComponent ],
+      imports: [
+        FormsModule,
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
   }));

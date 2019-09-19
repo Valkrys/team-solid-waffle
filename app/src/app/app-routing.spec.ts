@@ -1,26 +1,16 @@
+import { Location } from '@angular/common';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { routes } from './app-routing.module';
-import { Location } from '@angular/common';
-import { CompareRolesComponent } from './details-page/compare-roles/compare-roles.component';
-import { CurrentRoleComponent } from './details-page/current-role/current-role.component';
-import { DescriptionComponent } from './details-page/description/description.component';
-import { DetailsContainerComponent } from './details-page/details-container/details-container.component';
-import { KeyDetailsComponent } from './details-page/key-details/key-details.component';
-import { RelatedRolesComponent } from './details-page/related-roles/related-roles.component';
-import { ResponsibilityComponent } from './details-page/responsibility/responsibility.component';
-import { TimelineComponent } from './details-page/timeline/timeline.component';
-import { TrainingComponent } from './details-page/training/training.component';
-import { RolesPageContainerComponent } from './roles-page/roles-page-container/roles-page-container.component';
-import { FormsModule } from '@angular/forms';
-import { CapabilityFilterPipe } from './roles-page/capability-filter.pipe';
-import { RolesPageModule } from './roles-page/roles-page.module';
-import { DetailsPageModule } from './details-page/details-page.module';
-import { BandPageModule } from './band-page/band-page.module';
-import { CapabilityListModule } from './capability-page/capability-list.module'
-import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
+import { AddBandPageModule } from './add-band-page/add-band-page.module';
 import { AddRolePageModule } from './add-role-page/add-role-page.module';
+import { routes } from './app-routing.module';
+import { BandPageModule } from './band-page/band-page.module';
+import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
+import { CapabilityListModule } from './capability-page/capability-list.module';
+import { DetailsPageModule } from './details-page/details-page.module';
+import { RolesPageModule } from './roles-page/roles-page.module';
 
 
 describe('Router', () => {
@@ -37,7 +27,8 @@ describe('Router', () => {
         BandPageModule,
         CapabilityListModule,
         CapabilityLeadPageModule,
-        AddRolePageModule
+        AddRolePageModule,
+        AddBandPageModule
       ],
       declarations: [
       ]

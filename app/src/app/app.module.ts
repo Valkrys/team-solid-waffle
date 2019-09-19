@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddBandPageModule } from './add-band-page/add-band-page.module';
@@ -31,7 +31,9 @@ import { RolesPageModule } from './roles-page/roles-page.module';
     CapabilityListModule,
     CapabilityLeadPageModule,
     AddRolePageModule,
-    AddBandPageModule
+    AddBandPageModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
