@@ -1,0 +1,87 @@
+<div class="container">
+    <span id="headboy">
+        <h1>Families</h1>
+        <span class="expand"></span>
+    </span>
+    <div class="card" *ngFor="let fam of families; let i = index">
+        <div class="cardBody" (click)="onAdminFamilyChange()">
+            <app-editable-single-line [data]="fam.jobFamilyName"  [editMode]="editMode"
+                (focusOut)="updateFamily(i, $event)"></app-editable-single-line>
+            <span class="expand"></span>
+            <button type="button" *ngIf="editMode" class="close" (click)="save()" aria-label="Edit">
+                <span aria-hidden="true">&#10004;</span>
+            </button>
+            <button type="button" *ngIf="!editMode" class="close" (click)="editMode = true" aria-label="Edit">
+                <span aria-hidden="true">&#9998;</span>
+            </button>
+            <button type="button" *ngIf="editMode" class="close" (click)="resetFamily()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <button type="button" *ngIf="!editMode" class="close" (click)="toDeleteName = fam.jobFamilyName"
+                data-toggle="modal" data-target="#warnModal" aria-label="Delete">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <button id="add" (click)="reset()" type="button" class="btn btn-warning" data-toggle="modal"
+        data-target="#addModal">Add</button>
+</div>
+
+<div class="modal" id="warnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    (hide)="hide()">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 *ngIf="dependencies" class="modal-title" id="wait">Wait!</h5>
+                <h5 *ngIf="noDependencies" class="modal-title" id="sure">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="dependencies" class="modal-body">
+                You can't delete a family that has roles or capabilities attached to it.
+                Delete them all first and lastly, delete the family.
+            </div>
+            <div *ngIf="noDependencies" class="modal-body">
+                <span>You would <b>permanently</b> delete: </span>
+                <span style="color: red">{{toDeleteName}}</span>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="noDependencies" type="button" class="btn btn-secondary"
+                    (click)="deleteFamily(toDeleteName)">I am
+                    sure</button>
+                <button *ngIf="noDependencies" type="button" class="btn btn-primary"
+                    data-dismiss="modal">Nevermind</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="wait">Add Family</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form name="form" (ngSubmit)="addNewFamily(addForm)" #addForm="ngForm">
+                        <label for="familyName">Name</label>
+                        <span aria-hidden="true" class="error">*</span>
+                        <input [(ngModel)]="newFamily" name="familyName" class="form-control" type="text"
+                            placeholder="Family Name" required>
+                        <div class="error" *ngIf="addForm.hasError('required', 'familyName')">Name is required</div>
+                        <div class="modal-footer">
+                            <span id="success">{{ success }}</span>
+                            <span id="failure">{{ failure }}</span>
+                            <input type="submit" class="btn btn-secondary" value="Submit" [disabled]="!addForm.valid">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

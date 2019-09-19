@@ -19,6 +19,8 @@ import { RolesPageModule } from './roles-page/roles-page.module';
 import { DetailsPageModule } from './details-page/details-page.module';
 import { BandPageModule } from './band-page/band-page.module';
 import { CapabilityListModule } from './capability-page/capability-list.module'
+import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
+import { FamilyAdminPageModule } from './family-admin-page/family-admin-page.module'
 
 
 describe('Router', () => {
@@ -33,8 +35,9 @@ describe('Router', () => {
         RolesPageModule,
         DetailsPageModule,
         BandPageModule,
-        CapabilityListModule
-
+        CapabilityListModule,
+        CapabilityLeadPageModule,
+        FamilyAdminPageModule
       ],
       declarations: [
       ]
@@ -76,10 +79,10 @@ describe('Router', () => {
     });
   }));
 
-  it('navigate to "bands" redirects you to /bands', fakeAsync(() => {
-    router.navigate(['/bands']).then(() => {
+  it('navigate to "capability" redirects you to /capability/{id}', fakeAsync(() => {
+    router.navigate(['/capability/:id']).then(() => {
       tick(1000);
-      expect(location.path()).toBe('/bands');
+      expect(location.path()).toBe('/capability/:id');
     });
   }));
 
@@ -87,6 +90,20 @@ describe('Router', () => {
     router.navigate(['/capabilities']).then(() => {
       tick(1000);
       expect(location.path()).toBe('/capabilities');
+    });
+  }));
+
+  it('navigate to "bands" redirects you to /bands', fakeAsync(() => {
+    router.navigate(['/bands']).then(() => {
+      tick(1000);
+      expect(location.path()).toBe('/bands');
+    });
+  }));
+
+  it('navigate to "families" redirects you to /families', fakeAsync(() => {
+    router.navigate(['/families']).then(() => {
+      tick(1000);
+      expect(location.path()).toBe('/families');
     });
   }));
 });

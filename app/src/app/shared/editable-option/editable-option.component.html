@@ -1,0 +1,5 @@
+<div *ngIf="!editMode">{{data.length ? getSelectedItem().content : ""}}</div>
+<!-- <input *ngIf="editMode" (focusout)="onFocusOut()" [(ngModel)]="data" type="text"> -->
+<select *ngIf="editMode" (focusout)="onFocusOut()" [(ngModel)]="selected">
+  <option *ngFor="let item of data" value={{item?.value}}>{{item?.content}}</option>
+</select>

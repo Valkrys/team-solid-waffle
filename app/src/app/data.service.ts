@@ -6,13 +6,15 @@ import { Capability } from './capability';
 import { Family } from './family';
 import { Role } from './role';
 import { User } from './user';
+import { CapabilityLead } from './capabilityLead';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
   public user: User;
+  public role: Role;
 
   constructor(private http: HttpClient) {
     this.getUser();
@@ -37,12 +39,32 @@ export class DataService {
     return this.http.get<Capability[]>('/api/capabilities');
   }
 
+  public getCapabilityDetails(): Observable<Capability[]> {
+    return this.http.get<Capability[]>('/api/capability/:id');
+  }
+
   public getFamilyList(): Observable<Family[]> {
     return this.http.get<Family[]>('/api/families');
   }
 
+  public addFamily(newFamily: string): Observable<Family> {
+    return this.http.post<Family>('/api/addFamily', { jobFamilyName: newFamily });
+  }
+
+  public deleteFamily(oldFamilyID: number): Observable<Family> {
+    return this.http.post<Family>('/api/deleteFamily', { jobFamilyID: oldFamilyID });
+  }
+
+  public updateFamily(newFamilyName: string, oldFamilyID: number): Observable<Family> {
+    return this.http.put<Family>('/api/updateFamily', { jobFamilyName: newFamilyName, jobFamilyID: oldFamilyID });
+  }
+
   public getBandList(): Observable<Band[]> {
     return this.http.get<Band[]>('/api/bands');
+  }
+
+  public getCapabilityLeadDetails(id: number): Observable<CapabilityLead> {
+    return this.http.get<CapabilityLead>(`/api/capability/${id}`);
   }
 }
 

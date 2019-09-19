@@ -5,6 +5,8 @@ import { DetailsContainerComponent } from './details-page/details-container/deta
 import { RolesPageContainerComponent } from "./roles-page/roles-page-container/roles-page-container.component";
 import { BandPageContainerComponent } from './band-page/band-page-container/band-page-container.component';
 import { CapabilityListContainerComponent } from './capability-page/capability-list-container/capability-list-container.component';
+import { LeadContainerComponent } from "./capability-lead-page/lead-container/lead-container.component"
+import { FamilyAdminPageContainerComponent } from './family-admin-page/family-admin-page-container/family-admin-page-container.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +35,14 @@ export const routes: Routes = [
   {
     path: 'capabilities',
     component: CapabilityListContainerComponent
+  },
+  {
+    path: 'capabilities/:id',
+    component: LeadContainerComponent
+  },
+  {
+    path: 'families',
+    component: FamilyAdminPageContainerComponent
   }
 
 ];

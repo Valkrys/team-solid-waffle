@@ -120,6 +120,37 @@ app.get('/families', (req, res) => {
   });
 });
 
+app.delete('/deleteFamily', (req, res) => {
+  db.deleteFamily(req.body.jobFamilyID, (err, rows) => {
+    if (err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
+  res.send('Family Deleted');
+});
+
+app.post('/addFamily', (req, res) => {
+  db.addFamily(req.body.jobFamilyName, (err, rows) => {
+    if (err) {
+      console.log(err);
+      return handleError(err, req, res);
+    }
+    res.send({ jobFamilyID: rows.insertId, jobFamilyName: req.body.jobFamilyName });
+  });
+});
+
+app.put('/updateFamily', (req, res) => {
+  console.log("Updating family");
+  db.updateFamily(req.body.jobFamilyName, req.body.jobFamilyID, (err, rows) => {
+    if (err) {
+      return handleError(err, req, res);
+    }
+    res.send({ jobFamilyID: rows.insertId, jobFamilyName: req.body.jobFamilyName });
+    logger.info("Family updated");
+  });
+});
+
 app.get('/user_role', function (req, res) {
   logger.trace('GET user_role request');
 
@@ -136,4 +167,6 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-module.exports = app;
+function format(string) {
+  return string.replace(/-/g, " ");
+}

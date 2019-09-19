@@ -1,0 +1,61 @@
+.cardBody {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.expand {
+    flex-grow: 1;
+}
+
+.card {
+    width: 80%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.5em;
+}
+.card:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.card-title{
+    padding: 0;
+}
+h4{
+    margin: 1rem;
+}
+.close{
+    padding-right: 1rem;
+}
+.close:focus{
+    outline:0;
+}
+#add{
+    margin-left: 2rem;
+    width: 8rem;
+    margin-top: 1rem;
+    color: white;
+    margin-bottom: 4rem;
+}
+#headboy{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#edit{
+    margin-right: 20rem;
+    width: 6rem;
+}
+
+#success{
+    color: green;
+}
+#failure{
+    color: red;
+}
+.error{
+    color: red;
+}
+.modal-title{
+    font-size: 3em;
+}
