@@ -9,12 +9,12 @@ import { RolesPageContainerComponent } from './roles-page-container/roles-page-c
 @NgModule({
   declarations: [
     RolesPageContainerComponent,
-    
+    RolesPageContainerComponent,
+    RolesFilterPipe,
+    CapabilityFilterPipe    
   ],
   imports: [
     CommonModule,
-    RolesFilterPipe,
-    CapabilityFilterPipe,
     FormsModule,
     SharedFeaturesModule
   ],
