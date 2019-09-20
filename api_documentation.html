@@ -1,0 +1,245 @@
+<!DOCTYPE HTML><html><head><title>careerLattice API API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 7.4.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+  $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+
+  $('[data-toggle]').click(function() {
+    var selector = $(this).data('target') + ' pre code';
+    $(selector).each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+
+  // open modal on hashes like #_action_get
+  $(window).bind('hashchange', function(e) {
+    var anchor_id = document.location.hash.substr(1); //strip #
+    var element = $('#' + anchor_id);
+
+    // do we have such element + is it a modal?  --> show it
+    if (element.length && element.hasClass('modal')) {
+      element.modal('show');
+    }
+  });
+
+  // execute hashchange on first page load
+  $(window).trigger('hashchange');
+
+  // remove url fragment on modal hide
+  $('.modal').on('hidden.bs.modal', function() {
+    try {
+      if (history && history.replaceState) {
+          history.replaceState({}, '', '#');
+      }
+    } catch(e) {}
+  });
+});
+    </script><style>
+      .hljs {
+  background: transparent;
+}
+.parent {
+  color: #999;
+}
+.list-group-item > .badge {
+  float: none;
+  margin-right: 6px;
+}
+.panel-title > .methods {
+  float: right;
+}
+.badge {
+  border-radius: 0;
+  text-transform: uppercase;
+  width: 70px;
+  font-weight: normal;
+  color: #f3f3f6;
+  line-height: normal;
+}
+.badge_get {
+  background-color: #63a8e2;
+}
+.badge_post {
+  background-color: #6cbd7d;
+}
+.badge_put {
+  background-color: #22bac4;
+}
+.badge_delete {
+  background-color: #d26460;
+}
+.badge_patch {
+  background-color: #ccc444;
+}
+.list-group,
+.panel-group {
+  margin-bottom: 0;
+}
+.panel-group .panel+.panel-white {
+  margin-top: 0;
+}
+.panel-group .panel-white {
+  border-bottom: 1px solid #F5F5F5;
+  border-radius: 0;
+}
+.panel-white:last-child {
+  border-bottom-color: white;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.panel-white .panel-heading {
+  background: white;
+}
+.tab-pane ul {
+  padding-left: 2em;
+}
+.tab-pane h1 {
+  font-size: 1.3em;
+}
+.tab-pane h2 {
+  font-size: 1.2em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ddd;
+}
+.tab-pane h3 {
+  font-size: 1.1em;
+}
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+#sidebar {
+  margin-top: 30px;
+  padding-right: 5px;
+  overflow: auto;
+  height: 90%;
+}
+.top-resource-description {
+  border-bottom: 1px solid #ddd;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description {
+  border-bottom: 1px solid #fcfcfc;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description p:last-child {
+  margin: 0;
+}
+.list-group .badge {
+  float: left;
+}
+.method_description {
+  margin-left: 85px;
+}
+.method_description p:last-child {
+  margin: 0;
+}
+.list-group-item {
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+pre code {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+.items {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+}
+.examples {
+  margin-left: 0.5em;
+}
+.resource-modal li > ul {
+  margin-bottom: 1em;
+}
+.required {
+  color: #f00;
+}
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>careerLattice API API documentation</h1><p>http://localhost:8002</p><h3 id="welcome"><a href="#welcome">Welcome</a></h3><p>Welcome to the Career Lattice Documentation.</p><h3 id="chapter_one"><a href="#chapter_one">Chapter one</a></h3><p>More content here. Including <strong>bold</strong> text!</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="roles" class="panel-title">/roles</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of jobs and all the capabilities and families they belong to</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_roles"><span class="parent"></span>/roles</a> <span class="methods"><a href="#roles_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_roles" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#roles_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets an array of JSON objects containing roleID, roleName, capabilityID, capabilityName, jobFamilyID and jobFamilyName from the DB</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="roles_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/roles</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets an array of JSON objects containing roleID, roleName, capabilityID, capabilityName, jobFamilyID and jobFamilyName from the DB</p></div><ul class="nav nav-tabs"><li class="active"><a href="#roles_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="roles_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+    {
+        "roleID": 1,
+        "roleName": "Software Engineer", 
+        "jobFamilyID": 2, 
+        "jobFamilyName": "Technical",
+        "capabilityID": 1, 
+        "capabilityName": "Apprentice"
+    },
+    {
+        "roleID": 2,
+        "roleName": "Software Engineer", 
+        "jobFamilyID": 2, 
+        "jobFamilyName": "Technical",
+        "capabilityID": 2, 
+        "capabilityName": "Trainee"
+    }
+    
+]
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_roles__roleid_"><span class="parent">/roles</span>/{roleID}</a> <span class="methods"><a href="#roles__roleid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_roles__roleid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#roles__roleid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets a single JSON object containing roleID, roleName, capabilityID, capabilityName, jobFamilyID and jobFamilyName from the DB based on roleID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="roles__roleid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/roles</span>/{roleID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets a single JSON object containing roleID, roleName, capabilityID, capabilityName, jobFamilyID and jobFamilyName from the DB based on roleID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#roles__roleid__get_request" data-toggle="tab">Request</a></li><li><a href="#roles__roleid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="roles__roleid__get_request"><h3>URI Parameters</h3><ul><li><strong>roleID</strong>: <em><span class="required">required</span>(string)</em></li></ul><h3>Query Parameters</h3><ul><li><strong>roleID</strong>: <em><span class="required">required</span>(number)</em></li></ul></div><div class="tab-pane" id="roles__roleid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+    "roleID": 6,
+    "roleName": "Software Engineer", 
+    "jobFamilyID": 2, 
+    "jobFamilyName": "Technical",
+    "capabilityID": 7, 
+    "capabilityName": "Software Engineering"
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="families" class="panel-title">/families</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of job family names and their ids</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_families"><span class="parent"></span>/families</a> <span class="methods"><a href="#families_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_families" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#families_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets an array JSON objects containin jobFamilyName and jobFamilyID from the DB</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="families_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/families</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets an array JSON objects containin jobFamilyName and jobFamilyID from the DB</p></div><ul class="nav nav-tabs"><li class="active"><a href="#families_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="families_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+    {
+        "jobFamilyID": 2, 
+        "jobFamilyName": "Technical"
+    },
+    {
+        "jobFamilyID": 1, 
+        "jobFamilyName": "Sales &amp; Marketing"
+    }
+
+]
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="capabilities" class="panel-title">/capabilities</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of job family names and their ids along with capability names and their ids</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_capabilities"><span class="parent"></span>/capabilities</a> <span class="methods"><a href="#capabilities_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_capabilities" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#capabilities_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets an array of JSON objects containing jobFamilyName, jobFamilyID, capabilityName and capabilityID from the DB</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="capabilities_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/capabilities</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets an array of JSON objects containing jobFamilyName, jobFamilyID, capabilityName and capabilityID from the DB</p></div><ul class="nav nav-tabs"><li class="active"><a href="#capabilities_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="capabilities_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+    {
+        "jobFamilyID": 1, 
+        "jobFamilyName": "Sales &amp; Marketing",
+        "capabilityID": 1, 
+        "capabilityName": "Business Development"
+    },
+    {
+        "jobFamilyID": 1, 
+        "jobFamilyName": "Sales &amp; Marketing",
+        "capabilityID": 2, 
+        "capabilityName": "Account Management"
+    }
+]
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_capabilities__capabilityid_"><span class="parent">/capabilities</span>/{capabilityID}</a> <span class="methods"><a href="#capabilities__capabilityid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_capabilities__capabilityid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#capabilities__capabilityid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets a single JSON object containing jobFamilyName, jobFamilyID, capabilityName and capabilityID from the DB based on capabilityID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="capabilities__capabilityid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/capabilities</span>/{capabilityID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets a single JSON object containing jobFamilyName, jobFamilyID, capabilityName and capabilityID from the DB based on capabilityID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#capabilities__capabilityid__get_request" data-toggle="tab">Request</a></li><li><a href="#capabilities__capabilityid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="capabilities__capabilityid__get_request"><h3>URI Parameters</h3><ul><li><strong>capabilityID</strong>: <em><span class="required">required</span>(string)</em></li></ul><h3>Query Parameters</h3><ul><li><strong>capabilityID</strong>: <em><span class="required">required</span>(number)</em></li></ul></div><div class="tab-pane" id="capabilities__capabilityid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+    "jobFamilyID": 2, 
+    "jobFamilyName": "Technical",   
+    "capabilityID": 7, 
+    "capabilityName": "Software Engineering"
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="band" class="panel-title">/band</h3></div><div class="panel-body"><div class="top-resource-description"><p>Collection of band ids and band names</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_band"><span class="parent"></span>/band</a> <span class="methods"><a href="#band_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_band" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#band_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets an array JSON objects containing bandID and bandName from the DB</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="band_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/band</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets an array JSON objects containing bandID and bandName from the DB</p></div><ul class="nav nav-tabs"><li class="active"><a href="#band_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="band_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+    {
+        "bandID": 2, 
+        "bandName": "Trainee"
+    },
+    {
+        "bandID": 3, 
+        "bandName": "Associate"
+    }
+]
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_band__bandid_"><span class="parent">/band</span>/{bandID}</a> <span class="methods"><a href="#band__bandid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_band__bandid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#band__bandid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets a single JSON object containing bandID and bandName from the DB based on bandID</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="band__bandid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/band</span>/{bandID}</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets a single JSON object containing bandID and bandName from the DB based on bandID</p></div><ul class="nav nav-tabs"><li class="active"><a href="#band__bandid__get_request" data-toggle="tab">Request</a></li><li><a href="#band__bandid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="band__bandid__get_request"><h3>URI Parameters</h3><ul><li><strong>bandID</strong>: <em><span class="required">required</span>(string)</em></li></ul><h3>Query Parameters</h3><ul><li><strong>bandID</strong>: <em><span class="required">required</span>(number)</em></li></ul></div><div class="tab-pane" id="band__bandid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+    "bandID": 2, 
+    "bandName": "Trainee"
+}                                          
+</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#roles">/roles</a></li><li><a href="#families">/families</a></li><li><a href="#capabilities">/capabilities</a></li><li><a href="#band">/band</a></li></ul></div></div></div></div></body></html>
