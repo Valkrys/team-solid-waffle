@@ -4,10 +4,8 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken")
-var log4js = require('log4js');
 var md5 = require('md5');
 var cookieParser = require('cookie-parser')
-
 const log4js = require('log4js');
 
 log4js.configure({
