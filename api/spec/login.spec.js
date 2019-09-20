@@ -17,8 +17,8 @@ describe("Login", function () {
     });
     
     const mocksuccessfulLogin = {
-        username: 'antoniab@kainos.com',
-        password: '12345!abc'
+        username: process.env.USERNAME,
+        password: process.env.PASSWORD
     };
 
     const mockFailedLoginUsername = {
@@ -27,7 +27,7 @@ describe("Login", function () {
     };
 
     const mockFailedLoginPassword = {
-        username: 'antoniab@kainos.com',
+        username: process.env.USERNAME,
         password: 'abc'
     };
 
