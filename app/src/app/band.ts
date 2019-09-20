@@ -1,4 +1,4 @@
-export interface Band {
+export class Band {
   bandID: string;
   bandName: string;
   commercial: string;

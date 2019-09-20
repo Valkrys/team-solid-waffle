@@ -98,7 +98,7 @@ export class AddBandPageContainerComponent implements OnInit {
       this.isAddTrainingSelected = false;
     } else {
       // tslint:disable-next-line:radix
-      this.newBand.trainingID = parseInt(this.trainings[0].trainingID) + 1;
+      this.newBand.trainingID = this.trainings[0].trainingID + 1;
       this.isAddTrainingSelected = true;
     }
   }

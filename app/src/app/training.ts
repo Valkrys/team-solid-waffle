@@ -1,4 +1,4 @@
-export interface Training {
+export class Training {
   trainingID: number;
   description: string;
 }

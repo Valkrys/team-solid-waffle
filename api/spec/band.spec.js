@@ -107,10 +107,7 @@ xdescribe("GET /band/0", function () {
   });
 });
 
-describe("POST /band", function () {
-    let err;
-    let res;
-    let body;
+xdescribe("POST /band", function () {
     let bandList;
 
     const mockBand = {
@@ -118,16 +115,13 @@ describe("POST /band", function () {
         bandRank: 8
     };
 
-    it("should not return an error", function () {
-        expect(err).toBeUndefined;
-    });
-
     it("should have status code 200", function () {
         request.post(`${BASE_URL}/band`, {form: mockBand}, (e, r, b) => {
-            expect(res.statusCode).toBe(200);
+            expect(r.statusCode).toBe(200);
         });
     });
 
+    // THIS TEST WILL FAIL IF NOT RUN WITH A NEW DATABASE!!
     it("check band data", function () {
         request.get(`${BASE_URL}/bands`, (e, r, b) => {
             console.log(JSON.parse(b).length);
