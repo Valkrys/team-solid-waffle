@@ -132,6 +132,33 @@ app.get('/user_role', function (req, res) {
   });
 });
 
+app.get('/trainings', function (req, res) {
+  logger.trace('GET trainings request');
+
+  db.getTrainings(function (err, rows) {
+    if(!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    logger.info("Sending trainings results back");
+    res.send(rows);
+  });
+});
+
+app.post('/role', function (req, res) {
+  logger.trace('POST role request');
+  logger.trace(req.body);
+  db.insertRole(req.body, function (err) {
+    if (err) {
+      return handleError(err, req, res);
+    }
+    logger.info("Added role");
+    
+    res.status(200).send({
+      message: 'A new role was successfully added!'
+    });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

@@ -89,3 +89,21 @@ exports.getCapabilityDetail = function (capabilityID, callback) {
       callback(err, rows);
     });
 }
+
+exports.getTrainings = function (callback) {
+  db.query(
+    'SELECT * FROM training',
+    (err, rows, fields) => {
+      callback(err, rows);
+    }
+  );
+}
+exports.insertRole = (data, callback) => {
+  const param = data;
+  db.query('INSERT into role(name, capabilityID, description, bandID, responsibilities, trainingID) VALUES (?, ?, ?, ?, ?, ?);', 
+    [param.roleName, param.capabilityID, param.roleDescription, param.bandID, param.responsibilities, param.trainingID],
+    (err) => {
+      callback(err);
+    }
+  );
+}

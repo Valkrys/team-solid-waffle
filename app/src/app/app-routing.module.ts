@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DetailsContainerComponent } from './details-page/details-container/details-container.component';
 import { RolesPageContainerComponent } from "./roles-page/roles-page-container/roles-page-container.component";
-import { BandPageContainerComponent } from './band-page/band-page-container/band-page-container.component';
 import { CapabilityListContainerComponent } from './capability-page/capability-list-container/capability-list-container.component';
 import { LeadContainerComponent} from "./capability-lead-page/lead-container/lead-container.component"
+import { AddRoleContainerComponent } from './add-role-page/add-role-container/add-role-container.component';
+import { BandPageContainerComponent } from './band-page/band-page-container/band-page-container.component';
 
 export const routes: Routes = [
   {
@@ -28,16 +29,20 @@ export const routes: Routes = [
     component: RolesPageContainerComponent
   },
   {
-    path: 'bands',
-    component: BandPageContainerComponent
-  },
-  {
     path: 'capabilities',
     component: CapabilityListContainerComponent
   },
   {
     path: 'capability/:id',
     component: LeadContainerComponent
+  },
+  {
+    path: 'bands',
+    component: BandPageContainerComponent
+  },
+  {
+    path: 'addRole',
+    component: AddRoleContainerComponent
   }
 
 ];

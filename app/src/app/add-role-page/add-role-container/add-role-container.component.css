@@ -1,0 +1,77 @@
+/* Move to main styles if neccessary*/
+/*@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');*/
+
+.form{
+  padding-bottom: 2rem;
+}
+p {
+  padding: 0px;
+  margin: 5px;
+}
+.ng-invalid {
+  border-color: rgb(230, 65, 65);
+  box-shadow: 5px 10px rgb(250, 143, 143);
+}
+
+input, label {
+  display:block;
+}
+.form-control{
+  width: 40%;
+  padding: 12px 20px;
+margin: 8px 0;
+border: 2px solid grey;
+border-radius: 4px;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.pretty:focus {
+  border: 3px solid #555;
+}
+
+input[type=submit]{
+background-color: rgb(117, 115, 115);
+border: none;
+color: white;
+padding: 10px 20px;
+text-decoration: none;
+margin: 4px;
+cursor: pointer;
+border-radius: 6px;
+}
+
+input[type=submit]:hover{
+background-color: darkgray;
+}
+input[type=submit]:disabled{
+background-color: rgb(233, 220, 220);
+
+}
+.error{
+  font-size: 14px;
+  color: red;
+}
+*:focus {
+outline: none;
+}
+.required{
+  display: inline-block;
+}
+span{
+  color: red;
+}
+
+h4 {
+color: green;
+font-size: medium;
+}
+
+.info {
+font-size: 14px;
+color: #000;
+}

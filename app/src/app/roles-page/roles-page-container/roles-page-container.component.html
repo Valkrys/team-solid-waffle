@@ -25,12 +25,15 @@
 
         <span class="expand"></span>
 
+        <button (click)="routeToAddRole()">Add a Role</button>
+        
         <div id="search">
             <div class="active-cyan-4">
                 <input class="form-control" autocomplete="off" name="search" [(ngModel)]="searchText" type=" text"
                     placeholder="Search" aria-label="Search">
             </div>
         </div>
+        
     </div>
     <p id="sorryy"
         *ngIf="(roles | rolesFilter: searchText : selectedBand : selectedCapability : selectedFamily).length === 0">

@@ -20,6 +20,7 @@ import { DetailsPageModule } from './details-page/details-page.module';
 import { BandPageModule } from './band-page/band-page.module';
 import { CapabilityListModule } from './capability-page/capability-list.module'
 import { CapabilityLeadPageModule } from './capability-lead-page/capability-lead-page.module';
+import { AddRolePageModule } from './add-role-page/add-role-page.module';
 
 
 describe('Router', () => {
@@ -35,7 +36,8 @@ describe('Router', () => {
         DetailsPageModule,
         BandPageModule,
         CapabilityListModule,
-        CapabilityLeadPageModule
+        CapabilityLeadPageModule,
+        AddRolePageModule
       ],
       declarations: [
       ]
