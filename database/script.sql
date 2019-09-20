@@ -139,7 +139,7 @@ INSERT INTO capability(name, jobFamilyID, capabilityLeadID) VALUES ('Business De
 
 
 INSERT INTO training(description)
-    VALUES("www.google.com"), ('www.sharepoint.com');
+    VALUES("https://learning.kainos.com"), ('www.sharepoint.com');
 
 INSERT INTO band(bandName, commercial, communication, innovation, customerFocus, development, planning, knowledge, responsibilities, trainingID, bandRank)
 VALUES ('Apprentice', "", "", "", "", "", "", "", "", null, 1),

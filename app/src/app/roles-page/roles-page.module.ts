@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CapabilityFilterPipe } from './capability-filter.pipe';
 import { RolesFilterPipe } from './roles-filter.pipe';
 import { RolesPageContainerComponent } from './roles-page-container/roles-page-container.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { RolesPageContainerComponent } from './roles-page-container/roles-page-c
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     RolesPageContainerComponent,

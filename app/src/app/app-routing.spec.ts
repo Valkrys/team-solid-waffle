@@ -32,8 +32,7 @@ describe('Router', () => {
         BandDetailsModule,
         RouterModule
       ],
-      declarations: [
-      ]
+      declarations: []
     });
 
     router = TestBed.get(Router);

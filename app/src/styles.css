@@ -1,12 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-.details_title {
-    color: #4789cf;
-}
-
-.details_info {
-    color: #003471;
-}
-
 .family {
     background-color: #F79F79;
 }
@@ -17,11 +9,6 @@
 
 .band {
     color: rgb(210, 149, 238);
-}
-
-h1 {
-    font-size: 6em;
-    padding-bottom: 20px;
 }
 
 /* Top margins */

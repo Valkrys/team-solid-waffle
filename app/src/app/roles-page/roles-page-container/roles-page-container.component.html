@@ -43,7 +43,9 @@
             *ngFor="let role of roles | rolesFilter: searchText : selectedBand : selectedCapability : selectedFamily">
             <img class="card-img-top" src="assets/stock_card.jpeg" alt="softeng">
             <div class="card-body">
-                <h4 class="card-title">{{ role.roleName }}</h4>
+                <a [routerLink]="['/details', role.roleID]">
+                    <h4 class="card-title">{{ role.roleName }}</h4>
+                </a>
                 <span class="info-background" id="family-bg">
                     <span class="info-label">{{ role.jobFamilyName }}</span>
                 </span>
