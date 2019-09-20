@@ -13,3 +13,4 @@ export class Band {
   trainingID: number;
   trainingDescription: string;
 }
+

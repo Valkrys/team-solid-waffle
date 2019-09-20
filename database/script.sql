@@ -47,7 +47,8 @@ CREATE TABLE IF NOT EXISTS band(
     CONSTRAINT `band_customer_focus_len` CHECK ( LENGTH(customerFocus) <= 1500),
     CONSTRAINT `band_development_len` CHECK ( LENGTH(development) <= 1500),
     CONSTRAINT `band_planning_len` CHECK ( LENGTH(planning) <= 1500),
-    CONSTRAINT `band_knowledge_len` CHECK ( LENGTH(knowledge) <= 1500)
+    CONSTRAINT `band_knowledge_len` CHECK ( LENGTH(knowledge) <= 1500),
+    CONSTRAINT `band_responsibilities_len` CHECK ( LENGTH(responsibilities) <= 1500)
 );
 
 CREATE TABLE IF NOT EXISTS role(

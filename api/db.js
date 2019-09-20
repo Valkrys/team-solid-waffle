@@ -22,7 +22,7 @@ exports.getNameAndRole = function (callback) {
 
 exports.getRoles = (callback) => {
   db.query(
-    'SELECT role.roleID as roleID, role.name AS roleName, capability.capabilityID AS capabilityID, capability.name AS capabilityName, band.bandID AS bandID, bandName, band.bandRank, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName ' +
+    'SELECT role.roleID as roleID, role.name AS roleName, capability.capabilityID AS capabilityID, capability.name AS capabilityName, band.bandID AS bandID, band.bandName, band.bandRank, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName ' +
     'FROM role ' +
     'JOIN capability ON role.capabilityID = capability.capabilityID JOIN band ON role.bandID = band.bandID JOIN jobFamily ON capability.jobFamilyID = jobFamily.jobFamilyID',
     (err, rows, fields) => {
@@ -33,7 +33,7 @@ exports.getRoles = (callback) => {
 
 exports.getRoleDetail = (id, callback) => {
   db.query(
-    'SELECT role.roleID as roleID, role.name AS roleName, role.description, capability.capabilityID AS capabilityID, capability.name AS capabilityName, band.bandID AS bandID, bandName, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName, role.responsibilities, training.description AS training ' +
+    'SELECT role.roleID as roleID, role.name AS roleName, role.description, capability.capabilityID AS capabilityID, capability.name AS capabilityName, band.bandID AS bandID, band.bandName, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName, role.responsibilities, training.description AS training ' +
     'FROM role ' +
     'JOIN capability ON role.capabilityID = capability.capabilityID ' +
     'JOIN band ON role.bandID = band.bandID ' +
@@ -60,7 +60,7 @@ exports.getCapabilities = (callback) => {
 
 exports.getBands = (callback) => {
   db.query(
-    'SELECT band.bandID AS bandID, bandName, band.bandRank ' +
+    'SELECT band.bandID AS bandID, band.bandName, band.bandRank ' +
     'FROM band',
     (err, rows, fields) => {
       callback(err, rows);
@@ -70,7 +70,10 @@ exports.getBands = (callback) => {
 }
 
 exports.getBandDetail = (id, callback) => {
-  throw new Error("Not implemented");
+    db.query("SELECT band.bandID, band.bandName, band.commercial, band.communication, band.innovation, band.customerFocus, band.development, band.planning, band.knowledge, band.responsibilities, band.bandRank, training.trainingID, training.description AS trainingDescription from band left join training on (band.trainingID=training.trainingID) where band.bandID = ?", id,
+        function(err, rows) {
+            callback(err, rows);
+        });
 }
 
 exports.getFamilies = (callback) => {
