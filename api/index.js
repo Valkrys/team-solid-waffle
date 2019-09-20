@@ -134,7 +134,6 @@ app.get('/user_role', function (req, res) {
 
 app.get('/trainings', function (req, res) {
   logger.trace('GET trainings request');
-
   db.getTrainings(function (err, rows) {
     if(!Array.isArray(rows) || !rows.length || err) {
       return handleError(err, req, res);
@@ -159,10 +158,74 @@ app.post('/role', function (req, res) {
   });
 });
 
+app.get('/bands', (req, res) => {
+  db.getBands((err, rows) => {
+    if (!Array.isArray(rows) || !rows.length || err) {
+      return handleError(err, req, res);
+    }
+    res.send(rows);
+  });
+});
+
+app.post('/training', function (req, res) {
+  console.log(req);
+  db.insertTraining(req.body, function (err) {
+    if (err) return handleError(err, req, res);
+    else {
+      res.send({message: "Added training", body: req.body.bandRank});
+    }
+  })
+});
+
+app.post('/band', function (req, res) {
+  function insertBand(){
+    const bandRanks = [];
+    db.getBands(function (err, rows) {
+      for (let row of rows) {
+        bandRanks.push(row.bandRank);
+      }
+    });
+
+    db.insertBand(req.body, function (err) {
+      if (err) return handleError(err, req, res);
+      else {
+          if (req.body.bandRank - Math.max.apply(Math, bandRanks) <= 1) {
+            logger.info("Added band");
+            res.status(200).send({
+              message: 'Band added successfully!'
+            });
+          } else {
+            res.status(400).send({
+              message: 'Invalid rank, please refer to the range provided and try again!'
+            });
+          }
+        }
+      });
+  }
+
+  let count = 0;
+
+  db.checkBandRank(req.body.bandRank, function (err, rows) {
+    if(err) {
+      return handleError(err, req, res);
+    }
+    for (let row of rows) {
+      db.updateBandRank(row.bandRank, function (err, result) {
+        if(err) {
+          return handleError(err, req, res);
+        }
+        count++;
+        if (count === rows.length) {
+          insertBand();
+        }
+      });
+    }
+    if (rows.length === 0) {
+      insertBand();
+    }
+  })
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-
-function format(string) {
-  return string.replace(/-/g, " ");
-}

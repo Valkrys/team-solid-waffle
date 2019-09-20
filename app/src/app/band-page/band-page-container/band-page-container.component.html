@@ -8,6 +8,8 @@
                 <input class="form-control" autocomplete="off" name="search" [(ngModel)]="searchText" type=" text"
                     placeholder="Search" aria-label="Search">
             </div>
+            <br>
+            <button type="button" class="btn btn-primary" (click)="routeToAddBand()">Add band</button>
         </div>
     </div>
     <p id="sorryy" *ngIf="(bands | bandsFilter: searchText).length === 0">

@@ -44,7 +44,7 @@ describe("GET /roles", function () {
   });
 });
 
-xdescribe("GET /capability/1", function () {
+describe("GET /capability/1", function () {
   let err;
   let res;
   let body;
@@ -68,11 +68,12 @@ xdescribe("GET /capability/1", function () {
 
   it("should have correctly formatted body", function () {
     const expectedKeys = [
-      'capabilityID',
       'capabilityName',
-      'jobFamilyID',
-      'jobFamilyName'
-      // TODO: Add more expected fields
+      'jobFamilyName',
+      'firstName',
+      'lastName',
+      'picture',
+      'message'
     ];
     for (let key of expectedKeys) {
       expect(Object.keys(body)).toContain(key);
@@ -90,7 +91,7 @@ xdescribe("GET /capability/0", function() {
       err = e;
       res = r;
       body = JSON.parse(b);
-      done();
+      done();statusCode
     });
   });
 

@@ -106,3 +106,26 @@ xdescribe("GET /band/0", function () {
     });
   });
 });
+
+xdescribe("POST /band", function () {
+    let bandList;
+
+    const mockBand = {
+        bandName: 'mockBand',
+        bandRank: 8
+    };
+
+    it("should have status code 200", function () {
+        request.post(`${BASE_URL}/band`, {form: mockBand}, (e, r, b) => {
+            expect(r.statusCode).toBe(200);
+        });
+    });
+
+    // THIS TEST WILL FAIL IF NOT RUN WITH A NEW DATABASE!!
+    it("check band data", function () {
+        request.get(`${BASE_URL}/bands`, (e, r, b) => {
+            console.log(JSON.parse(b).length);
+            expect(bandList.length).toBe(JSON.parse(b).length);
+        });
+    });
+});

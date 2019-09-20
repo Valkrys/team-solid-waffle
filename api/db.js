@@ -22,7 +22,7 @@ exports.getNameAndRole = function (callback) {
 
 exports.getRoles = (callback) => {
   db.query(
-    'SELECT role.roleID as roleID, role.name AS roleName, capability.capabilityID AS capabilityID, capability.name AS capabilityName, band.bandID AS bandID, band.name AS bandName, band.bandRank, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName ' +
+    'SELECT role.roleID as roleID, role.name AS roleName, capability.capabilityID AS capabilityID, capability.name AS capabilityName, band.bandID AS bandID, bandName, band.bandRank, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName ' +
     'FROM role ' +
     'JOIN capability ON role.capabilityID = capability.capabilityID JOIN band ON role.bandID = band.bandID JOIN jobFamily ON capability.jobFamilyID = jobFamily.jobFamilyID',
     (err, rows, fields) => {
@@ -33,7 +33,7 @@ exports.getRoles = (callback) => {
 
 exports.getRoleDetail = (id, callback) => {
   db.query(
-    'SELECT role.roleID, role.name AS roleName, role.description, capability.capabilityID, capability.name AS capabilityName, band.bandID, band.name AS bandName, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName, role.responsibilities, training.description AS training ' +
+    'SELECT role.roleID as roleID, role.name AS roleName, role.description, capability.capabilityID AS capabilityID, capability.name AS capabilityName, band.bandID AS bandID, bandName, jobFamily.jobFamilyID as jobFamilyID, jobFamily.name AS jobFamilyName, role.responsibilities, training.description AS training ' +
     'FROM role ' +
     'JOIN capability ON role.capabilityID = capability.capabilityID ' +
     'JOIN band ON role.bandID = band.bandID ' +
@@ -60,10 +60,11 @@ exports.getCapabilities = (callback) => {
 
 exports.getBands = (callback) => {
   db.query(
-    'SELECT band.bandID, band.name AS bandName, band.bandRank ' +
+    'SELECT band.bandID AS bandID, bandName, band.bandRank ' +
     'FROM band',
     (err, rows, fields) => {
       callback(err, rows);
+
     }
   );
 }
@@ -84,15 +85,46 @@ exports.getFamilies = (callback) => {
 
 exports.getCapabilityDetail = function (capabilityID, callback) {
   db.query("SELECT capability.name AS capabilityName, jobFamily.name AS jobFamilyName, user.firstName, user.lastName, capabilityLead.picture, capabilityLead.message FROM capabilityLead " +
-  "JOIN user ON capabilityLead.userID = user.userID JOIN capability ON capabilityLead.capabilityLeadID = capability.capabilityLeadID JOIN jobFamily ON capability.jobFamilyID = jobFamily.jobFamilyID WHERE capabilityID=?",capabilityID,
-    (err, rows, fields)  => {
+    "JOIN user ON capabilityLead.userID = user.userID JOIN capability ON capabilityLead.capabilityLeadID = capability.capabilityLeadID JOIN jobFamily ON capability.jobFamilyID = jobFamily.jobFamilyID WHERE capabilityID=?", capabilityID,
+    (err, rows, fields) => {
       callback(err, rows);
     });
 }
 
+exports.insertBand = function (data, callback) {
+  db.query('INSERT INTO band SET ?', data, function (err, results, fields) {
+    if (err) return callback(err, null);
+    callback(err, results.insertedKey);
+  });
+}
+
+exports.checkBandRank = function (bandRank, callback) {
+  db.query('select bandRank from band where bandRank >= ? order by bandRank desc', bandRank, function (err, rows, fields) {
+    callback(err, rows);
+  });
+}
+
+exports.updateBandRank = function (bandRank, callback) {
+  db.query('update band set bandRank = ? where bandRank = ?', [bandRank + 1, bandRank], function (err, rows, fields) {
+    callback(err, rows);
+  });
+}
+
 exports.getTrainings = function (callback) {
-  db.query(
-    'SELECT * FROM training',
+  db.query('select * from training order by trainingID desc', function (err, rows, fields) {
+    callback(err, rows);
+  });
+}
+
+exports.insertTraining = function (data, callback) {
+  db.query('INSERT INTO training SET ?', data, function (err, results, fields) {
+    if (err) return callback(err, null);
+    callback(err, results.insertedKey);
+  });
+}
+
+exports.getBands = (callback) => {
+  db.query('SELECT band.bandID AS bandID, band.bandName AS bandName, band.bandRank FROM band',
     (err, rows, fields) => {
       callback(err, rows);
     }
